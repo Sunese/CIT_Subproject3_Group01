@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MovieNavbar from './MovieNavbar';
-import Title from './Title';
+import MovieNavbar from './components/MovieNavbar';
+import Title from './components/Title';
 import { useEffect, useState } from 'react';
 
 function App() {
