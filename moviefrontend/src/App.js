@@ -4,7 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MovieNavbar from './components/MovieNavbar';
 import FeaturedTitle from './components/FeaturedTitle';
 import { useEffect, useState } from 'react';
-import Signup from './components/SignUp';
+import SignUp from './components/SignUp';
+import Bookmark from './components/Bookmark';
+import Rate from './components/Rate';
 
 function App() {
     const [data, setData] = useState(null);
@@ -49,7 +51,9 @@ function App() {
                 plot={data.items[0].released}
                 poster={data.items[0].poster}>
             </FeaturedTitle>
-            <Signup></Signup>
+            <SignUp></SignUp>
+            <Bookmark isAddBookmark={false}></Bookmark>
+            <Rate isAddRating={true}></Rate>
         </div>
     );
 }
