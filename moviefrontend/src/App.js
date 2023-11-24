@@ -1,8 +1,8 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MovieNavbar from './components/MovieNavbar';
-import Title from './components/Title';
+import FeaturedTitle from './components/FeaturedTitle';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -44,10 +44,10 @@ function App() {
     return (
         <div>
             <MovieNavbar></MovieNavbar>
-            <Title title={data.items[0].name}
+            <FeaturedTitle title={data.items[0].name}
                 plot={data.items[0].released}
                 poster={data.items[0].poster}>
-            </Title>
+            </FeaturedTitle>
         </div>
     );
 }

@@ -1,8 +1,10 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-const Title = ({ title, plot, poster }) =>
+const FeaturedTitle = ({ title, plot, poster }) =>
     <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={poster} />
         <Card.Body>
@@ -12,4 +14,11 @@ const Title = ({ title, plot, poster }) =>
         </Card.Body>
     </Card>
 
-export default Title;
+
+FeaturedTitle.propTypes = {
+        title: PropTypes.string.isRequired,
+        plot: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
+    };
+
+export default FeaturedTitle;
