@@ -10,6 +10,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import SignIn from './SignIn';
 
 const MovieNavbar = () => 
     <Navbar expand="lg" bg="dark" data-bs-theme="dark">
@@ -54,7 +55,7 @@ const MovieNavbar = () =>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Sign In" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <SignIn/>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

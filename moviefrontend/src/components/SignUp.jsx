@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Button from 'react-bootstrap/Button';
 
-function Signup() {
+function SignUp() {
     const [password, setPassword] = useState('');
 
     const handlePasswordChange = (event) => {
@@ -25,6 +26,9 @@ function Signup() {
     }
 
     return (
+        <>
+            <h1>Sign Up</h1>
+            <p>Sign up for an account to save your favorite movies!</p>
         <Form>
             <Form.Group className="mb-3" controlId="formUsername">
                 <Form.Label>Username</Form.Label>
@@ -48,9 +52,13 @@ function Signup() {
                 />
             </Form.Group>
 
-            <ProgressBar animated now={calculatePasswordStrength()} striped variant={getPasswordStrengthVariant()}/>
+            <ProgressBar className="mb-3" animated now={calculatePasswordStrength()} striped variant={getPasswordStrengthVariant()}/>
+        <Button variant="primary" type="submit">
+            Sign Up
+        </Button>
         </Form>
+        </>
     );
 }
 
-export default Signup;
+export default SignUp;
