@@ -3,6 +3,7 @@ import TitleData from './titleData';
 class TitleProcessor {
     processTitle(rawData) {
         return new TitleData(
+            rawData.titleID,
             rawData.primaryTitle,
             rawData.originalTitle,
             rawData.titleType,

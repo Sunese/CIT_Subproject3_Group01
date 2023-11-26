@@ -17,7 +17,8 @@
 */
 
 class TitleData {
-    constructor(primaryTitle, originalTitle, titleType, isAdult, released, runtimeMinutes, poster, plot, startYear, endYear, genres, titleRating) {
+    constructor(titleID, primaryTitle, originalTitle, titleType, isAdult, released, runtimeMinutes, poster, plot, startYear, endYear, genres, titleRating) {
+        this.titleID = titleID;
         this.primaryTitle = primaryTitle;
         this.originalTitle = originalTitle;
         this.titleType = titleType;

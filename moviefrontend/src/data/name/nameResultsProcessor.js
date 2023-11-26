@@ -15,6 +15,7 @@ class NameResultsProcessor {
 
     processItem(rawData) {
         return new NameResultItemData(
+            rawData.nameid,
             rawData.url,
             rawData.name,
             rawData.released,

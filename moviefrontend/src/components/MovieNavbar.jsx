@@ -11,16 +11,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SignIn from './SignIn';
+import Name from '../pages/Name';
+import NameData from '../data/name/nameData';
+import { Link } from 'react-router-dom';
 
 const MovieNavbar = () => 
     <Navbar expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Brand href="#home">CIT group 1</Navbar.Brand>
-        
+        <Navbar.Brand>
+          <Link to="/">CIT Group 1</Link>
+        </Navbar.Brand>
         <InputGroup>
         <Form.Control aria-label="Search input with dropdown button for search options" placeholder="Search"/>
-        
         <DropdownButton
           variant="outline-secondary"
           title="All"
@@ -57,6 +60,8 @@ const MovieNavbar = () =>
             <NavDropdown title="Sign In" id="basic-nav-dropdown">
               <SignIn/>
             </NavDropdown>
+            <Link to="/name/nm0000129">Go to Tom Cruise</Link>
+            <Link to="/title/tt4912910">Go to Mission Impossible</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

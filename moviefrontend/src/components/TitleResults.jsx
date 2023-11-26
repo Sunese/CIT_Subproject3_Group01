@@ -19,7 +19,7 @@ const TitleResults = ({page}) =>
         {page.items.map((item) =>
             <TitleResultItem key={item.url} titleResultItemData={item} />
         )}
-    </div>;
+    </div>
 TitleResults.propTypes = {
     page: PropTypes.instanceOf(ResultsData).isRequired
 };
