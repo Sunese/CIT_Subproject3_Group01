@@ -15,6 +15,7 @@ class TitleResultsProcessor {
 
     processItem(rawData) {
         return new TitleResultItemData(
+            rawData.titleID,
             rawData.url,
             rawData.name,
             rawData.released,

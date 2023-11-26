@@ -1,5 +1,6 @@
 class TitleResultsItemData {
-    constructor(url, name, released, poster) {
+    constructor(titleid, url, name, released, poster) {
+        this.titleid = titleid;
         this.url = url;
         this.name = name;
         this.released = released;
