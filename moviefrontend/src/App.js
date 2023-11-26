@@ -1,22 +1,21 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MovieNavbar from './components/MovieNavbar';
-import FeaturedTitle from './components/FeaturedTitle';
-import { useEffect, useState } from 'react';
-import SignUp from './components/SignUp';
-import Bookmark from './components/Bookmark';
-import Rate from './components/Rate';
-import TitleClient from './api/titleClient';
-import React from 'react';
-import TitleResultsProcessor from './data/title/titleResultsProcessor';
-import TitleResults from './components/TitleResults';
-import Title from './components/Title';
-import TitleProcessor from './data/title/titleProcessor';
-import NameResultsProcessor from './data/name/nameResultsProcessor';
-import NameResults from './components/NameResults';
-import NameProcessor from './data/name/nameProcessor';
+import React, { useEffect, useState } from 'react';
+import './App.css';
 import NameClient from './api/nameClient';
+import TitleClient from './api/titleClient';
+import Bookmark from './components/Bookmark';
+import FeaturedTitle from './components/FeaturedTitle';
+import MovieNavbar from './components/MovieNavbar';
 import Name from './components/Name';
+import NameResults from './components/NameResults';
+import Rate from './components/Rate';
+import SignUp from './components/SignUp';
+import Title from './components/Title';
+import TitleResults from './components/TitleResults';
+import NameProcessor from './data/name/nameProcessor';
+import NameResultsProcessor from './data/name/nameResultsProcessor';
+import TitleProcessor from './data/title/titleProcessor';
+import TitleResultsProcessor from './data/title/titleResultsProcessor';
 
 const App = () => {
     const [titleResultsData, setTitleResultsData] = useState(null);
@@ -67,10 +66,11 @@ const App = () => {
     return (
         <div>
             <MovieNavbar></MovieNavbar>
-            <FeaturedTitle title={data.items[0].name}
-                plot={data.items[0].released}
-                poster={data.items[0].poster}>
-            </FeaturedTitle>
+            {titleResultsData &&
+            <FeaturedTitle title={titleResultsData.items[0].name}
+                plot={titleResultsData.items[0].released}
+                poster={titleResultsData.items[0].poster}>
+            </FeaturedTitle> }
             <SignUp></SignUp>
             <Bookmark isAddBookmark={false}></Bookmark>
             <Rate isAddRating={true}></Rate>
