@@ -20,7 +20,6 @@ import SignOut from './SignOut';
 const MovieNavbar = () => {
 	const { isAuthenticated } = useAuth();
 	const [searchParameters, setsearchParameters] = useSearchParams({ SearchResults: "" });
-	const searchUrl = searchParameters.get("SearchResults");
 	const [searchTitleType, setSearchTitleType] = useState("");
 	const [SearchButton, setSearchButton] = useState("All");
 	const [searchSection, setSearchSection] = useState("All");
@@ -45,7 +44,7 @@ const MovieNavbar = () => {
 				console.log({ SearchResults: "Title?query=" + event.target.value + "&titletype=" + searchTitleType });
 			}
 			console.log(searchParameters.get("SearchResults"));
-			navigate("/SearchResult/" + searchUrl);
+			navigate("/SearchResult/" + searchParameters.get("SearchResults"));
 		}
 	}
 
