@@ -7,16 +7,24 @@ import Title from './pages/Title';
 import Index from './pages/Index';
 import Layout from './pages/Layout';
 import Test from './pages/Test';
+import { AuthProvider } from './utils/AuthContext';
+import UserBookmarks from './pages/UserBookmarks';
+import SignUp from './pages/SignUp';
+
 
 const App = () =>
-    <Routes>
-        <Route path="/" element={<Layout/>}>
-            <Route index element={<Index/>} />
-            <Route path="/title/:id" element={<Title/>} />
-            <Route path="/name/:id" element={<Name/>} />
-            <Route path="/test/" element={<Test/>}/>
-            <Route path="*" element={<h1>404: Not Found</h1>} />
-        </Route>
-    </Routes>
+    <AuthProvider>
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<Index/>} />
+                <Route path="/title/:id" element={<Title/>} />
+                <Route path="/name/:id" element={<Name/>} />
+                <Route path="/bookmarks" element={<UserBookmarks/>} />
+                <Route path="/signup" element={<SignUp/>} />
+                <Route path="/test" element={<Test/>}/>
+                <Route path="*" element={<h1>Not Found</h1>} />
+            </Route>
+        </Routes>
+    </AuthProvider>
 
 export default App;

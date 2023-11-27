@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React from "react";
 
+
 const Layout = () =>
     <>
     <MovieNavbar></MovieNavbar>
