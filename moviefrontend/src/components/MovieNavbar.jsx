@@ -62,7 +62,7 @@ const MovieNavbar = () =>
               <SignIn/>
             </NavDropdown>
             <Button variant="primary">
-              <Link style={{color: 'white'}} to="/name/nm0000129">Go to Tom Cruise</Link>
+              <Link style={{color: 'white'}} to="/name/nm0243462">Go to Paula DuPré Pesmene</Link>
             </Button>
             <Link to="/title/tt4912910">Go to Mission Impossible</Link>
             <Link to="/test/">Test Page</Link>
