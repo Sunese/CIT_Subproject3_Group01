@@ -28,7 +28,7 @@ const KnownForTitles = ({knownForTitlesData}) =>
                     <Container>
                         <Row>
                             {group.map((item) => (
-                                <Col xs='3' key={item}>
+                                <Col key={item}>
                                     <Card>
                                         <Link style={{color:'white', textDecoration:'none'}} to={"/title/" + item.titleID}>
                                         <Card.Img variant="top" src={item.poster} />
