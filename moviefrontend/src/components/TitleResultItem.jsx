@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import TitleResultItemData from '../data/title/titleResultsItemData';
 import { Link } from 'react-router-dom';
 
-const TitleResultItem = ({data}) =>
-    <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={data.poster} />
+const TitleResultItem = ({data, className}) =>
+    <Card className={className}>
+        <Card.Img variant="bottom" src={data.poster} className='title-card-image' />
         <Card.Body>
             <Card.Title>
                 <Link to={"/title/" + data.titleid}>
@@ -19,7 +19,8 @@ const TitleResultItem = ({data}) =>
         </Card.Body>
     </Card>
 TitleResultItem.propTypes = {
-    data: PropTypes.instanceOf(TitleResultItemData).isRequired
+    data: PropTypes.instanceOf(TitleResultItemData).isRequired,
+    className: PropTypes.string
 };
 
 export default TitleResultItem;

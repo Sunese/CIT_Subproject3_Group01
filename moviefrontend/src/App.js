@@ -13,6 +13,7 @@ const App = () =>
             <Route index element={<Index/>} />
             <Route path="/title/:id" element={<Title/>} />
             <Route path="/name/:id" element={<Name/>} />
+            
         </Route>
     </Routes>
 

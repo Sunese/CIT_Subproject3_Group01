@@ -7,6 +7,8 @@ import TitleClient from '../api/titleClient';
 import TitleProcessor from '../data/title/titleProcessor';
 import { useState } from 'react';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
 const Title = () => {
     let { id } = useParams();
@@ -41,12 +43,18 @@ const Title = () => {
         return <p style={{color: 'red'}}>{error}</p>
     }
 
-    return <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={titleData.poster} />
-        <Card.Body>
-            <Card.Title>{titleData.primaryTitle}</Card.Title>
-            <Card.Text>{titleData.plot}</Card.Text>
-        </Card.Body>
-    </Card>
+    return <>
+        <Row>
+            <Col>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={titleData.poster} />
+                    <Card.Body>
+                        <Card.Title>{titleData.primaryTitle}</Card.Title>
+                        <Card.Text>{titleData.plot}</Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row>
+    </>
 }
 export default Title;
