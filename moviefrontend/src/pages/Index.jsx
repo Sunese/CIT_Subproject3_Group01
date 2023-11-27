@@ -4,40 +4,31 @@ import { useState, useEffect } from "react";
 import TitleClient from "../api/titleClient";
 import TitleResultsProcessor from "../data/title/titleResultsProcessor";
 import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-const Index = () => {
-    const [error, setError] = useState(null); 
-    const [loadingFeatured, setLoadingFeatured] = useState(true);
-    const [featuredTitles, setFeaturedTitles] = useState(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const titleClient = new TitleClient();
-                const titleResultsProcessor = new TitleResultsProcessor();
-                const result = titleResultsProcessor.processPage(await titleClient.getFeatured(10, 0));
-                setFeaturedTitles(result);
-                setLoadingFeatured(false);
-            } catch (error) {
-                console.error(error);
-                setLoadingFeatured(false);
-                setError(error.message);
-            }
-        }
-        fetchData();
-    }, []);
-
-    if (error) {
-        return <p style={{ color: 'red' }}>{error}</p>;
-    }
-
-    if (loadingFeatured) {
-        return <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
-    }
-
-    return <FeaturedTitles titles={featuredTitles.items}></FeaturedTitles>
-}
-
+const Index = () =>
+    <>
+    <Row>
+        <Col>
+            <h3>Featured Titles</h3>
+            <FeaturedTitles />
+        </Col>
+        <Col> 
+            <h2>Top rated bookmarks</h2>
+        </Col>
+    </Row>
+    <Row>
+        <Col>
+            <h2>Row 1, Col 0</h2>
+        </Col>
+        <Col>
+            <h2>Row 1, Col 1</h2>
+        </Col>
+        <Col>
+            <h2>Row 1, Col 2</h2>
+        </Col>
+    </Row>
+    </>
 export default Index;

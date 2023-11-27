@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import NameClient from '../api/nameClient';
 import NameProcessor from '../data/name/nameProcessor';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
 const Name = () => {
     const { id } = useParams();
@@ -40,12 +42,20 @@ const Name = () => {
         return <p style={{color: 'red'}}>{error}</p>
     }
 
-    return <Card style={{ width: '18rem' }}>
-        <Card.Body>
-            <Card.Title>{nameData.primaryName}</Card.Title>
-            <Card.Text>{nameData.birthYear}</Card.Text>
-            <Card.Text>{nameData.deathYear}</Card.Text>
-        </Card.Body>
-    </Card>
+    return (
+        <>
+        <Row>
+            <Col>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Title>{nameData.primaryName}</Card.Title>
+                        <Card.Text>{nameData.birthYear}</Card.Text>
+                        <Card.Text>{nameData.deathYear}</Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row>
+        </>
+    );
 }
 export default Name;
