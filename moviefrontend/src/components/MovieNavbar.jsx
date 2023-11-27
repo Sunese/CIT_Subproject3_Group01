@@ -14,6 +14,7 @@ import SignIn from './SignIn';
 import Name from '../pages/Name';
 import NameData from '../data/name/nameData';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/esm/Button';
 
 const MovieNavbar = () => 
     <Navbar expand="lg" bg="dark" data-bs-theme="dark">
@@ -60,7 +61,9 @@ const MovieNavbar = () =>
             <NavDropdown title="Sign In" id="basic-nav-dropdown">
               <SignIn/>
             </NavDropdown>
-            <Link to="/name/nm0000129">Go to Tom Cruise</Link>
+            <Button variant="primary">
+              <Link style={{color: 'white'}} to="/name/nm0000129">Go to Tom Cruise</Link>
+            </Button>
             <Link to="/title/tt4912910">Go to Mission Impossible</Link>
           </Nav>
         </Navbar.Collapse>
