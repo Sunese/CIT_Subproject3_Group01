@@ -7,6 +7,7 @@ import Title from './pages/Title';
 import Index from './pages/Index';
 import Layout from './pages/Layout';
 import Test from './pages/Test';
+import SearchResult from './pages/SearchResult';
 
 const App = () =>
     <Routes>
@@ -14,6 +15,7 @@ const App = () =>
             <Route index element={<Index/>} />
             <Route path="/title/:id" element={<Title/>} />
             <Route path="/name/:id" element={<Name/>} />
+            <Route path="/SearchResult/:searchParameters" element={<SearchResult/>} />
             <Route path="/test/" element={<Test/>}/>
             <Route path="*" element={<h1>404: Not Found</h1>} />
         </Route>
