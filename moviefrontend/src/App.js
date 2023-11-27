@@ -7,6 +7,7 @@ import Title from './pages/Title';
 import Index from './pages/Index';
 import Layout from './pages/Layout';
 import Test from './pages/Test';
+import SearchResult from './pages/SearchResult';
 import { AuthProvider } from './utils/AuthContext';
 import UserBookmarks from './pages/UserBookmarks';
 import SignUp from './pages/SignUp';
@@ -19,6 +20,7 @@ const App = () =>
                 <Route index element={<Index/>} />
                 <Route path="/title/:id" element={<Title/>} />
                 <Route path="/name/:id" element={<Name/>} />
+                <Route path="/SearchResult/:searchParameters" element={<SearchResult/>} />
                 <Route path="/bookmarks" element={<UserBookmarks/>} />
                 <Route path="/signup" element={<SignUp/>} />
                 <Route path="/test" element={<Test/>}/>
