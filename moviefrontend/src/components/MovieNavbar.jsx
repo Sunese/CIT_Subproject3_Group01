@@ -125,6 +125,7 @@ const MovieNavbar = () => {
 						</Button>
 						<Link to="/title/tt4912910">Go to Mission Impossible</Link>
 						<Link to="/bookmarks">Go to signed in user bookmarks</Link>
+						<Link to="/test"> Go to test page</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
