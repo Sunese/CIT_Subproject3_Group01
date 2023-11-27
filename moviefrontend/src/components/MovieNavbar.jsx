@@ -65,6 +65,7 @@ const MovieNavbar = () =>
               <Link style={{color: 'white'}} to="/name/nm0000129">Go to Tom Cruise</Link>
             </Button>
             <Link to="/title/tt4912910">Go to Mission Impossible</Link>
+            <Link to="/test/">Test Page</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
