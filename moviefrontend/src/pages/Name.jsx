@@ -35,6 +35,7 @@ const Name = () => {
                 const knownForTitlesClient = new KnownForTitleClient();
                 const knownForTitleResultsProcessor = new KnownForTitleResultsProcessor();
                 const knownForTitlesResult = knownForTitleResultsProcessor.processPage(await knownForTitlesClient.getKnownForTitles(id));
+                console.log(knownForTitlesResult);
                 setKnownForTitles(knownForTitlesResult);
 
                 setLoadingName(false);
@@ -72,7 +73,7 @@ const Name = () => {
         </Row>
         <Row>
             <Col>
-                <KnownForTitles knownForTitles={knownForTitlesData} />
+                <KnownForTitles knownForTitlesData={knownForTitlesData} />
             </Col>
         </Row>
         </>
