@@ -1,43 +1,83 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
+import { ApiParamsBuilder } from "../utils/urlBuilder";
+import { useSearchParams } from "react-router-dom";
 
 import Spinner from "react-bootstrap/esm/Spinner";
 import SearchClient from "../api/searchClient";
-import TitleResultsItemData from "../data/title/titleResultsItemData";
-import PagedData from "../data/pagedData";
+import TitleResultsProcessor from "../data/title/titleResultsProcessor";
+import NameResultsProcessor from "../data/name/nameResultsProcessor";
+import ResultsData from "../data/resultsData";
+import Paginator from "../components/Paginator";
 
 const SearchResult = () => {
   const { token } = useAuth();
-  const { searchParameters } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchError, setSearchError] = useState(null);
   const [error, setError] = useState(null);
   const [loadingSearch, setLoadingSearch] = useState(true);
-  const [titleSearchResultState, setTitleSearchResult] = useState(
-    new TitleResultsItemData()
-  );
+  const [resultsData, setResultsData] = useState(new ResultsData());
+
+  let handleResponse = (searchResponse) => {
+    if (!searchResponse.ok) {
+      throw new Error("Error searching");
+    }
+  };
+
+  const handleSearch = useCallback(async () => {
+    try {
+      const searchClient = new SearchClient();
+      const titleResultsProcessor = new TitleResultsProcessor();
+      const nameResultsProcessor = new NameResultsProcessor();
+
+      if (searchParams.get("section") === "title") {
+        const searchResponse = await searchClient.search(
+          token,
+          ApiParamsBuilder(
+            searchParams.get("section"),
+            searchParams.get("query"),
+            searchParams.get("titletype")
+          )
+        );
+        handleResponse(searchResponse);
+        const responseData = await searchResponse.json();
+        setResultsData(titleResultsProcessor.processPage(responseData));
+      } else if (searchParams.get("section") === "name") {
+        const searchResponse = await searchClient.search(
+          token,
+          ApiParamsBuilder(
+            searchParams.get("section"),
+            searchParams.get("query"),
+            searchParams.get("titletype")
+          )
+        );
+        handleResponse(searchResponse);
+        const responseData = await searchResponse.json();
+        setResultsData(nameResultsProcessor.processPage(responseData));
+      } else if (searchParams.get("section") === "all") {
+        return "Not Implemented";
+      } else {
+        return "Invalid Search Section";
+      }
+    } catch (error) {
+      console.error("error: ", error);
+    }
+  }, [searchParams, token]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const titleSearchResultJson = await SearchClient.getTitleSearchResults(
-          token,
-          searchParameters
-        );
-        const titleSearchResult = PagedData.fromJson(
-          titleSearchResultJson,
-          TitleResultsItemData.fromJson
-        );
-        setTitleSearchResult(titleSearchResult);
+        handleSearch();
         setLoadingSearch(false);
       } catch (error) {
         setLoadingSearch(false);
-        setError(error.message);
+        setSearchError(error.message);
         console.error("error: ", error);
       }
     };
     fetchData();
-  }, [token, searchParameters]);
+  }, [token, searchParams, handleSearch]);
 
   if (loadingSearch) {
     return (
@@ -53,7 +93,8 @@ const SearchResult = () => {
 
   return (
     <>
-      <h1> Search Results for {searchParameters} </h1>
+      <h1> Search Results for {searchParams.get("query")} </h1>
+      <Paginator page={resultsData} />
     </>
   );
 };

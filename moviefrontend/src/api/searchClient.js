@@ -1,13 +1,10 @@
 class SearchClient {
-  static async getTitleSearchResults(token, searchTerm) {
+  async search(token, searchTerm) {
     try {
-      console.log("searchTerm:", searchTerm);
       const authHeader = { Authorization: `${token}` };
       console.log("authHeader:", authHeader);
       const response = await fetch(
-        process.env.REACT_APP_API_BASE_URI +
-          "/api/v1/search/title?query=" +
-          searchTerm,
+        process.env.REACT_APP_API_BASE_URI + "/api/v1/search/" + searchTerm,
         {
           method: "GET",
           headers: authHeader,
