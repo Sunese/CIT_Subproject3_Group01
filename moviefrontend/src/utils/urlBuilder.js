@@ -1,23 +1,24 @@
-import React from 'react';
-import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
 
 // builds the url after api call, handles pagination and search parameters
-// "https://localhost:7293/api/v1/search/title?page=0&pageSize=10"
-const UrlBuilder = () => {
-    const [url, setUrl] = useState('');
-    const { id } = useParams();
-
-    const buildUrl = () => {
-        setUrl(`http://localhost:3000/api/movies/${id}`);
-    };
-
-    return (
-        <div>
-            <button onClick={buildUrl}>Build URL</button>
-            <p>{url}</p>
-        </div>
-    );
+// "https://localhost:7293/api/v1/search/title?query=friends&titletype=movie&page=0&pageSize=10"
+const PaginationUrlBuilder = ( section, query, type, page, pageSize ) => {
+    let url = '';
+    if (section != null) {
+        url += section.toLowerCase() + '?';
+    }
+    if (query != null) {
+        url += `query=${query}`;
+    }
+    if (type != null) {
+        url += `&titletype=${type.toLowerCase()}`;
+    }
+    if (page != null) {
+        url += `&page=${page}`;
+    }
+    if (pageSize != null) {
+        url += `&pageSize=${pageSize}`;
+    }
+    return url;
 }
 
 // gets the search parameters from the searchResults component
@@ -63,4 +64,4 @@ const searchParamsBuilder = ( Section, Query, Type ) => {
     return searchTerm;
 };
 
-export { UrlBuilder, ApiParamsBuilder, searchParamsBuilder };
+export { PaginationUrlBuilder, ApiParamsBuilder, searchParamsBuilder };
