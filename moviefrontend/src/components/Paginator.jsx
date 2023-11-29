@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import PropTypes from "prop-types";
-import PagedData from "../data/pagedData";
+import ResultsData from "../data/resultsData";
 import Pagination from "react-bootstrap/Pagination";
 import Dropdown from "react-bootstrap/Dropdown";
 import Container from "react-bootstrap/esm/Container";
@@ -9,6 +11,9 @@ import Col from "react-bootstrap/esm/Col";
 
 const Paginator = ({ page }) => {
   const [NumberOfitems, setNumberOfitems] = useState("10");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log("page: ", page);
 
   const handleNumberOfItems = (event) => {
     setNumberOfitems(event.target.getAttribute("id"));
@@ -17,6 +22,8 @@ const Paginator = ({ page }) => {
   return (
     <div>
       <h1>Paginator</h1>
+      current params: {searchParams.toString()}
+      <br />
       Total: {page.total}
       <br />
       Number of Pages: {page.numberOfPages}
