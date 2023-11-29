@@ -80,7 +80,7 @@ const MovieNavbar = () => {
   };
 
   return (
-    <Navbar expand="lg" bg="dark" data-bs-theme="dark">
+    <Navbar className="navbar" expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand>

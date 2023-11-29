@@ -3,26 +3,30 @@ import { useAuth } from "../utils/AuthContext";
 import AccountClient from "../api/accountClient";
 import { useNavigate } from "react-router";
 import Form from "react-bootstrap/Form";
-import { Alert, Button, Col, Row } from "react-bootstrap";
+import { Alert, Button, Col, Row, Spinner } from "react-bootstrap";
 import { useNotification } from "../utils/NotificationContext";
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const { login } = useAuth();
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { showNotification } = useNotification();
 
   const handleSignIn = async () => {
+    setLoading(true);
     try {
       const accountClient = new AccountClient();
       const response = await accountClient.SignIn(username, password);
 
       if (response.status === 401) {
         showNotification("Invalid credentials", "danger");
+        setLoading(false);
         return;
       } else if (!response.ok) {
+        setLoading(false);
         showNotification("Something went wrong, try again", "danger");
         return;
       }
@@ -33,9 +37,11 @@ const SignIn = () => {
 
       // Use the login function from useAuth to update the authentication state
       login(token, signedInUsername);
+      setLoading(false);
       showNotification("Signed in successfully", "success");
       navigate("/");
     } catch (error) {
+      setLoading(false);
       showNotification("Something went wrong, try again", "danger");
     }
   };
@@ -72,10 +78,13 @@ const SignIn = () => {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Group>
-
-            <Button onClick={handleSignIn} variant="primary">
-              Sign In
-            </Button>
+            {loading ? (
+              <Spinner animation="border" />
+            ) : (
+              <Button onClick={handleSignIn} variant="primary">
+                Sign In
+              </Button>
+            )}
           </Form>
         </Col>
       </Row>

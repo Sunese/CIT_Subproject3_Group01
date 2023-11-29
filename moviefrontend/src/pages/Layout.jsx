@@ -13,7 +13,9 @@ const Layout = () => {
     <>
       <MovieNavbar></MovieNavbar>
       <Container>
-        <NotificationBox />
+        <Row>
+          <NotificationBox />
+        </Row>
         <Outlet />
       </Container>
     </>

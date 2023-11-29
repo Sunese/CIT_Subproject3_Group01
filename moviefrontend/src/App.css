@@ -37,6 +37,10 @@
   }
 }
 
+.navbar {
+  margin-bottom: 5px;
+}
+
 .featured-titles-carousel {
   max-width: 100%;
   margin: auto;
@@ -70,12 +74,15 @@
   margin: 0 auto;
 }
 
+.account-button {
+  margin: 5px;
+  max-width: 20%;
+}
+
+.account-card {
+  max-width: 50%;
+}
+
 .notification-box {
-  position: relative;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Adjust the z-index as needed */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-bottom: 5px;
 }
