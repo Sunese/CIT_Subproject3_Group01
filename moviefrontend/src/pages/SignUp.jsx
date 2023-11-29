@@ -75,7 +75,7 @@ function SignUp() {
             type="username"
             placeholder="username"
             value={username}
-            onChange={setUsername(username)}
+            onChange={(event) => setUsername(event.target.value)}
           />
         </Form.Group>
 
