@@ -3,7 +3,6 @@ import { useAuth } from "../utils/AuthContext";
 import BookmarkClient from "../api/bookmarkClient";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import { SetGlobalNotification } from "../utils/Notification";
 
 const UserBookmarks = () => {
   const { isAuthenticated, token, username } = useAuth();
