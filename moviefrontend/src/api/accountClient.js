@@ -117,6 +117,25 @@ class AccountClient {
       throw error;
     }
   }
+
+  async DeleteAccount(username, token) {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_API_BASE_URI + `/api/v1/account/${username}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      );
+      return response;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  }
 }
 
 export default AccountClient;
