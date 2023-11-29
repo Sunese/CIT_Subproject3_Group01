@@ -88,8 +88,7 @@ const Paginator = ({ page }) => {
 };
 
 Paginator.propTypes = {
-  page: PropTypes.instanceOf(PagedData).isRequired,
-  inputurl: PropTypes.string.isRequired,
+  page: PropTypes.instanceOf(ResultsData).isRequired,
 };
 
 export default Paginator;
