@@ -14,7 +14,6 @@ const Account = () => {
   const navigate = useNavigate();
   const [showUpdateEmail, setShowUpdateEmail] = useState(false);
   const [showUpdatePassword, setShowUpdatePassword] = useState(false);
-  // const [accountError, setError] = useState(null);
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
   const [loading, setLoading] = useState(true);
   const [accountInfo, setAccountInfo] = useState({});
@@ -95,15 +94,6 @@ const Account = () => {
           onClick={() => setShowDeleteAccount(true)}
         >
           Delete Account
-        </Button>
-      </Row>
-      <Row>
-        <Button
-          className="account-button"
-          variant="danger"
-          onClick={() => showNotification("Haiiiii :3", "success")}
-        >
-          Hi
         </Button>
       </Row>
       <UpdateEmail
