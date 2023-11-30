@@ -61,7 +61,7 @@ const NameSearch = () => {
     return (
         <>
         <h1>Names:</h1>
-        <Paginator page={resultsData} />
+        <Paginator page={resultsData} isTitles={false}/>
         </>
     )
 }

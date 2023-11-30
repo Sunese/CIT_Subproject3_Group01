@@ -59,7 +59,7 @@ const TitleSearch = () => {
     return (
         <>
         <h1>Titles:</h1>
-        <Paginator page={resultsData} />
+        <Paginator page={resultsData} isTitles={true}/>
         </>
     )
 }
