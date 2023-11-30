@@ -13,15 +13,13 @@ const Paginator = ({ page }) => {
   const [NumberOfitems, setNumberOfitems] = useState("10");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log("page: ", page);
-
   const handleNumberOfItems = (event) => {
     setNumberOfitems(event.target.getAttribute("id"));
   };
+  console.log("Paginator page: ", page);
 
   return (
     <div>
-      <h1>Paginator</h1>
       current params: {searchParams.toString()}
       <br />
       Total: {page.total}
