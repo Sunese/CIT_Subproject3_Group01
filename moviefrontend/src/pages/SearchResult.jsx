@@ -7,7 +7,7 @@ import NameSearch from "../components/NameSearch";
 const SearchResult = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  function ConditionalSearch(searchParamsProps) {
+  function ConditionalSearch() {
     if (searchParams.get("section") === "title") {
       return <TitleSearch />;
     } else if (searchParams.get("section") === "name") {

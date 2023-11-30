@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import PropTypes from "prop-types";
 import ResultsData from "../data/resultsData";
@@ -8,15 +8,48 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/esm/Col";
+import Card from "react-bootstrap/Card";
 
-const Paginator = ({ page }) => {
+const Paginator = ({ page }, isTitles) => {
   const [NumberOfitems, setNumberOfitems] = useState("10");
   const [searchParams, setSearchParams] = useSearchParams();
+  const apiUrlParameters = new URLSearchParams(page.current);
 
   const handleNumberOfItems = (event) => {
     setNumberOfitems(event.target.getAttribute("id"));
   };
   console.log("Paginator page: ", page);
+  console.log("Paginator page.total: ", apiUrlParameters.keys());
+  console.log("Paginator page.current: ", apiUrlParameters.get("page"));
+
+  function CreateCard() {
+    return (
+      <Card>
+        <Card.Body>
+          <Card.Title>
+            <Link to={"/title/"}>link:</Link>
+          </Card.Title>
+          {/* <Button variant="primary">Go somewhere</Button> */}
+        </Card.Body>
+      </Card>
+    );
+  }
+
+  // maps cards to page using page.items
+  // need to fix the check before mapping
+  function MapCards() {
+    if (isTitles) {
+      return (
+        <div>
+          {page &&
+            page.items &&
+            page.items.map((item) => <CreateCard key={item.titleid} />)}
+        </div>
+      );
+    } else {
+      return;
+    }
+  }
 
   return (
     <div>
@@ -33,6 +66,7 @@ const Paginator = ({ page }) => {
       Current: {page.current}
       <br />
       <br />
+      <MapCards />
       <Container>
         <Row>
           <Col>
