@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/esm/Col';
 import { Link } from 'react-router-dom';
 
-const SearchTitleCard = ( {item} ) => {
+const SearchNameCard = ( {item} ) => {
     return (
         <Card>
             <Card.Body>
@@ -23,8 +23,8 @@ const SearchTitleCard = ( {item} ) => {
         )
 }
 
-SearchTitleCard.propTypes = {
+SearchNameCard.propTypes = {
     item: PropTypes.object.isRequired
 };
 
-export default SearchTitleCard;
+export default SearchNameCard;

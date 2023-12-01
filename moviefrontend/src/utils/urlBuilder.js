@@ -1,4 +1,20 @@
 
+// gets the data after the equals sign in the input part of the url
+// example: "https://localhost:7293/api/v1/search/title?query=friends&titletype=movie&page=0&pageSize=10"
+// input: tityletype
+// output: movie
+// input: page
+// output: 0
+const GetUrlParamRegex = ( url, paramater ) => {
+    let regex = new RegExp( paramater + '=([^&]*)' );
+    let match = url.match( regex );
+    if (match) {
+        return match[1];
+    } else {
+        return null;
+    }
+}
+
 // builds the url after api call, handles pagination and search parameters
 // "https://localhost:7293/api/v1/search/title?query=friends&titletype=movie&page=0&pageSize=10"
 const PaginationUrlBuilder = ( section, query, type, page, pageSize ) => {
@@ -64,4 +80,4 @@ const searchParamsBuilder = ( Section, Query, Type ) => {
     return searchTerm;
 };
 
-export { PaginationUrlBuilder, ApiParamsBuilder, searchParamsBuilder };
+export { GetUrlParamRegex, PaginationUrlBuilder, ApiParamsBuilder, searchParamsBuilder };
