@@ -8,9 +8,10 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/esm/Col";
-import Card from "react-bootstrap/Card";
+import SearchTitleCard from "./SearchTitleCard";
+import SearchNameCard from "./SearchNameCard";
 
-const Paginator = ({ page }, isTitles) => {
+const Paginator = ({ page, isTitles }) => {
   const [NumberOfitems, setNumberOfitems] = useState("10");
   const [searchParams, setSearchParams] = useSearchParams();
   const apiUrlParameters = new URLSearchParams(page.current);
@@ -18,32 +19,27 @@ const Paginator = ({ page }, isTitles) => {
   const handleNumberOfItems = (event) => {
     setNumberOfitems(event.target.getAttribute("id"));
   };
-  console.log("Paginator page: ", page);
-  console.log("Paginator page.total: ", apiUrlParameters.keys());
-  console.log("Paginator page.current: ", apiUrlParameters.get("page"));
+  console.log("Curernt Frontend page: ", searchParams.toString());
+  console.log("Current API Page", apiUrlParameters.toString());
 
-  function CreateCard() {
-    return (
-      <Card>
-        <Card.Body>
-          <Card.Title>
-            <Link to={"/title/"}>link:</Link>
-          </Card.Title>
-          {/* <Button variant="primary">Go somewhere</Button> */}
-        </Card.Body>
-      </Card>
-    );
-  }
-
-  // maps cards to page using page.items
-  // need to fix the check before mapping
-  function MapCards() {
-    if (isTitles) {
+  function MapCards(props) {
+    if (!Array.isArray(props.items)) {
+      return;
+    }
+    if (props.isTitles) {
       return (
         <div>
-          {page &&
-            page.items &&
-            page.items.map((item) => <CreateCard key={item.titleid} />)}
+          {props.items.map((item) => (
+            <SearchTitleCard key={item.titleid} item={item} />
+          ))}
+        </div>
+      );
+    } else if (!props.isTitles) {
+      return (
+        <div>
+          {props.items.map((item) => (
+            <SearchNameCard key={item.url} item={item} />
+          ))}
         </div>
       );
     } else {
@@ -53,6 +49,7 @@ const Paginator = ({ page }, isTitles) => {
 
   return (
     <div>
+      <MapCards items={page.items} isTitles={isTitles} />
       current params: {searchParams.toString()}
       <br />
       Total: {page.total}
@@ -66,8 +63,7 @@ const Paginator = ({ page }, isTitles) => {
       Current: {page.current}
       <br />
       <br />
-      <MapCards />
-      <Container>
+      <Container className="justify-content-center">
         <Row>
           <Col>
             <Pagination>
@@ -128,6 +124,9 @@ const Paginator = ({ page }, isTitles) => {
 
 Paginator.propTypes = {
   page: PropTypes.instanceOf(ResultsData).isRequired,
+  items: PropTypes.array.isRequired,
+  isTitles: PropTypes.bool.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default Paginator;

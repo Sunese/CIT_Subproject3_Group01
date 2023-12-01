@@ -26,7 +26,6 @@ const NameSearch = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                console.log('Am i running twice NameSearch?')
                 const searchClient = new SearchClient();
                 const nameResultsProcessor = new NameResultsProcessor();
                 const searchResponse = await searchClient.search(

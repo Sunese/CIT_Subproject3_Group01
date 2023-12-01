@@ -18,7 +18,6 @@ const SearchBar = () => {
 
 	let handleSearch = (event) => {
 		if (event.key === 'Enter') {
-			//console.log(event.target.value);
 			let Query = event.target.value;
 			navigate(`/SearchResult/${searchParamsBuilder(SearchSection, Query, SearchType)}`);
 		}

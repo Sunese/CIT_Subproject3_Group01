@@ -1,6 +1,6 @@
 class NameResultsItemData {
-  constructor(nameid, url, name, birthYear, deathYear) {
-    this.nameid = nameid;
+  constructor(nameid, url, primaryName, birthYear, deathYear) {
+    this.primaryName = primaryName;
     this.url = url;
     this.name = name;
     this.birthYear = birthYear;
@@ -11,7 +11,7 @@ class NameResultsItemData {
     return new NameResultsItemData(
       json.nameID,
       json.url,
-      json.name,
+      json.primaryName,
       json.birthYear,
       json.deathYear
     );
