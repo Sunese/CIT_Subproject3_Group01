@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
-import { PaginationUrlBuilder } from "../utils/urlBuilder";
+import { useSearchParams } from "react-router-dom";
+import { PaginationUrlBuilder, GetUrlParamRegex } from "../utils/urlBuilder";
 import PropTypes from "prop-types";
 import ResultsData from "../data/resultsData";
 import Pagination from "react-bootstrap/Pagination";
@@ -14,13 +14,23 @@ import SearchNameCard from "./SearchNameCard";
 const Paginator = ({ page, isTitles }) => {
   const [NumberOfitems, setNumberOfitems] = useState("10");
   const [searchParams, setSearchParams] = useSearchParams();
-  const apiUrlParameters = new URLSearchParams(page.current);
 
   const handleNumberOfItems = (event) => {
     setNumberOfitems(event.target.getAttribute("id"));
   };
-  console.log("Curernt Frontend page: ", searchParams.toString());
-  console.log("Current API Page", apiUrlParameters.toString());
+
+  console.log("Paginator: ", page.current);
+  console.log("getUrlParam: ", GetUrlParamRegex(page.current, "page"));
+  console.log(
+    "PaginationUrlBuilder: ",
+    PaginationUrlBuilder(
+      searchParams.get("section"),
+      searchParams.get("query"),
+      searchParams.get("type"),
+      GetUrlParamRegex(page.current, "page"),
+      GetUrlParamRegex(page.current, "pageSize")
+    )
+  );
 
   function MapCards(props) {
     if (!Array.isArray(props.items)) {
@@ -63,12 +73,14 @@ const Paginator = ({ page, isTitles }) => {
       Current: {page.current}
       <br />
       <br />
-      <Container className="justify-content-center">
+      <Container>
         <Row>
           <Col>
             <Pagination>
               <Pagination.Prev></Pagination.Prev>
-              <Pagination.Item active>{page.current}</Pagination.Item>
+              <Pagination.Item active>
+                {GetUrlParamRegex(page.current, "page")}
+              </Pagination.Item>
               <Pagination.Next></Pagination.Next>
             </Pagination>
           </Col>
@@ -109,7 +121,7 @@ const Paginator = ({ page, isTitles }) => {
                 <Dropdown.Item
                   onClick={handleNumberOfItems}
                   id="100"
-                  active={NumberOfitems === "100    "}
+                  active={NumberOfitems === "100"}
                 >
                   100
                 </Dropdown.Item>
