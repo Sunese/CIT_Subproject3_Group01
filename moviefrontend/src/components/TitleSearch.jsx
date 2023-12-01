@@ -25,7 +25,6 @@ const TitleSearch = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                console.log('Am i running twice TitleSearch?')
                 const searchClient = new SearchClient();
                 const titleResultsProcessor = new TitleResultsProcessor();
                 const searchResponse = await searchClient.search(
