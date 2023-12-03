@@ -15,8 +15,7 @@ const UpdatePassword = ({ show, onHide }) => {
   const handleUpdateEmail = async () => {
     setLoading(true);
     try {
-      const accountClient = new AccountClient();
-      const response = await accountClient.UpdatePassword(
+      const response = await AccountClient.updatePassword(
         username,
         token,
         newPassword

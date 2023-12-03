@@ -1,5 +1,5 @@
 class AccountClient {
-  async SignIn(username, password) {
+  static async signIn(username, password) {
     try {
       const signInModel = JSON.stringify({
         username: username,
@@ -22,7 +22,7 @@ class AccountClient {
     }
   }
 
-  async SignUp(username, email, password, role) {
+  static async signUp(username, email, password, role) {
     if (role === "") {
       role = "User";
     }
@@ -51,7 +51,7 @@ class AccountClient {
     }
   }
 
-  async GetAccountInfo(username, token) {
+  static async getAccountInfo(username, token) {
     try {
       const response = await fetch(
         process.env.REACT_APP_API_BASE_URI + `/api/v1/account/${username}`,
@@ -70,7 +70,7 @@ class AccountClient {
     }
   }
 
-  async UpdateEmail(username, token, newEmail) {
+  static async updateEmail(username, token, newEmail) {
     try {
       const updateEmailModel = JSON.stringify({
         newEmail: newEmail,
@@ -94,7 +94,7 @@ class AccountClient {
     }
   }
 
-  async UpdatePassword(username, token, newPassword) {
+  static async updatePassword(username, token, newPassword) {
     try {
       const updatePasswordModel = JSON.stringify({
         newPassword: newPassword,
@@ -118,7 +118,7 @@ class AccountClient {
     }
   }
 
-  async DeleteAccount(username, token) {
+  static async deleteAccount(username, token) {
     try {
       const response = await fetch(
         process.env.REACT_APP_API_BASE_URI + `/api/v1/account/${username}`,

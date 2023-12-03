@@ -1,60 +1,81 @@
-import React, { useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
-import PropTypes from 'prop-types';
-import TitleData from '../data/title/titleData';
-import { useParams } from 'react-router-dom';
-import TitleClient from '../api/titleClient';
-import TitleProcessor from '../data/title/titleProcessor';
-import { useState } from 'react';
-import Spinner from 'react-bootstrap/esm/Spinner';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
+import React, { useEffect } from "react";
+import Card from "react-bootstrap/Card";
+import PropTypes from "prop-types";
+import TitleData from "../data/title/titleData";
+import { useParams } from "react-router-dom";
+import TitleClient from "../api/titleClient";
+import { useState } from "react";
+import Spinner from "react-bootstrap/esm/Spinner";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 const Title = () => {
-    let { id } = useParams();
-    const [error, setError] = useState(null);
-    const [loadingTitle, setLoadingTitle] = useState(true);
-    const [titleData, setTitleData] = useState(new TitleData());
+  let { id } = useParams();
+  const [error, setError] = useState(null);
+  const [loadingTitle, setLoadingTitle] = useState(true);
+  const [titleData, setTitleData] = useState(new TitleData());
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const titleClient = new TitleClient();
-                const titleProcessor = new TitleProcessor();
-                const titleResult = titleProcessor.processTitle(await titleClient.getTitle(id));
-                setTitleData(titleResult);
-                setLoadingTitle(false);
-            } catch (error) {
-                setLoadingTitle(false);
-                setError(error.message);
-                console.error('error: ', error);
-            }
-        }
-        fetchData();
-    }, [id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const jsonTitleResult = await TitleClient.getTitle(id);
+        const titleResult = TitleData.fromJson(jsonTitleResult);
+        setTitleData(titleResult);
+        setLoadingTitle(false);
+      } catch (error) {
+        setLoadingTitle(false);
+        setError(error.message);
+      }
+    };
+    fetchData();
+  }, [id]);
 
-    if (loadingTitle) {
-        return <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
-    }
+  if (loadingTitle) {
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
+  }
 
-    if (error) {
-        return <p style={{color: 'red'}}>{error}</p>
-    }
+  if (error) {
+    return <p style={{ color: "red" }}>{error}</p>;
+  }
 
-    return <>
-        <Row>
-            <Col>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={titleData.poster} />
-                    <Card.Body>
-                        <Card.Title>{titleData.primaryTitle}</Card.Title>
-                        <Card.Text>{titleData.plot}</Card.Text>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </Row>
+  return (
+    <>
+      <Row>
+        <Col>
+          <Card className="custom-card">
+            <Card.Img src={titleData.poster} className="custom-card-image" />
+            <Card.Body>
+              <Card.Title>
+                <h1>{titleData.primaryTitle}</h1>
+              </Card.Title>
+              {titleData.isAdult ? (
+                <Card.Text>
+                  <div className="isadult">18+</div>{" "}
+                </Card.Text>
+              ) : (
+                <div></div>
+              )}
+              <p className="genres">
+                {titleData.genres.map((genre, index) => (
+                  <span key={index} className="genre-bubble">
+                    {genre.genreName}
+                  </span>
+                ))}
+              </p>
+              <Card.Text>
+                Runtime (minutes): {titleData.runtimeMinutes}
+              </Card.Text>
+              <Card.Text>Released: {titleData.released}</Card.Text>
+              <Card.Text>Plot: {titleData.plot}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </>
-}
+  );
+};
 export default Title;

@@ -1,31 +1,54 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import TitleClient from "../api/titleClient";
+import Spinner from "react-bootstrap/esm/Spinner";
+import PagedData from "../data/pagedData";
+import TitleRatingPageItemData from "../data/title/titleRatingPageItemData";
+import TitleRatingPageItem from "./TitleRatingPageItem";
 
-// HighestRated component
-// returns a card list of the highest rated movies in the last n days
-const HighestRated = ({ titles, days }) => 
+const HighestRated = ({ days }) => {
+  const [titles, setTitles] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = PagedData.fromJson(
+          await TitleClient.getHighestRated(days, 0, 2),
+          TitleRatingPageItemData.fromJson
+        );
+        console.log(`results for ${days} days: ${result}`);
+        setTitles(result);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+        setError("Error loading highest rated titles");
+      }
+    };
+
+    fetchData();
+  }, [days]);
+
+  if (loading) {
+    return <Spinner animation="border" role="status" />;
+  }
+
+  if (error) {
+    return <p style={{ color: "red" }}>{error}</p>;
+  }
+
+  return (
     <>
-    <h1>Highest Rated Movies in the Last {days} Days</h1>
-        {titles.items.map((title) =>
-        <Card key={title.titleid}>
-            <Card.Body>
-                <Card.Title>
-                    <Link to={"/title/" + title.titleid}>
-                        {title.name}
-                    </Link>
-                </Card.Title>
-                <Card.Text>{title.released}</Card.Text>
-                <Card.Text>{title.rating}</Card.Text>
-            </Card.Body>
-        </Card>
-        )}
+      <ul>
+        {titles.items.map((titleRating) => (
+          <li key={titleRating.titleid}>
+            <TitleRatingPageItem data={titleRating} />
+          </li>
+        ))}
+      </ul>
     </>
-
-HighestRated.propTypes = {
-    titles: PropTypes.array.isRequired,
-    days: PropTypes.number.isRequired
+  );
 };
 
 export default HighestRated;

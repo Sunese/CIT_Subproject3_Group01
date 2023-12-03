@@ -18,8 +18,7 @@ const SignIn = () => {
   const handleSignIn = async () => {
     setLoading(true);
     try {
-      const accountClient = new AccountClient();
-      const response = await accountClient.SignIn(username, password);
+      const response = await AccountClient.signIn(username, password);
 
       if (response.status === 401) {
         showNotification("Invalid credentials", "danger");

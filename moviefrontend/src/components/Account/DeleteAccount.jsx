@@ -15,8 +15,7 @@ const DeleteAccount = ({ show, onHide }) => {
   const handleDeleteAccount = async () => {
     setLoading(true);
     try {
-      const accountClient = new AccountClient();
-      const response = await accountClient.DeleteAccount(
+      const response = await AccountClient.deleteAccount(
         username,
         token,
         newPassword
