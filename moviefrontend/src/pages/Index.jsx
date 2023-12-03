@@ -1,12 +1,8 @@
 import FeaturedTitles from "../components/FeaturedTitles";
 import React from "react";
-import { useState, useEffect } from "react";
-import TitleClient from "../api/titleClient";
-import TitleResultsProcessor from "../data/title/titleResultsProcessor";
-import Spinner from "react-bootstrap/Spinner";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import HighestRated from "../components/HighestRated";
 
 const Index = () => {
   return (
@@ -17,18 +13,17 @@ const Index = () => {
           <FeaturedTitles />
         </Col>
         <Col>
-          <h2>Top rated bookmarks</h2>
+          <h3>Top rated bookmarks</h3>
         </Col>
       </Row>
       <Row>
         <Col>
-          <h2>Row 1, Col 0</h2>
+          <h3>Highest Rated All Time</h3>
+          <HighestRated />
         </Col>
         <Col>
-          <h2>Row 1, Col 1</h2>
-        </Col>
-        <Col>
-          <h2>Row 1, Col 2</h2>
+          <h3>Highest Rated Newly Released</h3>
+          <HighestRated days={30} />
         </Col>
       </Row>
     </>

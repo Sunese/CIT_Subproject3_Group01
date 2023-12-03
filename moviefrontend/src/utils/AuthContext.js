@@ -30,7 +30,7 @@ const authReducer = (state, action) => {
         username: "",
       };
     default:
-      return state;
+      throw Error(`Unexpected action type: ${action.type}`);
   }
 };
 

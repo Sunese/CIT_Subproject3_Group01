@@ -27,8 +27,7 @@ const Account = () => {
     console.log("Account effect triggered");
     const getAccountInfo = async () => {
       try {
-        const accountClient = new AccountClient();
-        const response = await accountClient.GetAccountInfo(username, token);
+        const response = await AccountClient.getAccountInfo(username, token);
         if (response.status === 200) {
           const data = await response.json();
           setAccountInfo(data);

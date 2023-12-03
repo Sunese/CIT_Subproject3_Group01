@@ -15,8 +15,7 @@ const UpdateEmail = ({ show, onHide }) => {
   const handleUpdateEmail = async () => {
     setLoading(true);
     try {
-      const accountClient = new AccountClient();
-      const response = await accountClient.UpdateEmail(
+      const response = await AccountClient.updateEmail(
         username,
         token,
         newEmail

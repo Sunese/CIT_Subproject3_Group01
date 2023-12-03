@@ -86,3 +86,36 @@
 .notification-box {
   margin-bottom: 5px;
 }
+
+.genres {
+  margin-top: 10px;
+}
+
+.genre-bubble {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 5px; /* spacing between bubbles */
+  border-radius: 20px; /* border-radius makes bubbles */
+}
+
+.isadult {
+  display: inline-block;
+  background-color: red;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 5px; /* spacing between bubbles */
+  border-radius: 20px; /* border-radius makes bubbles */
+}
+
+.custom-card {
+  display: flex; /* Use flexbox for layout */
+  width: 100%; /* Make the card take 100% of the available width */
+}
+
+.custom-card-image {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  width: 200px; /* Set a fixed width for the image */
+  margin-right: 20px; /* Add spacing between the image and the card content */
+}
