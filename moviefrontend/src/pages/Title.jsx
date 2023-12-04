@@ -72,7 +72,7 @@ const Title = () => {
               </Card.Text>
               <Card.Text>Released: {titleData.released}</Card.Text>
               <Card.Text>Plot: {titleData.plot}</Card.Text>
-              <Card.Text>
+              <Card.Text as={"span"}>
                 <TitleRating titleId={titleData.titleID}></TitleRating>
               </Card.Text>
             </Card.Body>

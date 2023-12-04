@@ -57,15 +57,14 @@ class UserRatingClient {
   }
 
   static async updateUserRating(username, token, titleid, rating) {
-    // Update rating for specific title from user
-    // TODO: add this to backend
     const body = {
       titleId: titleid,
       rating: rating,
     };
     console.log("update rating body: ", body);
     const response = await fetch(
-      process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlerating/`,
+      process.env.REACT_APP_API_BASE_URI +
+        `/api/v1/${username}/titlerating/${titleid}`,
       {
         method: "PUT",
         headers: {

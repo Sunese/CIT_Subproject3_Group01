@@ -5,7 +5,7 @@ import Popover from "react-bootstrap/Popover";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import { Rating } from "react-simple-star-rating";
-import { Modal } from "react-bootstrap";
+import { Modal, Spinner } from "react-bootstrap";
 import { useAuth } from "../../utils/AuthContext";
 import AccountClient from "../../api/accountClient";
 import UserRatingClient from "../../api/userRatingClient";
@@ -17,8 +17,15 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
   const { isAuthenticated, token, username } = useAuth();
   const { showNotification } = useNotification();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleError = (error) => {
+    showNotification(error, "danger");
+    onHide();
+  };
 
   const handleUpdateRating = async () => {
+    setLoading(true);
     try {
       const response = await UserRatingClient.updateUserRating(
         username,
@@ -30,9 +37,13 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
       if (response.status === 200) {
         showNotification("Rating updated successfully.", "success");
         onHide();
+      } else {
+        handleError("Could not update rating. Try again");
       }
     } catch (error) {
-      setError("Something went wrong.");
+      handleError("Could not update rating. Try again");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,23 +83,29 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
             </>
           ) : (
             <>
-              <Button
-                className="mb-1"
-                variant="secondary"
-                onClick={() => {
-                  setInputRating(null);
-                  onHide();
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="mb-1"
-                variant="primary"
-                onClick={handleUpdateRating}
-              >
-                Update Rating
-              </Button>
+              {loading ? (
+                <Spinner />
+              ) : (
+                <>
+                  <Button
+                    className="mb-1"
+                    variant="secondary"
+                    onClick={() => {
+                      setInputRating(null);
+                      onHide();
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className="mb-1"
+                    variant="primary"
+                    onClick={handleUpdateRating}
+                  >
+                    Update Rating
+                  </Button>
+                </>
+              )}
             </>
           )}
         </Modal.Footer>

@@ -77,18 +77,13 @@ class TitleClient {
   }
 
   static async getTitleRatings(id) {
-    try {
-      const response = await fetch(
-        process.env.REACT_APP_API_BASE_URI + "/api/v1/title/" + id + "/rating",
-        {
-          method: "GET",
-        }
-      );
-      return response;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URI + "/api/v1/title/" + id + "/rating",
+      {
+        method: "GET",
+      }
+    );
+    return response;
   }
 }
 export default TitleClient;

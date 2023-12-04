@@ -9,6 +9,7 @@ import UserRatingClient from "../api/userRatingClient";
 import Rating from "../data/rating/ratingData";
 import UpdateRating from "./Rating/UpdateRating";
 import DeleteRating from "./Rating/DeleteRating";
+import { Link } from "react-router-dom";
 
 const YourRating = ({ titleid }) => {
   const { isAuthenticated, token, username } = useAuth();
@@ -56,7 +57,12 @@ const YourRating = ({ titleid }) => {
   ]);
 
   if (!isAuthenticated) {
-    return null;
+    return (
+      <Link to="/signin" className="global-rating-text">
+        Sign in to see your rating
+      </Link>
+    );
+    // return <div className="global-rating-text">Sign in to see your rating</div>;
   }
 
   if (error) {
@@ -65,46 +71,44 @@ const YourRating = ({ titleid }) => {
 
   return (
     <>
-      <Col xs="auto">
-        <div style={{ fontSize: 20, fontWeight: "bold" }}>Your rating</div>
-        {storedRating ? (
-          <>
-            <div style={{ display: "flex" }}>
-              <FaStar className="user-rating-star" />
-              {loading ? (
-                <Spinner />
-              ) : (
-                <div className="your-rating-text">{storedRating.rating}/10</div>
-              )}
-            </div>
-            <Button
-              variant="outline-primary"
-              className="user-rating-button"
-              onClick={() => setShowUpdateRating(true)}
-            >
-              Update rating
-            </Button>
-            <Button
-              variant="outline-danger"
-              className="user-rating-button"
-              onClick={() => setShowDeleteRating(true)}
-            >
-              Delete rating
-            </Button>
-          </>
-        ) : (
+      <div style={{ fontSize: 20, fontWeight: "bold" }}>Your rating</div>
+      {storedRating ? (
+        <>
           <div style={{ display: "flex" }}>
-            <FaRegStar className="user-rating-star" />
-            <Button
-              variant="outline-primary"
-              className="user-rating-button"
-              onClick={() => setShowRate(true)}
-            >
-              Rate
-            </Button>
+            <FaStar className="user-rating-star" />
+            {loading ? (
+              <Spinner />
+            ) : (
+              <div className="your-rating-text">{storedRating.rating}/10</div>
+            )}
           </div>
-        )}
-      </Col>
+          <Button
+            variant="outline-primary"
+            className="user-rating-button"
+            onClick={() => setShowUpdateRating(true)}
+          >
+            Update rating
+          </Button>
+          <Button
+            variant="outline-danger"
+            className="user-rating-button"
+            onClick={() => setShowDeleteRating(true)}
+          >
+            Delete rating
+          </Button>
+        </>
+      ) : (
+        <div style={{ display: "flex" }}>
+          <FaRegStar className="user-rating-star" />
+          <Button
+            variant="outline-primary"
+            className="user-rating-button"
+            onClick={() => setShowRate(true)}
+          >
+            Rate
+          </Button>
+        </div>
+      )}
       <Rate
         titleid={titleid}
         show={showRate}
