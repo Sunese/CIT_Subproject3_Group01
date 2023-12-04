@@ -3,11 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { PaginationUrlBuilder, GetUrlParamRegex } from "../utils/urlBuilder";
 
 import UpdatePageClient from "../api/updatePageClient";
-import TitleResultsProcessor from "../data/title/titleResultsProcessor";
-import NameResultsProcessor from "../data/name/nameResultsProcessor";
 import { useAuth } from "../utils/AuthContext";
 import PropTypes from "prop-types";
-import ResultsData from "../data/resultsData";
+import PagedData from "../data/pagedData";
 import Pagination from "react-bootstrap/Pagination";
 import Dropdown from "react-bootstrap/Dropdown";
 import Container from "react-bootstrap/esm/Container";
@@ -15,6 +13,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/esm/Col";
 import SearchTitleCard from "./SearchTitleCard";
 import SearchNameCard from "./SearchNameCard";
+import TitleData from "../data/title/titleData";
+import NameData from "../data/name/nameData";
 
 const Paginator = ({ page, isTitles }) => {
   const { token } = useAuth();
@@ -41,12 +41,10 @@ const Paginator = ({ page, isTitles }) => {
   const updatePage = async () => {
     try {
       console.log("updatePage");
-      const updatePageClient = new UpdatePageClient();
       if (isTitlesState) {
         console.log("isTitlesState");
-        const titleResultsProcessor = new TitleResultsProcessor();
         // page=1&pageSize=10&query=mike"
-        const response = updatePageClient.updateTitles(
+        const response = UpdatePageClient.updateTitles(
           token,
           "page=" +
             5 +
@@ -58,11 +56,10 @@ const Paginator = ({ page, isTitles }) => {
         console.log("response: ", response);
         handleResponse(response);
         const responseData = await response.json();
-        setPageState(titleResultsProcessor.processPage(responseData));
+        setPageState(PagedData.fromJson(responseData, TitleData.fromJson));
       } else {
         console.log("is Not Titles State");
-        const nameResultsProcessor = new NameResultsProcessor();
-        const response = updatePageClient.updateNames(
+        const response = UpdatePageClient.updateNames(
           token,
           "page=" +
             pageCountState +
@@ -74,7 +71,7 @@ const Paginator = ({ page, isTitles }) => {
         console.log("response: ", response);
         handleResponse(response);
         const responseData = await response.json();
-        setPageState(nameResultsProcessor.processPage(responseData));
+        setPageState(PagedData.fromJson(responseData, NameData.fromJson));
       }
     } catch (error) {
       console.error("error: ", error);
@@ -185,7 +182,7 @@ const Paginator = ({ page, isTitles }) => {
 };
 
 Paginator.propTypes = {
-  page: PropTypes.instanceOf(ResultsData).isRequired,
+  page: PropTypes.instanceOf(PagedData).isRequired,
   items: PropTypes.array.isRequired,
   isTitles: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
