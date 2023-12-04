@@ -35,7 +35,11 @@ const TitleSearch = () => {
                         searchParams.get('titletype')));
                 handleResponse(searchResponse);
                 const responseData = await searchResponse.json();
+                console.log('responseData: ', responseData)
                 setResultsData(titleResultsProcessor.processPage(responseData));
+                if (responseData.totalCount < 0) {
+                    throw new Error('Error searching');
+                }
                 setLoading(false);
                     } 
                     catch (error) {
