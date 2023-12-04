@@ -32,8 +32,7 @@ function SignUp() {
   const handleSignUp = async () => {
     console.log("Signing up with username:", username);
     try {
-      const accountClient = new AccountClient();
-      const signUpResponse = await accountClient.SignUp(
+      const signUpResponse = await AccountClient.signUp(
         username,
         email,
         password,
@@ -44,7 +43,7 @@ function SignUp() {
         throw new Error("Error signing up");
       }
 
-      const signInReponse = await accountClient.SignIn(username, password);
+      const signInReponse = await AccountClient.signIn(username, password);
 
       if (!signInReponse.ok) {
         throw new Error("Error signing in");
