@@ -48,7 +48,16 @@ const Title = () => {
       <Row>
         <Col>
           <Card className="custom-card">
-            <Card.Img src={titleData.poster} className="custom-card-image" />
+            <div style={{ display: "flex" }}>
+              <Card.Img
+                src={titleData.poster}
+                className="custom-card-image"
+              ></Card.Img>
+              <Card.Text as={"span"}>
+                <TitleRating titleId={titleData.titleID}></TitleRating>
+                {/* <2 titleId={titleData.titleID}></TitleBookmark> */}
+              </Card.Text>
+            </div>
             <Card.Body>
               <Card.Title>
                 <h1>{titleData.primaryTitle}</h1>
@@ -72,9 +81,6 @@ const Title = () => {
               </Card.Text>
               <Card.Text>Released: {titleData.released}</Card.Text>
               <Card.Text>Plot: {titleData.plot}</Card.Text>
-              <Card.Text as={"span"}>
-                <TitleRating titleId={titleData.titleID}></TitleRating>
-              </Card.Text>
             </Card.Body>
           </Card>
         </Col>
