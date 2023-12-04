@@ -1,8 +1,8 @@
 class NameResultsItemData {
-  constructor(nameid, url, primaryName, birthYear, deathYear) {
+  constructor(nameID, url, primaryName, birthYear, deathYear) {
     this.primaryName = primaryName;
     this.url = url;
-    this.name = name;
+    this.nameID = nameID;
     this.birthYear = birthYear;
     this.deathYear = deathYear;
   }

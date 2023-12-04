@@ -1,5 +1,4 @@
 import React from "react";
-import TitleResultItem from "./TitleResultItem";
 import Carousel from "react-bootstrap/Carousel";
 import PropTypes from "prop-types";
 import PagedData from "../data/pagedData";
@@ -18,7 +17,7 @@ const groupTitles = (acc, cur, index) => {
 };
 
 const KnownForTitles = ({ knownForTitlesData }) =>
-  console.log(knownForTitlesData) || (
+  (knownForTitlesData.items) ? (
     <>
       <h1>Known For Titles</h1>
       <Carousel>
@@ -48,7 +47,9 @@ const KnownForTitles = ({ knownForTitlesData }) =>
         ))}
       </Carousel>
     </>
-  );
+    ) : (
+      <h1>Not Known For any Titles... veery sad</h1>
+    );
 
 KnownForTitles.propTypes = {
   knownForTitlesData: PropTypes.instanceOf(PagedData).isRequired,

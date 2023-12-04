@@ -10,9 +10,7 @@ class KnownForTitleClient {
           method: "GET",
         }
       );
-      const data = await response.json();
-      console.log("data:", data);
-      return data;
+      return response;
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
