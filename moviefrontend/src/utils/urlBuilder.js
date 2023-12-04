@@ -6,6 +6,9 @@
 // input: page
 // output: 0
 const GetUrlParamRegex = ( url, paramater ) => {
+    if (url == null || paramater == null) {
+        return null;
+    }
     let regex = new RegExp( paramater + '=([^&]*)' );
     let match = url.match( regex );
     if (match) {
