@@ -68,9 +68,9 @@ const Paginator = ({ page, isTitles }) => {
             "&query=" +
             searchParams.get("query")
         );
-        console.log("response: ", response);
         handleResponse(response);
         const responseData = await response.json();
+        console.log("response data", responseData);
         setPageState(PagedData.fromJson(responseData, NameData.fromJson));
       }
     } catch (error) {
