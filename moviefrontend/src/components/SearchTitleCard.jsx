@@ -18,7 +18,11 @@ const SearchTitleCard = ( {item} ) => {
                             </Col>
                             <Col>
                                 <h2 >{item.primaryTitle}</h2>
-                                <p >{item.plot.substring(0, 200)}...</p>
+                                 {(item.plot != null) ? (
+                                    <p >{item.plot.substring(0, 200)}...</p>
+                                    ) : (
+                                    <p >No plot available</p>
+                                    )}
                                 <Button className="flex-end" variant="primary">Read more...</Button>
                             </Col>
                         </Row>
