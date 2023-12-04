@@ -1,6 +1,8 @@
 import React from 'react';
+import { useAuth } from '../utils/AuthContext';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useNotification } from '../utils/NotificationContext';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
@@ -10,16 +12,23 @@ import { searchParamsBuilder } from '../utils/urlBuilder';
 
 
 const SearchBar = () => {
+	const { isAuthenticated } = useAuth(); 
 	const [SearchButton, setSearchButton] = useState("All");
 	const [SearchSection, setSearchSection] = useState("All");
 	const [SearchType, setSearchType] = useState("");
 	const navigate = useNavigate();
+	const { showNotification } = useNotification();
 	
 
 	let handleSearch = (event) => {
 		if (event.key === 'Enter') {
+			if (!isAuthenticated) {
+				showNotification("Please sign in to search", "danger");
+				navigate('/signin/');
+			} else {
 			let Query = event.target.value;
 			navigate(`/SearchResult/${searchParamsBuilder(SearchSection, Query, SearchType)}`);
+			}
 		}
 	}
 

@@ -5,9 +5,10 @@ import { useAuth } from "../utils/AuthContext";
 
 import SearchClient from "../api/searchClient";
 import PagedData from "../data/pagedData";
-import { ApiParamsBuilder } from "../utils/urlBuilder";
+import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import Paginator from "./Paginator";
 import TitleData from "../data/title/titleData";
+import SearchTitleCard from "./SearchTitleCard";
 
 const TitleSearch = () => {
   const { token } = useAuth();
@@ -15,20 +16,24 @@ const TitleSearch = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [resultsData, setResultsData] = useState(new PagedData());
+  const [pageCount, setPageCount] = useState(0);
+  const [itemCount, setItemCount] = useState(10);
 
   let handleResponse = (searchResponse) => {
     if (!searchResponse.ok) {
       throw new Error("Error searching");
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const searchResponse = await SearchClient.search(
+        const searchResponse = await SearchClient.titleSearch(
           token,
-          ApiParamsBuilder(
-            "title",
+          PaginationUrlBuilder(
+            pageCount,
+            itemCount,
             searchParams.get("query"),
             searchParams.get("titletype")
           )
@@ -48,7 +53,20 @@ const TitleSearch = () => {
       }
     };
     fetchData();
-  }, [searchParams, token]);
+  }, [searchParams, token, pageCount, itemCount]);
+
+  function MapCards() {
+    if (!Array.isArray(resultsData.items)) {
+      return;
+    }
+    return (
+      <div>
+        {resultsData.items.map((item) => (
+          <SearchTitleCard key={item.titleid} item={item} />
+        ))}
+      </div>
+    );
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -57,11 +75,12 @@ const TitleSearch = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  // { page, pageCount, setPageCount, setItemCount }
   return (
     <>
       <h1>Titles:</h1>
-      <Paginator page={resultsData} isTitles={true} />
+      <MapCards />
+      <Paginator pageCount={pageCount} setPageCount={setPageCount} itemCount={itemCount} setItemCount={setItemCount}/>
     </>
   );
 };
