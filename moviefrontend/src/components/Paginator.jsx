@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { PaginationUrlBuilder, GetUrlParamRegex } from "../utils/urlBuilder";
+
+import UpdatePageClient from "../api/updatePageClient";
+import TitleResultsProcessor from "../data/title/titleResultsProcessor";
+import NameResultsProcessor from "../data/name/nameResultsProcessor";
+import { useAuth } from "../utils/AuthContext";
 import PropTypes from "prop-types";
 import ResultsData from "../data/resultsData";
 import Pagination from "react-bootstrap/Pagination";
@@ -12,65 +17,107 @@ import SearchTitleCard from "./SearchTitleCard";
 import SearchNameCard from "./SearchNameCard";
 
 const Paginator = ({ page, isTitles }) => {
-  const [NumberOfitems, setNumberOfitems] = useState("10");
+  const { token } = useAuth();
+  const [pageState, setPageState] = useState(page);
+  const [pageCountState, setPageCountState] = useState(
+    GetUrlParamRegex(pageState.current, "page")
+  );
+  const [pageItemsState, setPageItemsState] = useState(10);
+  const [isTitlesState, setIsTitlesState] = useState(isTitles);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  //console.log('pageState: ', pageState);
+
   const handleNumberOfItems = (event) => {
-    setNumberOfitems(event.target.getAttribute("id"));
+    setPageItemsState(event.target.getAttribute("id"));
   };
 
-  console.log("Paginator: ", page.current);
-  console.log("getUrlParam: ", GetUrlParamRegex(page.current, "page"));
-  console.log(
-    "PaginationUrlBuilder: ",
-    PaginationUrlBuilder(
-      searchParams.get("section"),
-      searchParams.get("query"),
-      searchParams.get("type"),
-      GetUrlParamRegex(page.current, "page"),
-      GetUrlParamRegex(page.current, "pageSize")
-    )
-  );
+  let handleResponse = (response) => {
+    console.log("HandleResponse: ", response);
+    if (!response.ok) {
+      throw new Error("Error getting response");
+    }
+  };
+  const updatePage = async () => {
+    try {
+      console.log("updatePage");
+      const updatePageClient = new UpdatePageClient();
+      if (isTitlesState) {
+        console.log("isTitlesState");
+        const titleResultsProcessor = new TitleResultsProcessor();
+        // page=1&pageSize=10&query=mike"
+        const response = updatePageClient.updateTitles(
+          token,
+          "page=" +
+            5 +
+            "&pageSize=" +
+            20 +
+            "&query=" +
+            searchParams.get("query")
+        );
+        console.log("response: ", response);
+        handleResponse(response);
+        const responseData = await response.json();
+        setPageState(titleResultsProcessor.processPage(responseData));
+      } else {
+        console.log("is Not Titles State");
+        const nameResultsProcessor = new NameResultsProcessor();
+        const response = updatePageClient.updateNames(
+          token,
+          "page=" +
+            pageCountState +
+            "&pageSize=" +
+            pageItemsState +
+            "&query=" +
+            searchParams.get("query")
+        );
+        console.log("response: ", response);
+        handleResponse(response);
+        const responseData = await response.json();
+        setPageState(nameResultsProcessor.processPage(responseData));
+      }
+    } catch (error) {
+      console.error("error: ", error);
+    }
+  };
 
-  function MapCards(props) {
-    if (!Array.isArray(props.items)) {
+  function MapCards() {
+    if (!Array.isArray(pageState.items)) {
       return;
     }
-    if (props.isTitles) {
+    if (isTitlesState) {
       return (
         <div>
-          {props.items.map((item) => (
+          {pageState.items.map((item) => (
             <SearchTitleCard key={item.titleid} item={item} />
           ))}
         </div>
       );
-    } else if (!props.isTitles) {
+    } else {
       return (
         <div>
-          {props.items.map((item) => (
+          {pageState.items.map((item) => (
             <SearchNameCard key={item.url} item={item} />
           ))}
         </div>
       );
-    } else {
-      return;
     }
   }
 
   return (
     <div>
-      <MapCards items={page.items} isTitles={isTitles} />
+      <MapCards items={pageState.items} />
       current params: {searchParams.toString()}
       <br />
-      Total: {page.total}
+      Total: {pageState.total}
       <br />
-      Number of Pages: {page.numberOfPages}
+      Number of Pages: {pageState.numberOfPages}
       <br />
-      Next: {page.next}
+      Next: {pageState.next}
       <br />
-      Prev: {page.prev}
+      Prev: {pageState.prev}
       <br />
-      Current: {page.current}
+      Current: {pageState.current}
       <br />
       <br />
       <Container>
@@ -78,50 +125,53 @@ const Paginator = ({ page, isTitles }) => {
           <Col>
             <Pagination>
               <Pagination.Prev></Pagination.Prev>
-              <Pagination.Item active>
-                {GetUrlParamRegex(page.current, "page")}
-              </Pagination.Item>
-              <Pagination.Next></Pagination.Next>
+              <Pagination.Item active>{pageCountState}</Pagination.Item>
+              <Pagination.Next
+                onClick={() => {
+                  setPageCountState(pageCountState + 1);
+                  updatePage();
+                }}
+              ></Pagination.Next>
             </Pagination>
           </Col>
           <Col>
             <Dropdown>
               <Dropdown.Toggle id="dropdown-basic">
-                Items: {NumberOfitems}
+                Items: {pageItemsState}
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item
                   onClick={handleNumberOfItems}
                   id="5"
-                  active={NumberOfitems === "5"}
+                  active={pageItemsState === "5"}
                 >
                   5
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={handleNumberOfItems}
                   id="10"
-                  active={NumberOfitems === "10"}
+                  active={pageItemsState === "10"}
                 >
                   10
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={handleNumberOfItems}
                   id="25"
-                  active={NumberOfitems === "25"}
+                  active={pageItemsState === "25"}
                 >
                   25
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={handleNumberOfItems}
                   id="50"
-                  active={NumberOfitems === "50"}
+                  active={pageItemsState === "50"}
                 >
                   50
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={handleNumberOfItems}
                   id="100"
-                  active={NumberOfitems === "100"}
+                  active={pageItemsState === "100"}
                 >
                   100
                 </Dropdown.Item>
