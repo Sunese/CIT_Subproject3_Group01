@@ -23,6 +23,7 @@ class AccountClient {
   }
 
   static async signUp(username, email, password, role) {
+    // If no role is specified, default to User
     if (role === "") {
       role = "User";
     }
