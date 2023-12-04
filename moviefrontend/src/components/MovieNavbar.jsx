@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SignIn from "./SignIn";
+import SignIn from "../pages/SignIn";
 import Button from "react-bootstrap/esm/Button";
 import { useAuth } from "../utils/AuthContext";
 import SignOut from "./SignOut";

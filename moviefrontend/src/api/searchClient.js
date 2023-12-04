@@ -1,5 +1,5 @@
 class SearchClient {
-  async search(token, searchTerm) {
+  static async search(token, searchTerm) {
     try {
       const authHeader = { Authorization: `${token}` };
       const response = await fetch(
