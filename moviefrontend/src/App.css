@@ -119,3 +119,55 @@
   width: 200px; /* Set a fixed width for the image */
   margin-right: 20px; /* Add spacing between the image and the card content */
 }
+
+.title-rating-star {
+  fill: #ffc107;
+  height: 80px;
+  width: 80px;
+  /*Center it horizontally*/
+  margin: 0 auto;
+  margin-left: 20px;
+}
+
+.user-rating-star {
+  fill: #3498db;
+  height: 80px;
+  width: 80px;
+  margin-left: 20px;
+}
+
+.global-rating-text {
+  /*have text in the middle horizontally and vertically*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  /*make the text bold and a little bigger*/
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.user-rating-button {
+  /*Place the button in the middle vertically without stretching it*/
+  /* display: flex;
+  align-items: center; */
+  /*Center it horizontally*/
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  /*make the text bold and a little bigger*/
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.your-rating-text {
+  /*have text in the middle horizontally and vertically*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*make the text bold and a little bigger*/
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding-left: 20px;
+}

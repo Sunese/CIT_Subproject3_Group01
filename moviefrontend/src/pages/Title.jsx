@@ -8,6 +8,7 @@ import { useState } from "react";
 import Spinner from "react-bootstrap/esm/Spinner";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import TitleRating from "../components/TitleRating";
 
 const Title = () => {
   let { id } = useParams();
@@ -71,6 +72,9 @@ const Title = () => {
               </Card.Text>
               <Card.Text>Released: {titleData.released}</Card.Text>
               <Card.Text>Plot: {titleData.plot}</Card.Text>
+              <Card.Text>
+                <TitleRating titleId={titleData.titleID}></TitleRating>
+              </Card.Text>
             </Card.Body>
           </Card>
         </Col>

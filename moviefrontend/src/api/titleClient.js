@@ -77,7 +77,6 @@ class TitleClient {
   }
 
   static async getTitleRatings(id) {
-    console.log("getting title ratings");
     try {
       const response = await fetch(
         process.env.REACT_APP_API_BASE_URI + "/api/v1/title/" + id + "/rating",
@@ -85,8 +84,7 @@ class TitleClient {
           method: "GET",
         }
       );
-      const data = await response.json();
-      return data;
+      return response;
     } catch (error) {
       console.error("Error fetching data:", error);
       throw error;
