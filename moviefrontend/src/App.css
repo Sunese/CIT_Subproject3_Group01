@@ -171,3 +171,22 @@
   font-size: 1.2rem;
   padding-left: 20px;
 }
+
+.icon-container {
+  transition: color 0.3s ease-in-out;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.icon-container.bookmark-hovered {
+  color: #880000; /* Change the color or apply any other style you want on hover */
+}
+
+.icon-container.no-bookmark-hovered svg {
+  fill: rgb(0, 154, 38);
+}
+
+.icon-container svg {
+  width: 80px; /* Adjust the width as needed */
+  height: 80px; /* Adjust the height as needed */
+}

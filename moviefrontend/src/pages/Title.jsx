@@ -9,6 +9,8 @@ import Spinner from "react-bootstrap/esm/Spinner";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import TitleRating from "../components/TitleRating";
+import { Button } from "react-bootstrap";
+import Bookmark from "../components/Bookmark";
 
 const Title = () => {
   let { id } = useParams();
@@ -55,7 +57,7 @@ const Title = () => {
               ></Card.Img>
               <Card.Text as={"span"}>
                 <TitleRating titleId={titleData.titleID}></TitleRating>
-                {/* <2 titleId={titleData.titleID}></TitleBookmark> */}
+                <Bookmark titleid={titleData.titleID} />
               </Card.Text>
             </div>
             <Card.Body>
