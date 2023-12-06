@@ -162,11 +162,9 @@
 }
 
 .your-rating-text {
-  /*have text in the middle horizontally and vertically*/
   display: flex;
   justify-content: center;
   align-items: center;
-  /*make the text bold and a little bigger*/
   font-weight: bold;
   font-size: 1.2rem;
   padding-left: 20px;
@@ -179,14 +177,14 @@
 }
 
 .icon-container.bookmark-hovered {
-  color: #880000; /* Change the color or apply any other style you want on hover */
+  color: #880000;
 }
 
 .icon-container.no-bookmark-hovered svg {
-  fill: rgb(0, 154, 38);
+  /* fill: rgb(0, 154, 38); */
 }
 
 .icon-container svg {
-  width: 80px; /* Adjust the width as needed */
-  height: 80px; /* Adjust the height as needed */
+  width: 80px;
+  height: 80px;
 }
