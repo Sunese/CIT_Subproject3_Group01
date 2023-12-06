@@ -14,16 +14,19 @@ import { BsBookmark } from "react-icons/bs";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import { BsBookmarkDashFill } from "react-icons/bs";
+import { useNotification } from "../utils/NotificationContext";
 
 const Bookmark = ({ titleid }) => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const [storedBookmark, setStoredBookmark] = useState(null);
   const { isAuthenticated, username, token } = useAuth();
-  const [error, setError] = useState(null);
   const [loadingBookmark, setLoadingBookmark] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("fetching bookmark");
       setLoadingBookmark(true);
       if (!isAuthenticated) {
         return;
@@ -36,34 +39,65 @@ const Bookmark = ({ titleid }) => {
         );
         if (response.status === 200) {
           const json = await response.json();
+          console.log("bookmark found: ", json);
+          setIsBookmarked(true);
           setStoredBookmark(TitleBookmarkData.fromJson(json));
         } else if (response.status === 404) {
+          setIsBookmarked(false);
           setStoredBookmark(null);
         }
       } catch (error) {
-        setError("Could not retreive user's bookmark");
+        console.log("error fetching bookmark: ", error);
+        showNotification("Could not retreive user's bookmark", "danger");
       } finally {
         setLoadingBookmark(false);
       }
     };
 
     fetchData();
-  }, [titleid, isAuthenticated, username, token]);
+  }, [isAuthenticated, token, titleid, username, isBookmarked]);
 
-  const handleAddBookmark = async () => {
+  const handleAddBookmark = async (notes) => {
     setLoadingBookmark(true);
     try {
       const response = await BookmarkClient.addTitleBookmark(
         token,
         username,
+        titleid,
+        "test notes"
+      );
+      console.log("add bookmark response: ", response);
+      if (response.status === 201) {
+        showNotification("Bookmark added", "success");
+        setIsBookmarked(true);
+      } else {
+        showNotification("Could not add bookmark", "danger");
+      }
+    } catch (error) {
+      console.log("error adding bookmark: ", error);
+      showNotification("Could not add bookmark", "danger");
+    } finally {
+      setLoadingBookmark(false);
+    }
+  };
+
+  const handleRemoveBookmark = async () => {
+    setLoadingBookmark(true);
+    try {
+      const response = await BookmarkClient.removeTitleBookmark(
+        token,
+        username,
         titleid
       );
       if (response.status === 200) {
-        const json = await response.json();
-        setStoredBookmark(TitleBookmarkData.fromJson(json));
+        setStoredBookmark(null);
+        setIsBookmarked(false);
+        showNotification("Bookmark removed", "success");
+      } else {
+        showNotification("Could not remove bookmark", "danger");
       }
     } catch (error) {
-      setError("Could not add bookmark");
+      showNotification("Could not remove bookmark", "danger");
     } finally {
       setLoadingBookmark(false);
     }
@@ -77,10 +111,6 @@ const Bookmark = ({ titleid }) => {
     return <Spinner />;
   }
 
-  if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
-  }
-
   if (storedBookmark) {
     return (
       <div
@@ -88,7 +118,11 @@ const Bookmark = ({ titleid }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {isHovered ? <BsBookmarkDashFill /> : <BsBookmarkCheckFill />}
+        {isHovered ? (
+          <BsBookmarkDashFill onClick={() => handleRemoveBookmark()} />
+        ) : (
+          <BsBookmarkCheckFill />
+        )}
       </div>
     );
   }
