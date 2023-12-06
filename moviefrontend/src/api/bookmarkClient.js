@@ -40,8 +40,6 @@ class BookmarkClient {
     });
     const uri =
       process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlebookmark`;
-    console.log("uri:", uri);
-    console.log("model:", model);
     const response = await fetch(uri, {
       method: "POST",
       headers: {

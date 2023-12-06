@@ -17,7 +17,6 @@ const HighestRated = ({ days }) => {
           await TitleClient.getHighestRated(days, 0, 2),
           TitleRatingPageItemData.fromJson
         );
-        console.log(`results for ${days} days: ${result}`);
         setTitles(result);
         setLoading(false);
       } catch (error) {

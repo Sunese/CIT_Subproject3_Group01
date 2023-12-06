@@ -6,7 +6,6 @@ const NotificationProvider = ({ children }) => {
   const [notification, setNotification] = useState(null);
 
   const showNotification = (message, type = "info") => {
-    console.log("showNotification triggered with message:", message);
     setNotification({ message, type });
   };
 

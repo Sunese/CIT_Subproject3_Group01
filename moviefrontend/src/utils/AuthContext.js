@@ -11,10 +11,8 @@ const initialState = {
 };
 
 const authReducer = (state, action) => {
-  console.log("Auth reducer called with action: ", action);
   switch (action.type) {
     case "LOGIN":
-      console.log("Updating login context for: ", action.payload.username);
       return {
         ...state,
         isAuthenticated: true,
@@ -22,7 +20,6 @@ const authReducer = (state, action) => {
         username: action.payload.username,
       };
     case "LOGOUT":
-      console.log("Updating logout context for: ", state.username);
       return {
         ...state,
         isAuthenticated: false,

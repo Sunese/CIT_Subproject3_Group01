@@ -25,7 +25,6 @@ function DeleteRating({ titleid, show, onHide }) {
         token,
         titleid
       );
-      console.log("delete rating response: ", response);
       if (response.status === 200) {
         showNotification("Rating deleted successfully.", "success");
         onHide();

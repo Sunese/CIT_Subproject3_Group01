@@ -33,7 +33,6 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
         titleid,
         inputRating
       );
-      console.log("update user rating response: ", response);
       if (response.status === 200) {
         showNotification("Rating updated successfully.", "success");
         onHide();

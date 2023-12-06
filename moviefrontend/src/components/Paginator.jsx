@@ -26,23 +26,18 @@ const Paginator = ({ page, isTitles }) => {
   const [isTitlesState, setIsTitlesState] = useState(isTitles);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  //console.log('pageState: ', pageState);
-
   const handleNumberOfItems = (event) => {
     setPageItemsState(event.target.getAttribute("id"));
   };
 
   let handleResponse = (response) => {
-    console.log("HandleResponse: ", response);
     if (!response.ok) {
       throw new Error("Error getting response");
     }
   };
   const updatePage = async () => {
     try {
-      console.log("updatePage");
       if (isTitlesState) {
-        console.log("isTitlesState");
         // page=1&pageSize=10&query=mike"
         const response = UpdatePageClient.updateTitles(
           token,
@@ -53,12 +48,10 @@ const Paginator = ({ page, isTitles }) => {
             "&query=" +
             searchParams.get("query")
         );
-        console.log("response: ", response);
         handleResponse(response);
         const responseData = await response.json();
         setPageState(PagedData.fromJson(responseData, TitleData.fromJson));
       } else {
-        console.log("is Not Titles State");
         const response = UpdatePageClient.updateNames(
           token,
           "page=" +
@@ -70,7 +63,6 @@ const Paginator = ({ page, isTitles }) => {
         );
         handleResponse(response);
         const responseData = await response.json();
-        console.log("response data", responseData);
         setPageState(PagedData.fromJson(responseData, NameData.fromJson));
       }
     } catch (error) {

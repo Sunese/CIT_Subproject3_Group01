@@ -32,7 +32,6 @@ function Rate({ titleid, show, onHide }) {
         titleid,
         inputRating
       );
-      console.log("create user rating response: ", response);
       if (response.status === 201) {
         showNotification("Rating created successfully.", "success");
         onHide();
