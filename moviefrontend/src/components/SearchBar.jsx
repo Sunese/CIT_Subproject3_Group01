@@ -37,11 +37,9 @@ const SearchBar = () => {
 		setSearchType(event.target.id);
 	}
 
-	let handleSectionChange = (event) => {
-		setSearchButton(event.target.id);
-		if (event.target.id === 'All' || event.target.id === 'Title' || event.target.id === 'Name') {
-			setSearchType("");
-		}
+	let handleSectionChange = (event, searchName) => {
+		setSearchButton(searchName);
+		setSearchType("");
 		setSearchSection(event.target.id);
 	}
 
@@ -60,9 +58,9 @@ const SearchBar = () => {
 				id="input-group-dropdown-2"
 				align="end"
 			>
-				<Dropdown.Item onClick={handleSectionChange} id='All' > All </Dropdown.Item>
-				<Dropdown.Item onClick={handleSectionChange} id='Title'>Title Search</Dropdown.Item>
-				<Dropdown.Item onClick={handleSectionChange} id='Name'>Name Search</Dropdown.Item>
+				<Dropdown.Item onClick={(e) => handleSectionChange(e, 'All')} id='all' > All </Dropdown.Item>
+				<Dropdown.Item onClick={(e) => handleSectionChange(e, 'Titles')} id='title'>Title Search</Dropdown.Item>
+				<Dropdown.Item onClick={(e) => handleSectionChange(e, 'Names')} id='name'>Name Search</Dropdown.Item>
 				<Dropdown.Divider />
 				<DropdownButton
 					variant="outline-secondary"
