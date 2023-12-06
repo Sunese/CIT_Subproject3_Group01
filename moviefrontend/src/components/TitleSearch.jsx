@@ -35,7 +35,6 @@ const TitleSearch = () => {
         );
         handleResponse(searchResponse);
         const responseData = await searchResponse.json();
-        console.log("responseData: ", responseData);
         setResultsData(PagedData.fromJson(responseData, TitleData.fromJson));
         if (responseData.totalCount < 0) {
           throw new Error("Error searching");

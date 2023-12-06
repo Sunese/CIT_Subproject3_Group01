@@ -13,7 +13,6 @@ const groupTitles = (acc, cur, index) => {
   const groupIndex = Math.floor(index / 3);
   if (!acc[groupIndex]) acc[groupIndex] = [];
   acc[groupIndex].push(cur);
-  console.log(acc);
   return acc;
 };
 

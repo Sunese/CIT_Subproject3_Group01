@@ -30,7 +30,6 @@ function SignUp() {
   };
 
   const handleSignUp = async () => {
-    console.log("Signing up with username:", username);
     try {
       const signUpResponse = await AccountClient.signUp(
         username,
@@ -50,7 +49,6 @@ function SignUp() {
       }
 
       const data = await signInReponse.json();
-      console.log("Signed in: ", data);
       const jwttoken = data.token;
       const jwtusername = data.userName;
 

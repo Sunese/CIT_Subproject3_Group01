@@ -28,7 +28,6 @@ class AccountClient {
       role = "User";
     }
     try {
-      console.log("client signin up username:", username);
       const signUpModel = JSON.stringify({
         username: username,
         email: email,
@@ -79,7 +78,6 @@ class AccountClient {
       const uri =
         process.env.REACT_APP_API_BASE_URI +
         `/api/v1/account/${username}/email`;
-      console.log("uri:", uri);
       const response = await fetch(uri, {
         method: "PATCH",
         headers: {

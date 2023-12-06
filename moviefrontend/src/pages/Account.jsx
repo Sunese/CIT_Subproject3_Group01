@@ -24,7 +24,6 @@ const Account = () => {
       navigate("/signin");
       return;
     }
-    console.log("Account effect triggered");
     const getAccountInfo = async () => {
       try {
         const response = await AccountClient.getAccountInfo(username, token);

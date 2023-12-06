@@ -26,7 +26,6 @@ const Bookmark = ({ titleid }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("fetching bookmark");
       setLoadingBookmark(true);
       if (!isAuthenticated) {
         return;
@@ -39,7 +38,6 @@ const Bookmark = ({ titleid }) => {
         );
         if (response.status === 200) {
           const json = await response.json();
-          console.log("bookmark found: ", json);
           setIsBookmarked(true);
           setStoredBookmark(TitleBookmarkData.fromJson(json));
         } else if (response.status === 404) {
@@ -47,7 +45,6 @@ const Bookmark = ({ titleid }) => {
           setStoredBookmark(null);
         }
       } catch (error) {
-        console.log("error fetching bookmark: ", error);
         showNotification("Could not retreive user's bookmark", "danger");
       } finally {
         setLoadingBookmark(false);
@@ -66,7 +63,6 @@ const Bookmark = ({ titleid }) => {
         titleid,
         "test notes"
       );
-      console.log("add bookmark response: ", response);
       if (response.status === 201) {
         showNotification("Bookmark added", "success");
         setIsBookmarked(true);
@@ -74,7 +70,6 @@ const Bookmark = ({ titleid }) => {
         showNotification("Could not add bookmark", "danger");
       }
     } catch (error) {
-      console.log("error adding bookmark: ", error);
       showNotification("Could not add bookmark", "danger");
     } finally {
       setLoadingBookmark(false);

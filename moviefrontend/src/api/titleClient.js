@@ -1,6 +1,5 @@
 class TitleClient {
   static async getTitles(pageSize = 10, page = 0) {
-    console.log("getting titles");
     try {
       const response = await fetch(
         process.env.REACT_APP_API_BASE_URI +
@@ -22,7 +21,6 @@ class TitleClient {
   }
 
   static async getTitle(id) {
-    console.log("getting title");
     try {
       const response = await fetch(
         process.env.REACT_APP_API_BASE_URI + "/api/v1/title/" + id,
@@ -39,7 +37,6 @@ class TitleClient {
   }
 
   static async getFeatured() {
-    console.log("getting featured titles");
     try {
       const response = await fetch(
         process.env.REACT_APP_API_BASE_URI + "/api/v1/title/featured",
@@ -64,7 +61,6 @@ class TitleClient {
       if (days) {
         uri += "&days=" + days;
       }
-      console.log(uri);
       const response = await fetch(uri, {
         method: "GET",
       });
