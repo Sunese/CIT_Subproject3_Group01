@@ -1,53 +1,115 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
-import PropTypes from 'prop-types';
-import Form from 'react-bootstrap/Form';
+import React, { useEffect } from "react";
+import { Button, Spinner } from "react-bootstrap";
+import BookmarkClient from "../api/bookmarkClient";
+import { useAuth } from "../utils/AuthContext";
+import { useState } from "react";
+import TitleBookmarkData from "../data/bookmark/titleBookmarkData";
+import { Link } from "react-router-dom";
+import { CiBookmark } from "react-icons/ci";
+import { FaBookmark } from "react-icons/fa";
+import { MdBookmarkRemove } from "react-icons/md";
+import { CiBookmarkRemove } from "react-icons/ci";
+import { MdBookmark } from "react-icons/md";
+import { BsBookmark } from "react-icons/bs";
+import { BsBookmarkPlus } from "react-icons/bs";
+import { BsBookmarkCheckFill } from "react-icons/bs";
+import { BsBookmarkDashFill } from "react-icons/bs";
 
-const addBookmark = (
-        <Popover id="popover-basic">
-            <Popover.Header as="h3">Add Note</Popover.Header>
-            <Popover.Body>
-            <Form>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" rows="3" />
-            </Form.Group>
-            </Form>
-            </Popover.Body>
-            <Button variant="primary">Save</Button>
-        </Popover>
-    )
-        
-const editBookmark = (
-        <Popover id="popover-basic">
-            <Popover.Header as="h3">Edit Note</Popover.Header>
-            <Popover.Body>
-            <Form>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" rows="3" />
-            </Form.Group>
-            </Form>
-            </Popover.Body>
-            <Button variant="primary">Save</Button>
-            <Button variant="danger">Remove</Button>
-        </Popover>
-)
+const Bookmark = ({ titleid }) => {
+  const [storedBookmark, setStoredBookmark] = useState(null);
+  const { isAuthenticated, username, token } = useAuth();
+  const [error, setError] = useState(null);
+  const [loadingBookmark, setLoadingBookmark] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
-const Bookmark = ({isAddBookmark}) => (
-    <>
-    {isAddBookmark ? (<OverlayTrigger trigger="click" placement="right" overlay={addBookmark}>
-        <Button variant="primary">Add Bookmark</Button>
-    </OverlayTrigger>
-    ) : (<OverlayTrigger trigger="click" placement="right" overlay={editBookmark}>
-        <Button variant="primary">Edit Bookmark</Button>
-    </OverlayTrigger>)
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingBookmark(true);
+      if (!isAuthenticated) {
+        return;
+      }
+      try {
+        const response = await BookmarkClient.getTitleBookmark(
+          token,
+          username,
+          titleid
+        );
+        if (response.status === 200) {
+          const json = await response.json();
+          setStoredBookmark(TitleBookmarkData.fromJson(json));
+        } else if (response.status === 404) {
+          setStoredBookmark(null);
+        }
+      } catch (error) {
+        setError("Could not retreive user's bookmark");
+      } finally {
+        setLoadingBookmark(false);
+      }
+    };
+
+    fetchData();
+  }, [titleid, isAuthenticated, username, token]);
+
+  const handleAddBookmark = async () => {
+    setLoadingBookmark(true);
+    try {
+      const response = await BookmarkClient.addTitleBookmark(
+        token,
+        username,
+        titleid
+      );
+      if (response.status === 200) {
+        const json = await response.json();
+        setStoredBookmark(TitleBookmarkData.fromJson(json));
+      }
+    } catch (error) {
+      setError("Could not add bookmark");
+    } finally {
+      setLoadingBookmark(false);
     }
-    </>
-    );
+  };
 
-Bookmark.propTypes = {
-    isAddBookmark: PropTypes.bool.isRequired,
+  if (!isAuthenticated) {
+    return <Link to="/signin">Sign in to bookmark</Link>;
+  }
+
+  if (loadingBookmark) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <p style={{ color: "red" }}>{error}</p>;
+  }
+
+  if (storedBookmark) {
+    return (
+      <div
+        className={`icon-container ${isHovered ? "bookmark-hovered" : ""}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {isHovered ? <BsBookmarkDashFill /> : <BsBookmarkCheckFill />}
+      </div>
+    );
+  }
+
+  if (!storedBookmark) {
+    return (
+      <div
+        className={`icon-container ${isHovered ? "no-bookmark-hovered" : ""}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {isHovered ? (
+          <BsBookmarkPlus onClick={() => handleAddBookmark()} />
+        ) : (
+          <BsBookmark />
+        )}
+      </div>
+    );
+  }
+
+  return <Spinner />;
 };
 
 export default Bookmark;
