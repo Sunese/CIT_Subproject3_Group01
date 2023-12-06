@@ -36,6 +36,28 @@ const TitleRating = ({ titleId }) => {
 
   if (error) return <div style={{ color: "red" }}>{error}</div>;
 
+  const handleEffects = () => {
+    if (loading) {
+      return <Spinner animation="border" role="status"></Spinner>;
+    } else if (rating) {
+      return (
+        <>
+          <div className="global-rating-text">
+            {rating.averageRating}/10
+            <br />
+            {rating.numVotes}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="global-rating-text">No rating yet</div>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <Row>
@@ -43,25 +65,7 @@ const TitleRating = ({ titleId }) => {
           <div style={{ fontSize: 20, fontWeight: "bold" }}>Global rating</div>
           <FaStar className="title-rating-star" />
         </Col>
-        <Col xs={1}>
-          {loading ? (
-            <Spinner animation="border" />
-          ) : (
-            <>
-              {rating ? (
-                <div className="global-rating-text">
-                  {rating.averageRating}/10
-                  <br />
-                  {rating.numVotes}
-                </div>
-              ) : (
-                <div style={{ marginTop: 30, color: "red" }}>
-                  Title has no ratings!
-                </div>
-              )}
-            </>
-          )}
-        </Col>
+        <Col xs={1}>{handleEffects()}</Col>
         <Col xs={2}></Col>
         <Col xs="auto">
           <YourRating titleid={titleId} />
