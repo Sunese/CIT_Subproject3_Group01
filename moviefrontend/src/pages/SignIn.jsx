@@ -38,7 +38,7 @@ const SignIn = () => {
       login(token, signedInUsername);
       setLoading(false);
       showNotification("Signed in successfully", "success");
-      navigate("/");
+      navigate(-1);
     } catch (error) {
       setLoading(false);
       showNotification("Something went wrong, try again", "danger");
