@@ -6,12 +6,9 @@ class BookmarkClient {
       const uri =
         process.env.REACT_APP_API_BASE_URI +
         `/api/v1/${username}/titlebookmark/`;
-      console.log("uri: ", uri);
-      const authHeader = { Authorization: `${token}` };
-      console.log("authHeader: ", authHeader);
       const response = await fetch(uri, {
         method: "GET",
-        headers: authHeader,
+        Authorization: `${token}`,
       });
       const data = await response.json();
       return data;
@@ -36,21 +33,36 @@ class BookmarkClient {
     return response;
   }
 
-  static async addTitleBookmark(token, username, titleId, notes) {
-    const body = {
-      titleId: titleId,
+  static async addTitleBookmark(token, username, titleId, notes = "") {
+    const model = JSON.stringify({
       notes: notes,
-    };
+      titleId: titleId,
+    });
     const uri =
       process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlebookmark`;
-    const authHeader = { Authorization: `${token}` };
+    console.log("uri:", uri);
+    console.log("model:", model);
     const response = await fetch(uri, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authHeader,
+        Authorization: `${token}`,
       },
-      body: JSON.stringify(body),
+      body: model,
+    });
+    return response;
+  }
+
+  static async removeTitleBookmark(token, username, titleId) {
+    const uri =
+      process.env.REACT_APP_API_BASE_URI +
+      `/api/v1/${username}/titlebookmark/${titleId}`;
+    const response = await fetch(uri, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
     });
     return response;
   }

@@ -10,7 +10,7 @@ class TitleBookmarkData {
 
   static fromJson(json) {
     return new TitleBookmarkData(
-      json.titleId,
+      json.titleID,
       json.timestamp,
       json.notes,
       TitleData.fromJson(json.title)
