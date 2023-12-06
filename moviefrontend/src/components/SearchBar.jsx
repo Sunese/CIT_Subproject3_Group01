@@ -32,8 +32,8 @@ const SearchBar = () => {
 		}
 	}
 
-	let handleTypeChange = (event) => {
-		setSearchButton(event.target.id);
+	let handleTypeChange = (event, typeName) => {
+		setSearchButton(typeName);
 		setSearchType(event.target.id);
 	}
 
@@ -51,7 +51,6 @@ const SearchBar = () => {
 				id="searchInput"
 				role='search'
 				name='query'
-				aria-label="Search input with dropdown button for search options"
 				placeholder="Search"
 				type='text'
 				onKeyDown={handleSearch} />
@@ -61,25 +60,26 @@ const SearchBar = () => {
 				id="input-group-dropdown-2"
 				align="end"
 			>
-				<Dropdown.Item onClick={handleSectionChange} id='All' aria-label='All'> All </Dropdown.Item>
-				<Dropdown.Item onClick={handleSectionChange} id='Title' aria-label='Title Search'>Title Search</Dropdown.Item>
-				<Dropdown.Item onClick={handleSectionChange} id='Name' aria-label='Name Search'>Name Search</Dropdown.Item>
+				<Dropdown.Item onClick={handleSectionChange} id='All' > All </Dropdown.Item>
+				<Dropdown.Item onClick={handleSectionChange} id='Title'>Title Search</Dropdown.Item>
+				<Dropdown.Item onClick={handleSectionChange} id='Name'>Name Search</Dropdown.Item>
 				<Dropdown.Divider />
 				<DropdownButton
 					variant="outline-secondary"
 					title="Advanced Search"
 					id="input-group-dropdown-2"
 					align="end">
-					<Dropdown.Item onClick={handleTypeChange} id='Movie' aria-label='Movie'>Movie</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Tv Short' aria-label='Tv Short'>Tv Short</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Short' aria-label='Short'>Short</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Tv Movie' aria-label='Tv Movie'>Tv Movie</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Tv Mini Series' aria-label='Tv Mini Series'>Tv Mini Series</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Video Game' aria-label='Video Game'>Video Game</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Tv Episode' aria-label='Tv Episode'>Tv Episode</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Video' aria-label='Video'>Video</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Tv Special' aria-label='Tv Special'>Tv Special</Dropdown.Item>
-					<Dropdown.Item onClick={handleTypeChange} id='Tv Series' aria-label='Tv Series'>Tv Series</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Movie')} id='movie'>Movie</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Tv Short')} id='tvShort'>Tv Short</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Short')} id='_short'>Short</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Tv Movie')} id='tvMovie'>Tv Movie</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Tv Mini Series')} id='tvMiniSeries'>Tv Mini Series</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Video Game')} id='videoGame'>Video Game</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Tv Episode')} id='tvEpisode'>Tv Episode</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Video')} id='video'>Video</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Tv Special')} id='tvSpecial'>Tv Special</Dropdown.Item>
+					<Dropdown.Item onClick={(e) => handleTypeChange(e, 'Tv Series')} id='tvSeries'>Tv Series</Dropdown.Item>
+
 				</DropdownButton>
 			</DropdownButton>
 		</InputGroup>
