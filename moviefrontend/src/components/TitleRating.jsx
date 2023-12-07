@@ -5,14 +5,16 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import React from "react";
 import Rate from "./Rating/Rate";
-import YourRating from "./YourRating";
+import YourRating from "./Rating/YourRating";
 import TitleClient from "../api/titleClient";
 import TitleRatingData from "../data/title/titleRatingData";
+import GlobalRatingStar from "./Rating/GlobalRatingStar";
+import { useNotification } from "../utils/NotificationContext";
 
 const TitleRating = ({ titleId }) => {
   const [rating, setRating] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     async function fetchData() {
@@ -22,10 +24,10 @@ const TitleRating = ({ titleId }) => {
           const titleRating = TitleRatingData.fromJson(await response.json());
           setRating(titleRating);
         } else {
-          setError("Could not retreive rating");
+          showNotification("Could not retreive rating", "danger");
         }
       } catch (error) {
-        setError("Could not retreive rating");
+        showNotification("Could not retreive rating", "danger");
       }
     }
 
@@ -34,45 +36,11 @@ const TitleRating = ({ titleId }) => {
     setLoading(false);
   }, [titleId]);
 
-  if (error) return <div style={{ color: "red" }}>{error}</div>;
+  if (loading) return <Spinner />;
 
-  const handleEffects = () => {
-    if (loading) {
-      return <Spinner animation="border" role="status"></Spinner>;
-    } else if (rating) {
-      return (
-        <>
-          <div className="global-rating-text">
-            {rating.averageRating}/10
-            <br />
-            {rating.numVotes}
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <div className="global-rating-text">No rating yet</div>
-        </>
-      );
-    }
-  };
+  if (!rating) return <div>No rating for this title</div>;
 
-  return (
-    <>
-      <Row>
-        <Col xs="auto">
-          <div style={{ fontSize: 20, fontWeight: "bold" }}>Global rating</div>
-          <FaStar className="title-rating-star" />
-        </Col>
-        <Col xs={1}>{handleEffects()}</Col>
-        <Col xs={2}></Col>
-        <Col xs="auto">
-          <YourRating titleid={titleId} />
-        </Col>
-      </Row>
-    </>
-  );
+  return <GlobalRatingStar rating={rating.averageRating}></GlobalRatingStar>;
 };
 
 export default TitleRating;

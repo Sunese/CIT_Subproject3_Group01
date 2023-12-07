@@ -15,6 +15,7 @@ import { BsBookmarkPlus } from "react-icons/bs";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import { BsBookmarkDashFill } from "react-icons/bs";
 import { useNotification } from "../utils/NotificationContext";
+import { BsFillBookmarkPlusFill } from "react-icons/bs";
 
 const Bookmark = ({ titleid }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -98,6 +99,29 @@ const Bookmark = ({ titleid }) => {
     }
   };
 
+  const HoverableBookmark = ({ filled }) => {
+    if (filled && isHovered) {
+      return <BsBookmarkDashFill />;
+    } else if (filled && !isHovered) {
+      return <BsBookmarkCheckFill />;
+    } else if (!filled && isHovered) {
+      return <BsFillBookmarkPlusFill />;
+    } else if (!filled && !isHovered) {
+      return <BsBookmarkPlus />;
+    }
+  };
+
+  const Bookmark = ({ filled, className, onClick }) => (
+    <div
+      className={`bookmark-icon-container ${isHovered ? `${className}` : ""}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
+    >
+      <HoverableBookmark filled={filled}></HoverableBookmark>
+    </div>
+  );
+
   if (!isAuthenticated) {
     return <Link to="/signin">Sign in to bookmark</Link>;
   }
@@ -108,37 +132,13 @@ const Bookmark = ({ titleid }) => {
 
   if (storedBookmark) {
     return (
-      <div
-        className={`icon-container ${isHovered ? "bookmark-hovered" : ""}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {isHovered ? (
-          <BsBookmarkDashFill onClick={() => handleRemoveBookmark()} />
-        ) : (
-          <BsBookmarkCheckFill />
-        )}
-      </div>
+      <Bookmark filled={true} onClick={() => handleRemoveBookmark()}></Bookmark>
     );
   }
 
-  if (!storedBookmark) {
-    return (
-      <div
-        className={`icon-container ${isHovered ? "no-bookmark-hovered" : ""}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {isHovered ? (
-          <BsBookmarkPlus onClick={() => handleAddBookmark()} />
-        ) : (
-          <BsBookmark />
-        )}
-      </div>
-    );
-  }
-
-  return <Spinner />;
+  return (
+    <Bookmark filled={false} onClick={() => handleAddBookmark()}></Bookmark>
+  );
 };
 
 export default Bookmark;
