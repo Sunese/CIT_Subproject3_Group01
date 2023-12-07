@@ -84,6 +84,9 @@
 }
 
 .notification-box {
+  position: absolute;
+  z-index: 5;
+  max-width: 92%;
   margin-bottom: 5px;
 }
 
@@ -124,16 +127,12 @@
   fill: #ffc107;
   height: 80px;
   width: 80px;
-  /*Center it horizontally*/
-  margin: 0 auto;
-  margin-left: 20px;
 }
 
 .user-rating-star {
   fill: #3498db;
   height: 80px;
   width: 80px;
-  margin-left: 20px;
 }
 
 .global-rating-text {
@@ -170,21 +169,52 @@
   padding-left: 20px;
 }
 
-.icon-container {
+.userrating-icon-container {
   transition: color 0.3s ease-in-out;
   display: inline-block;
   cursor: pointer;
+  position: relative;
 }
 
-.icon-container.bookmark-hovered {
-  color: #880000;
+.bookmark-icon-container {
+  transition: color 0.3s ease-in-out;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
 }
 
-.icon-container.no-bookmark-hovered svg {
-  /* fill: rgb(0, 154, 38); */
-}
-
-.icon-container svg {
+.bookmark-icon-container svg {
   width: 80px;
   height: 80px;
+  fill: #3498db;
+}
+
+.userrating-icon-container svg {
+  width: 80px;
+  height: 80px;
+  fill: #3498db;
+}
+
+.star-rating-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.global-rating-star {
+  display: inline-block;
+  position: relative;
+}
+
+.title-actions {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.title-actions {
+  margin-right: 30px;
 }

@@ -15,7 +15,7 @@ class TitleRatingData {
     return new TitleRatingData(
       json.titleID,
       json.primaryTitle,
-      json.averageRating,
+      (Math.round(json.averageRating * 100) / 100).toFixed(2),
       json.numVotes
     );
   }

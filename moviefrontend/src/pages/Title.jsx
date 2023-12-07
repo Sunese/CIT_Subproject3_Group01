@@ -11,6 +11,7 @@ import Col from "react-bootstrap/esm/Col";
 import TitleRating from "../components/TitleRating";
 import { Button } from "react-bootstrap";
 import Bookmark from "../components/Bookmark";
+import YourRating from "../components/Rating/YourRating";
 
 const Title = () => {
   let { id } = useParams();
@@ -49,43 +50,29 @@ const Title = () => {
     <>
       <Row>
         <Col>
-          <Card className="custom-card">
-            <div style={{ display: "flex" }}>
-              <Card.Img
-                src={titleData.poster}
-                className="custom-card-image"
-              ></Card.Img>
-              <Card.Text as={"span"}>
-                <TitleRating titleId={titleData.titleID}></TitleRating>
-                <Bookmark titleid={titleData.titleID} />
-              </Card.Text>
-            </div>
-            <Card.Body>
-              <Card.Title>
-                <h1>{titleData.primaryTitle}</h1>
-              </Card.Title>
-              {titleData.isAdult ? (
-                <Card.Text>
-                  <div className="isadult">18+</div>{" "}
-                </Card.Text>
-              ) : (
-                <div></div>
-              )}
-              <p className="genres">
-                {titleData.genres.map((genre, index) => (
-                  <span key={index} className="genre-bubble">
-                    {genre.genreName}
-                  </span>
-                ))}
-              </p>
-              <Card.Text>
-                Runtime (minutes): {titleData.runtimeMinutes}
-              </Card.Text>
-              <Card.Text>Released: {titleData.released}</Card.Text>
-              <Card.Text>Plot: {titleData.plot}</Card.Text>
-            </Card.Body>
-          </Card>
+          <img src={titleData.poster} className="custom-card-image" />
         </Col>
+        <TitleRating titleId={titleData.titleID}></TitleRating>
+        <YourRating titleid={titleData.titleID}></YourRating>
+        <Bookmark titleid={titleData.titleID} />
+        <h1>{titleData.primaryTitle}</h1>
+        {titleData.isAdult ? (
+          <Card.Text>
+            <div className="isadult">18+</div>{" "}
+          </Card.Text>
+        ) : (
+          <div></div>
+        )}
+        <p className="genres">
+          {titleData.genres.map((genre, index) => (
+            <span key={index} className="genre-bubble">
+              {genre.genreName}
+            </span>
+          ))}
+        </p>
+        <Card.Text>Runtime (minutes): {titleData.runtimeMinutes}</Card.Text>
+        <Card.Text>Released: {titleData.released}</Card.Text>
+        <Card.Text>Plot: {titleData.plot}</Card.Text>
       </Row>
     </>
   );

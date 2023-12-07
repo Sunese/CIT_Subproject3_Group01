@@ -6,7 +6,7 @@ const NotificationBox = () => {
   const { hideNotification, notification } = useNotification();
   const [isVisible, setIsVisible] = useState(true);
 
-  const duration = 3000;
+  const duration = 1500;
 
   useEffect(() => {
     setIsVisible(true);

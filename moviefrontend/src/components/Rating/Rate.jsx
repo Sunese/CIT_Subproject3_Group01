@@ -47,6 +47,43 @@ function Rate({ titleid, show, onHide }) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
 
+  const ModalFooter = () => {
+    if (inputRating === null) {
+      return (
+        <>
+          <Button className="mb-1" variant="secondary" onClick={onHide}>
+            Cancel
+          </Button>
+          <Button disabled>Submit</Button>
+        </>
+      );
+    } else if (loading) {
+      return <Spinner />;
+    } else {
+      return (
+        <>
+          <Button
+            className="mb-1"
+            variant="secondary"
+            onClick={() => {
+              setInputRating(null);
+              onHide();
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            className="mb-1"
+            variant="primary"
+            onClick={handleCreateRating}
+          >
+            Submit
+          </Button>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <Modal
@@ -69,42 +106,7 @@ function Rate({ titleid, show, onHide }) {
           iconsCount={10}
           style={{ marginLeft: 40 }}
         />
-        <Modal.Footer>
-          {inputRating === null ? (
-            <>
-              <Button className="mb-1" variant="secondary" onClick={onHide}>
-                Cancel
-              </Button>
-              <Button disabled>Submit</Button>
-            </>
-          ) : (
-            <>
-              {loading ? (
-                <Spinner />
-              ) : (
-                <>
-                  <Button
-                    className="mb-1"
-                    variant="secondary"
-                    onClick={() => {
-                      setInputRating(null);
-                      onHide();
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    className="mb-1"
-                    variant="primary"
-                    onClick={handleCreateRating}
-                  >
-                    Submit
-                  </Button>
-                </>
-              )}
-            </>
-          )}
-        </Modal.Footer>
+        <Modal.Footer>{ModalFooter()}</Modal.Footer>
       </Modal>
     </>
   );
