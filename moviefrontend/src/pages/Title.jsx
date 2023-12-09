@@ -48,13 +48,22 @@ const Title = () => {
 
   return (
     <>
-      <Row>
+      <Row className="title-first-row">
         <Col>
           <img src={titleData.poster} className="custom-card-image" />
         </Col>
-        <TitleRating titleId={titleData.titleID}></TitleRating>
-        <YourRating titleid={titleData.titleID}></YourRating>
-        <Bookmark titleid={titleData.titleID} />
+        <Col>
+          <div className="star-top-text">Global rating</div>
+          <TitleRating titleId={titleData.titleID}></TitleRating>
+        </Col>
+        <Col>
+          <div className="star-top-text">Your rating</div>
+          <YourRating titleid={titleData.titleID}></YourRating>
+        </Col>
+        <Col>
+          <div className="star-top-text">Bookmark</div>
+          <Bookmark titleid={titleData.titleID} />
+        </Col>
         <h1>{titleData.primaryTitle}</h1>
         {titleData.isAdult ? (
           <Card.Text>

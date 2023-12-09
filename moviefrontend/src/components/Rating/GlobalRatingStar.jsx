@@ -3,9 +3,9 @@ import { FaStar } from "react-icons/fa";
 
 const GlobalRatingStar = ({ rating }) => {
   return (
-    <div className="global-rating-star">
-      <FaStar className="title-rating-star"></FaStar>
-      <span className="star-rating-text">{rating}</span>
+    <div className="global-rating-icon-container">
+      <FaStar />
+      <span>{rating}</span>
     </div>
   );
 };
