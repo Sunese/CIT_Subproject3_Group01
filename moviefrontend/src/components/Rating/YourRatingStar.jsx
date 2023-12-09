@@ -25,7 +25,7 @@ const YourRatingStar = ({ text, filled, className, onClick }) => {
       onClick={onClick}
     >
       <HoverableStar filled={filled}></HoverableStar>
-      <span className="star-rating-text">{text}</span>
+      <span>{text}</span>
     </div>
   );
 };

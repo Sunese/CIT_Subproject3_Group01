@@ -123,18 +123,6 @@
   margin-right: 20px; /* Add spacing between the image and the card content */
 }
 
-.title-rating-star {
-  fill: #ffc107;
-  height: 80px;
-  width: 80px;
-}
-
-.user-rating-star {
-  fill: #3498db;
-  height: 80px;
-  width: 80px;
-}
-
 .global-rating-text {
   /*have text in the middle horizontally and vertically*/
   display: flex;
@@ -160,53 +148,84 @@
   font-size: 1.2rem;
 }
 
-.your-rating-text {
+.star-top-text {
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 1.2rem;
-  padding-left: 20px;
+  font-size: 1rem;
 }
 
-.userrating-icon-container {
-  transition: color 0.3s ease-in-out;
-  display: inline-block;
-  cursor: pointer;
+.global-rating-icon-container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.bookmark-icon-container {
-  transition: color 0.3s ease-in-out;
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
+.global-rating-icon-container svg {
+  fill: #ffc107;
+  height: 60px;
+  width: 60px;
 }
 
-.bookmark-icon-container svg {
-  width: 80px;
-  height: 80px;
-  fill: #3498db;
-}
-
-.userrating-icon-container svg {
-  width: 80px;
-  height: 80px;
-  fill: #3498db;
-}
-
-.star-rating-text {
+.global-rating-icon-container span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
-.global-rating-star {
-  display: inline-block;
+.userrating-icon-container {
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userrating-icon-container span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.userrating-icon-container svg {
+  width: 60px;
+  height: 60px;
+  fill: #3498db;
+}
+
+.bookmark-icon-container {
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark-icon-container svg {
+  width: 60px;
+  height: 60px;
+  fill: #3498db;
+}
+.title-first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-first-row img {
+  max-width: 80%;
+  object-fit: cover;
+  margin-right: 20px;
 }
 
 .title-actions {
