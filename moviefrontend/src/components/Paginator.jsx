@@ -18,8 +18,8 @@ const Paginator = ({pageCount, setPageCount, itemCount, setItemCount }) => {
   return (
     <div>
       <Container>
-        <Row>
-          <Col>
+        <Row md='auto' className="d-flex justify-content-center">
+          <Col md='auto' className="d-flex justify-content-center">
             <Pagination>
               {pageCount === 0 ? (
                 <Pagination.Prev disabled></Pagination.Prev>
@@ -32,7 +32,7 @@ const Paginator = ({pageCount, setPageCount, itemCount, setItemCount }) => {
               ></Pagination.Next>
             </Pagination>
           </Col>
-          <Col>
+          <Col md='auto' className="d-flex justify-content-center">
             <Dropdown>
               <Dropdown.Toggle id="dropdown-basic">
                 Items: {itemCount}
