@@ -1,6 +1,6 @@
 class NameData {
-  constructor(nameId, primaryName, birthYear, deathYear) {
-    this.nameid = nameId;
+  constructor(nameID, primaryName, birthYear, deathYear) {
+    this.nameID = nameID;
     this.primaryName = primaryName;
     this.birthYear = birthYear;
     this.deathYear = deathYear;

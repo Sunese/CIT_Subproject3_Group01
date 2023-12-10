@@ -56,6 +56,7 @@ const MovieNavbar = () => {
                 <Link to="/test"> Go to test page</Link>
               </div>
               <Link to="/account"> Go to account page</Link>
+              <Link to="/searchhistory"> Go to search history page</Link>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

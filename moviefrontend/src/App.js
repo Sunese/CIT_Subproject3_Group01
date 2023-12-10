@@ -13,6 +13,7 @@ import UserBookmarks from "./pages/UserBookmarks";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Account from "./pages/Account";
+import SearchHistory from "./pages/SearchHistory";
 import { NotificationProvider } from "./utils/NotificationContext";
 
 const App = () => (
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/signup" element={<SignUp />} />
           <Route path="/test" element={<Test />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/searchhistory" element={<SearchHistory />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Route>
       </Routes>

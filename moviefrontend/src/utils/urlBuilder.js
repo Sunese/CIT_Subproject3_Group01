@@ -18,24 +18,21 @@ const GetUrlParamRegex = ( url, paramater ) => {
     }
 }
 
-// builds the url after api call, handles pagination and search parameters
-// "https://localhost:7293/api/v1/search/title?query=friends&titletype=movie&page=0&pageSize=10"
-const PaginationUrlBuilder = ( section, query, type, page, pageSize ) => {
+// builds the url for api calls, handles pagination and search parameters
+// "https://localhost:7293/api/v1/search/title?page=0&pageSize=10&query=mike"
+const PaginationUrlBuilder = (page, pageSize, query, type) => {
     let url = '';
-    if (section != null) {
-        url += section.toLowerCase() + '?';
-    }
-    if (query != null) {
-        url += `query=${query}`;
-    }
-    if (type != null) {
-        url += `&titletype=${type.toLowerCase()}`;
-    }
     if (page != null) {
         url += `&page=${page}`;
     }
     if (pageSize != null) {
         url += `&pageSize=${pageSize}`;
+    }
+    if (query != null) {
+        url += `&query=${query}`;
+    }
+    if (type != null) {
+        url += `&titletype=${type.toLowerCase()}`;
     }
     return url;
 }
@@ -44,11 +41,8 @@ const PaginationUrlBuilder = ( section, query, type, page, pageSize ) => {
 // creates the url string required for API requests
 // searchClient.js handles base url and api version
 // title?query=friends&titletype=movie
-const ApiParamsBuilder = ( section, query, type ) => {
+const ApiParamsBuilder = (query, type ) => {
     let queryString = '';
-    if (section != null) {
-        queryString += section.toLowerCase() + '?';
-    }
     if (query != null) {
         queryString += `query=${query}`;
     }

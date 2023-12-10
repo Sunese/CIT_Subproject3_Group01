@@ -11,7 +11,7 @@ const SearchNameCard = ({ item }) => {
     <Card>
       <Card.Body>
         <Card.Title>
-          <Link to={"/name/" + item.nameId}>
+          <Link to={"/name/" + item.nameID}>
             <Row>
               <h2>{item.primaryName}</h2>
             </Row>

@@ -9,6 +9,7 @@ import NameClient from "../api/nameClient";
 import NameData from "../data/name/nameData";
 import KnownForTitleClient from "../api/knownForTitlesClient";
 import KnownForTitlesData from "../data/knownForTitle/knownForTitleData";
+import PagedData from "../data/pagedData";
 
 const Name = () => {
   const { id } = useParams();
@@ -25,13 +26,18 @@ const Name = () => {
         const jsonNameResult = await NameClient.getName(id);
         const nameResult = NameData.fromJson(jsonNameResult);
         setNameData(nameResult);
-
-        const jsonKnownForTitlesResult =
+        const response =
           await KnownForTitleClient.getKnownForTitles(id);
-        const knownForTitlesResult = KnownForTitlesData.fromJson(
-          jsonKnownForTitlesResult
+        if (!response.ok) {
+          throw new Error("placeholder error");
+        }
+        const pagedKnownForTitles = await response.json();
+        console.log("pagedKnownForTitles: ", pagedKnownForTitles);
+        const pagedKnownForTitlesData = PagedData.fromJson(
+          pagedKnownForTitles,
+          KnownForTitlesData.fromJson
         );
-        setKnownForTitles(knownForTitlesResult);
+        setKnownForTitles(pagedKnownForTitlesData);
         setLoadingName(false);
       } catch (error) {
         setLoadingName(false);

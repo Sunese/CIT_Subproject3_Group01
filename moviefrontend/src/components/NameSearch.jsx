@@ -5,17 +5,19 @@ import { useAuth } from "../utils/AuthContext";
 
 import SearchClient from "../api/searchClient";
 import PagedData from "../data/pagedData";
-import { ApiParamsBuilder } from "../utils/urlBuilder";
+import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import Paginator from "./Paginator";
-
+import SearchNameCard from "./SearchNameCard";
 import NameData from "../data/name/nameData";
-
+ 
 const NameSearch = () => {
   const { token } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [resultsData, setResultsData] = useState(new PagedData());
+  const [pageCount, setPageCount] = useState(0);
+  const [itemCount, setItemCount] = useState(10);
 
   let handleResponse = (searchResponse) => {
     if (!searchResponse.ok) {
@@ -27,10 +29,11 @@ const NameSearch = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const searchResponse = await SearchClient.search(
+        const searchResponse = await SearchClient.nameSearch(
           token,
-          ApiParamsBuilder(
-            "name",
+          PaginationUrlBuilder(
+            pageCount,
+            itemCount,
             searchParams.get("query"),
             searchParams.get("titletype")
           )
@@ -38,6 +41,7 @@ const NameSearch = () => {
         handleResponse(searchResponse);
         const responseData = await searchResponse.json();
         setResultsData(PagedData.fromJson(responseData, NameData.fromJson));
+        console.log("NameresponseData: ", responseData);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -46,7 +50,20 @@ const NameSearch = () => {
       }
     };
     fetchData();
-  }, [searchParams, token]);
+  }, [searchParams, token, pageCount, itemCount]);
+
+  function MapCards() {
+    if (!Array.isArray(resultsData.items)) {
+      return;
+    }
+    return (
+      <div>
+        {resultsData.items.map((item) => (
+          <SearchNameCard key={item.titleid} item={item} />
+        ))}
+      </div>
+    );
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -59,7 +76,8 @@ const NameSearch = () => {
   return (
     <>
       <h1>Names:</h1>
-      <Paginator page={resultsData} isTitles={false} />
+      <MapCards />
+      <Paginator pageCount={pageCount} setPageCount={setPageCount} itemCount={itemCount} setItemCount={setItemCount}/>
     </>
   );
 };
