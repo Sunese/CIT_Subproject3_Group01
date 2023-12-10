@@ -45,6 +45,13 @@ const SignIn = () => {
     }
   };
 
+  const validateAndSetUsername = (username) => {
+    if (!/^[a-zA-Z0-9_]*$/.test(username)) {
+      showNotification("Username can only contain letters, numbers and underscores");
+    }
+    setUsername(username)
+  };
+
   return (
     <>
       <div className="text-center">
@@ -62,7 +69,7 @@ const SignIn = () => {
                 type="username"
                 placeholder="username"
                 value={username}
-                onChange={(event) => setUsername(event.target.value)}
+                onChange={(event) => validateAndSetUsername(event.target.value)}
               />
             </Form.Group>
 

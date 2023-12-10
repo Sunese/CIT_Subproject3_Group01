@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useAuth } from "../utils/AuthContext";
 import AccountClient from "../api/accountClient";
 import { useNavigate } from "react-router";
+import { useNotification } from "../utils/NotificationContext";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -13,24 +14,57 @@ function SignUp() {
   const [role, setRole] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { showNotification } = useNotification();
 
   const calculatePasswordStrength = () => {
-    return password.length * 10;
+    return password.length * 4;
+  };
+
+  const isInvalidUsername = (username) => {
+    if (username.length < 3) {
+      showNotification("Username must be at least 3 characters long", "danger");
+      return true;
+    } else if (username.length > 20) {
+      showNotification("Username must be less than 20 characters long", "danger");
+      return true;
+    } else if (!/^[a-zA-Z0-9_]*$/.test(username)) {
+      showNotification("Username can only contain letters, numbers and underscores", "danger");
+      return true;
+    }
+    return false;
+  };
+
+  const isInvalidPassword = (password) => {
+    if (password.length < 8) {
+      showNotification("Password must be at least 8 characters long", "danger");
+      return true;
+    }
+    return false;
+  };
+
+  const isInvalidEmail = (email) => {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showNotification("Invalid email address", "danger");
+      return true;
+    }
+    return false;
   };
 
   const getPasswordStrengthVariant = () => {
     const strength = calculatePasswordStrength();
-    if (strength < 50) {
+    if (strength < 30) {
       return "danger";
     }
-    if (strength < 80) {
+    if (strength < 60) {
       return "warning";
     }
     return "success";
   };
 
   const handleSignUp = async () => {
-    console.log("Signing up with username:", username);
+    if (isInvalidEmail(email) && isInvalidUsername(username) && isInvalidPassword(password)) {
+      return;
+    }
     try {
       const signUpResponse = await AccountClient.signUp(
         username,
@@ -57,7 +91,7 @@ function SignUp() {
       // Use the login function from useAuth to update the authentication state
       login(jwttoken, jwtusername);
       navigate("/");
-      // TODO: pop up a message to let user know they are signed up and signed in?
+      showNotification("Welcome " + username + " you have signed up and signed in successfully", "success");
     } catch (error) {
       console.error("Error signing up:", error.message);
     }
