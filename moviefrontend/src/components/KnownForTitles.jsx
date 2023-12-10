@@ -16,7 +16,7 @@ const groupTitles = (acc, cur, index) => {
 };
 
 const KnownForTitles = ({ knownForTitlesData }) =>
-  (knownForTitlesData.items) ? (
+  knownForTitlesData.items ? (
     <>
       <h1>Known For Titles</h1>
       <Carousel>
@@ -46,9 +46,9 @@ const KnownForTitles = ({ knownForTitlesData }) =>
         ))}
       </Carousel>
     </>
-    ) : (
-      <h1>Not Known For any Titles... veery sad</h1>
-    );
+  ) : (
+    <h1>Not Known For any Titles... veery sad</h1>
+  );
 
 KnownForTitles.propTypes = {
   knownForTitlesData: PropTypes.instanceOf(PagedData).isRequired,
