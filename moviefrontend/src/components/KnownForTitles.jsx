@@ -25,7 +25,7 @@ const KnownForTitles = ({ knownForTitlesData }) =>
             <Container>
               <Row>
                 {group.map((item) => (
-                  <Col key={item}>
+                  <Col key={item.primaryTitle}>
                     <Card>
                       <Link
                         style={{ color: "white", textDecoration: "none" }}

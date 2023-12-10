@@ -26,13 +26,11 @@ const Name = () => {
         const jsonNameResult = await NameClient.getName(id);
         const nameResult = NameData.fromJson(jsonNameResult);
         setNameData(nameResult);
-        const response =
-          await KnownForTitleClient.getKnownForTitles(id);
+        const response = await KnownForTitleClient.getKnownForTitles(id);
         if (!response.ok) {
-          throw new Error("placeholder error");
+          throw new Error("Error getting KnownForTitles");
         }
         const pagedKnownForTitles = await response.json();
-        console.log("pagedKnownForTitles: ", pagedKnownForTitles);
         const pagedKnownForTitlesData = PagedData.fromJson(
           pagedKnownForTitles,
           KnownForTitlesData.fromJson
