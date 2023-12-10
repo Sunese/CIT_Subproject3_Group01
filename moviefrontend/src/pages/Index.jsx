@@ -3,6 +3,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import HighestRated from "../components/HighestRated";
+import TopRatedBookmarks from "../components/TopRatedBookmarks";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
         </Col>
         <Col>
           <h3>Top rated bookmarks</h3>
+          <TopRatedBookmarks />
         </Col>
       </Row>
       <Row>
