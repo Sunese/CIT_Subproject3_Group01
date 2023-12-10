@@ -102,6 +102,9 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
           >
             Cancel
           </Button>
+          <Button variant="danger" onClick={handleDeleteRating}>
+            Remove rating
+          </Button>
           <Button
             className="mb-1"
             variant="primary"
