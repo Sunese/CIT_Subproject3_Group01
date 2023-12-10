@@ -27,7 +27,7 @@ const SearchBar = () => {
 				navigate('/signin/');
 			} else {
 			let Query = event.target.value;
-			var regex = new RegExp("^[a-zA-Z0-9 ]*$");
+			var regex = new RegExp("^[a-zA-Z0-9 ']*$");
 			if (!regex.test(Query)) {
 				showNotification("Please enter a valid search query, make sure your input does not contain symbols", "danger");
 				return;
