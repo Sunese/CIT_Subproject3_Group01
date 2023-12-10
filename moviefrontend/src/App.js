@@ -9,12 +9,13 @@ import Layout from "./pages/Layout";
 import Test from "./pages/Test";
 import SearchResult from "./pages/SearchResult";
 import { AuthProvider } from "./utils/AuthContext";
-import UserBookmarks from "./pages/UserBookmarks";
+import Bookmarks from "./pages/Bookmarks";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Account from "./pages/Account";
 import SearchHistory from "./pages/SearchHistory";
 import { NotificationProvider } from "./utils/NotificationContext";
+import Ratings from "./pages/Ratings";
 
 const App = () => (
   <AuthProvider>
@@ -25,7 +26,8 @@ const App = () => (
           <Route path="/title/:id" element={<Title />} />
           <Route path="/name/:id" element={<Name />} />
           <Route path="/SearchResult/*" element={<SearchResult />} />
-          <Route path="/bookmarks" element={<UserBookmarks />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/ratings" element={<Ratings />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/test" element={<Test />} />

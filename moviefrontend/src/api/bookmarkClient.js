@@ -2,20 +2,17 @@ import { useAuth } from "../utils/AuthContext";
 
 class BookmarkClient {
   static async getTitleBookmarks(token, username) {
-    try {
-      const uri =
-        process.env.REACT_APP_API_BASE_URI +
-        `/api/v1/${username}/titlebookmark/`;
-      const response = await fetch(uri, {
-        method: "GET",
+    const uri =
+      process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlebookmark/`;
+    const response = await fetch(uri, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
         Authorization: `${token}`,
-      });
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+      },
+    });
+    console.log("response from client: ", response);
+    return response;
   }
 
   static async getTitleBookmark(token, username, titleId) {
@@ -71,6 +68,19 @@ class BookmarkClient {
       `/api/v1/${username}/titlebookmark/${titleId}`;
     const response = await fetch(uri, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    });
+    return response;
+  }
+
+  static async getNameBookmarks(token, username) {
+    const uri =
+      process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/namebookmark/`;
+    const response = await fetch(uri, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `${token}`,

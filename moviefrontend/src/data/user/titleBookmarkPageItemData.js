@@ -1,17 +1,28 @@
+import TitleData from "../title/titleData";
+
 class TitleBookmarkPageItemData {
-  constructor(titleID, url, primaryTitle, notes) {
+  constructor(titleID, url, notes, title) {
     this.titleID = titleID;
     this.url = url;
-    this.primaryTitle = primaryTitle;
     this.notes = notes;
+    this.title = title;
   }
 
   static fromJson(json) {
     return new TitleBookmarkPageItemData(
       json.titleID,
       json.url,
-      json.primaryTitle,
-      json.notes
+      json.notes,
+      TitleData.fromJson(json.title)
+    );
+  }
+
+  static fromJsonWithoutRating(json) {
+    return new TitleBookmarkPageItemData(
+      json.titleID,
+      json.url,
+      json.notes,
+      TitleData.fromJsonWithoutRating(json.title)
     );
   }
 }
