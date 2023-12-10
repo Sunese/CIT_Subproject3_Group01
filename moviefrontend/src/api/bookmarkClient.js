@@ -33,6 +33,20 @@ class BookmarkClient {
     return response;
   }
 
+  static async getTopRatedBookmarks(token, username, numberOfBookmarks = 4) {
+    const uri =
+      process.env.REACT_APP_API_BASE_URI +
+      `/api/v1/${username}/titlebookmark/?orderBy=rating&pageSize=${numberOfBookmarks}`;
+    const response = await fetch(uri, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    });
+    return response;
+  }
+
   static async addTitleBookmark(token, username, titleId, notes = "") {
     const model = JSON.stringify({
       notes: notes,

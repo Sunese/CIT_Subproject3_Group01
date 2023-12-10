@@ -1,3 +1,5 @@
+import TitleRatingData from "./titleRatingData";
+
 class TitleData {
   constructor(
     titleID,
@@ -43,7 +45,7 @@ class TitleData {
       json.startYear,
       json.endYear,
       json.genres,
-      json.titleRating
+      TitleRatingData.fromJson(json.titleRating)
     );
   }
 }
