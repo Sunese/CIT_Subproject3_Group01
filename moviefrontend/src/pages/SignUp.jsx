@@ -62,7 +62,7 @@ function SignUp() {
   };
 
   const handleSignUp = async () => {
-    if (isInvalidEmail(email) && isInvalidUsername(username) && isInvalidPassword(password)) {
+    if (isInvalidEmail(email) || isInvalidUsername(username) || isInvalidPassword(password)) {
       return;
     }
     try {
