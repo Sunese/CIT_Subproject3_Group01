@@ -7,11 +7,11 @@ const YourRatingStar = ({ text, filled, className, onClick }) => {
 
   const HoverableStar = ({ filled }) => {
     if (filled && isHovered) {
-      return <FaRegStar />;
+      return <FaRegStar title="Update or remove your rating" />;
     } else if (filled && !isHovered) {
-      return <FaStar />;
+      return <FaStar title="Update or remove your rating" />;
     } else if (!filled && isHovered) {
-      return <FaStar />;
+      return <FaStar title="Add your rating" />;
     } else if (!filled && !isHovered) {
       return <FaRegStar />;
     }

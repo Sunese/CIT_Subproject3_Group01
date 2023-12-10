@@ -101,11 +101,11 @@ const Bookmark = ({ titleid }) => {
 
   const HoverableBookmark = ({ filled }) => {
     if (filled && isHovered) {
-      return <BsBookmarkDashFill />;
+      return <BsBookmarkDashFill title="Remove bookmark" />;
     } else if (filled && !isHovered) {
       return <BsBookmarkCheckFill />;
     } else if (!filled && isHovered) {
-      return <BsFillBookmarkPlusFill />;
+      return <BsFillBookmarkPlusFill title="Add bookmark" />;
     } else if (!filled && !isHovered) {
       return <BsBookmarkPlus />;
     }
