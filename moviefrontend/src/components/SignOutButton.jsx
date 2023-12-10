@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 import { useNotification } from "../utils/NotificationContext";
 
-const SignOut = () => {
+const SignOutButton = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const { showNotification } = useNotification();
@@ -34,4 +34,4 @@ const SignOut = () => {
   );
 };
 
-export default SignOut;
+export default SignOutButton;

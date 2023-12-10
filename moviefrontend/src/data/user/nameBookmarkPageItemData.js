@@ -1,8 +1,10 @@
+import NameData from "../name/nameData";
+
 class NameBookmarkPageItemData {
-  constructor(nameID, url, primaryName, notes) {
+  constructor(nameID, url, name, notes) {
     this.nameID = nameID;
     this.url = url;
-    this.primaryName = primaryName;
+    this.name = name;
     this.notes = notes;
   }
 
@@ -10,7 +12,7 @@ class NameBookmarkPageItemData {
     return new NameBookmarkPageItemData(
       json.nameID,
       json.url,
-      json.primaryName,
+      NameData.fromJson(json.name),
       json.notes
     );
   }

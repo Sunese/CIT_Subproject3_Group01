@@ -8,8 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SignIn from "../pages/SignIn";
 import Button from "react-bootstrap/esm/Button";
 import { useAuth } from "../utils/AuthContext";
-import SignOut from "./SignOut";
+import SignOutButton from "./SignOutButton";
 import SearchBar from "./SearchBar";
+import { MdAccountCircle } from "react-icons/md";
+import { Dropdown } from "react-bootstrap";
 
 const MovieNavbar = () => {
   const { isAuthenticated } = useAuth();
@@ -28,13 +30,38 @@ const MovieNavbar = () => {
           <Nav className="me-auto">
             {isAuthenticated ? (
               <>
-                <SignOut />
+                <Dropdown>
+                  {/* <Link to="/account"> */}
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <MdAccountCircle size={40} />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <Link to="/account">Account settings</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link to="/bookmarks">Bookmarks</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link to="/searchhistory">Search History</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link to="/ratings">Ratings</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <SignOutButton></SignOutButton>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                  {/* </Link> */}
+                </Dropdown>
               </>
             ) : (
               <>
-                <NavDropdown title="Sign In" id="basic-nav-dropdown">
-                  <SignIn />
-                </NavDropdown>
+                <Button variant="primary">
+                  <Link style={{ color: "white" }} to="/signin">
+                    Sign in
+                  </Link>
+                </Button>
                 <Button variant="primary">
                   <Link style={{ color: "white" }} to="/signup">
                     Sign up

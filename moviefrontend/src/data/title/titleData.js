@@ -48,6 +48,24 @@ class TitleData {
       TitleRatingData.fromJson(json.titleRating)
     );
   }
+
+  static fromJsonWithoutRating(json) {
+    return new TitleData(
+      json.titleID,
+      json.primaryTitle,
+      json.originalTitle,
+      json.titleType,
+      json.isAdult,
+      json.released,
+      json.runtimeMinutes,
+      json.poster,
+      json.plot,
+      json.startYear,
+      json.endYear,
+      json.genres,
+      null
+    );
+  }
 }
 
 export default TitleData;

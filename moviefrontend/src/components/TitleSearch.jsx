@@ -9,6 +9,7 @@ import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import Paginator from "./Paginator";
 import TitleData from "../data/title/titleData";
 import SearchTitleCard from "./SearchTitleCard";
+import TitleSearchData from "../data/search/titleSearchData";
 
 const TitleSearch = () => {
   const { token } = useAuth();
@@ -40,7 +41,9 @@ const TitleSearch = () => {
         );
         handleResponse(searchResponse);
         const responseData = await searchResponse.json();
-        setResultsData(PagedData.fromJson(responseData, TitleData.fromJson));
+        setResultsData(
+          PagedData.fromJson(responseData, TitleSearchData.fromJson)
+        );
         if (responseData.totalCount < 0) {
           throw new Error("Error searching");
         }
@@ -79,7 +82,12 @@ const TitleSearch = () => {
     <>
       <h1>Titles:</h1>
       <MapCards />
-      <Paginator pageCount={pageCount} setPageCount={setPageCount} itemCount={itemCount} setItemCount={setItemCount}/>
+      <Paginator
+        pageCount={pageCount}
+        setPageCount={setPageCount}
+        itemCount={itemCount}
+        setItemCount={setItemCount}
+      />
     </>
   );
 };
