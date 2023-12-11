@@ -29,7 +29,7 @@ const Directors = ({ titleID }) => {
 
   let renderResults = () => {
     console.log("Directors: ", resultsData);
-    if (Object.keys(resultsData).length === 0) {
+    if (Object.keys(resultsData).length === 0 || resultsData[0] === undefined) {
       return <p>No Directors found</p>;
     }
     return resultsData.map((item) => {
