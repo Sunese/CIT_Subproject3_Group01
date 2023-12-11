@@ -12,6 +12,7 @@ import TitleRating from "../components/TitleRating";
 import { Button } from "react-bootstrap";
 import Bookmark from "../components/Bookmark";
 import YourRating from "../components/Rating/YourRating";
+import Similarmovies from "../components/Title/Similarmovies";
 
 const Title = () => {
   let { id } = useParams();
@@ -81,7 +82,23 @@ const Title = () => {
         </p>
         <Card.Text>Runtime (minutes): {titleData.runtimeMinutes}</Card.Text>
         <Card.Text>Released: {titleData.released}</Card.Text>
-        <Card.Text>Plot: {titleData.plot}</Card.Text>
+        <Card.Text>{titleData.plot}</Card.Text>
+      </Row>
+      <Row>
+        <Col>
+          <Similarmovies titleID={titleData.titleID} />
+        </Col>
+        <Col>
+          <h2>Popular Actors</h2>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h2>Directors</h2>
+        </Col>
+        <Col>
+          <h2>Writers</h2>
+        </Col>
       </Row>
     </>
   );
