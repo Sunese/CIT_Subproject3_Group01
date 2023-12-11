@@ -19,14 +19,20 @@ const KnownForTitles = ({ knownForTitlesData }) =>
   knownForTitlesData.items ? (
     <>
       <h1>Known For Titles</h1>
-      <Carousel>
+      <Carousel data-bs-theme="dark">
         {knownForTitlesData.items.reduce(groupTitles, []).map((group) => (
           <Carousel.Item key={group[0].id}>
             <Container>
-              <Row>
+              <Row style={{ justifyContent: "center" }}>
                 {group.map((item) => (
-                  <Col key={item.primaryTitle}>
-                    <Card>
+                  <Col md="auto" key={item.primaryTitle}>
+                    <Card
+                      style={{
+                        minWidth: "16rem",
+                        maxWidth: "16rem",
+                        minHeight: "29rem",
+                      }}
+                    >
                       <Link
                         style={{ color: "white", textDecoration: "none" }}
                         to={"/title/" + item.titleID}
