@@ -25,19 +25,71 @@ const NameSearch = () => {
     }
   };
 
+  const nameSearch = useCallback(async () => {
+    return SearchClient.nameSearch(
+      token,
+      PaginationUrlBuilder(
+        pageCount,
+        itemCount,
+        searchParams.get("query"),
+        searchParams.get("titletype")
+      )
+    );
+  }, [token, pageCount, itemCount, searchParams]);
+
+  const actorSearch = useCallback(async () => {
+    return SearchClient.actorSearch(
+      token,
+      PaginationUrlBuilder(
+        pageCount,
+        itemCount,
+        searchParams.get("query"),
+        searchParams.get("titletype")
+      )
+    );
+  }, [token, pageCount, itemCount, searchParams]);
+
+  const writerSearch = useCallback(async () => {
+    return SearchClient.writerSearch(
+      token,
+      PaginationUrlBuilder(
+        pageCount,
+        itemCount,
+        searchParams.get("query"),
+        searchParams.get("titletype")
+      )
+    );
+  }, [token, pageCount, itemCount, searchParams]);
+
+  const coplayerSearch = useCallback(async () => {
+    return SearchClient.coPlayerSearch(
+      token,
+      PaginationUrlBuilder(
+        pageCount,
+        itemCount,
+        searchParams.get("query"),
+        searchParams.get("titletype")
+      )
+    );
+  }, [token, pageCount, itemCount, searchParams]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const searchResponse = await SearchClient.nameSearch(
-          token,
-          PaginationUrlBuilder(
-            pageCount,
-            itemCount,
-            searchParams.get("query"),
-            searchParams.get("titletype")
-          )
-        );
+        let searchResponse = "";
+        if (searchParams.get("section") === "actor") {
+          searchResponse = await actorSearch();
+          console.log("actorSearch: ", searchResponse);
+        } else if (searchParams.get("section") === "coplayer") {
+          searchResponse = await coplayerSearch();
+          console.log("coplayerSearch: ", searchResponse);
+        } else if (searchParams.get("section") === "writer") {
+          searchResponse = await writerSearch();
+          console.log("writerSearch: ", searchResponse);
+        } else {
+          searchResponse = await nameSearch(token);
+        }
         handleResponse(searchResponse);
         const responseData = await searchResponse.json();
         setResultsData(PagedData.fromJson(responseData, NameData.fromJson));
@@ -50,11 +102,20 @@ const NameSearch = () => {
       }
     };
     fetchData();
-  }, [searchParams, token, pageCount, itemCount]);
+  }, [
+    searchParams,
+    token,
+    pageCount,
+    itemCount,
+    nameSearch,
+    actorSearch,
+    writerSearch,
+    coplayerSearch,
+  ]);
 
   function MapCards() {
-    if (!Array.isArray(resultsData.items)) {
-      return;
+    if (!Array.isArray(resultsData.items) || resultsData.total === 0) {
+      return <div>No results found</div>;
     }
     return (
       <div>
