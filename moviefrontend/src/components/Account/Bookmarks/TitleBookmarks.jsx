@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../utils/AuthContext";
-import BookmarkClient from "../../api/bookmarkClient";
+import { useAuth } from "../../../utils/AuthContext";
+import BookmarkClient from "../../../api/bookmarkClient";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import TitleBookmarkPageItemData from "../../data/user/titleBookmarkPageItemData";
-import PagedData from "../../data/pagedData";
-import { useNotification } from "../../utils/NotificationContext";
+import TitleBookmarkPageItemData from "../../../data/user/titleBookmarkPageItemData";
+import PagedData from "../../../data/pagedData";
+import { useNotification } from "../../../utils/NotificationContext";
 import Spinner from "react-bootstrap/Spinner";
+import { Button } from "react-bootstrap";
+import AddBookmark from "../../Bookmark/AddBookmark";
+import UpdateBookmark from "../../Bookmark/UpdateBookmark";
 
 const TitleBookmarks = () => {
   const { isAuthenticated, token, username } = useAuth();
@@ -14,6 +17,8 @@ const TitleBookmarks = () => {
   const [loading, setLoading] = useState(false);
   const { showNotification } = useNotification();
   const [error, setError] = useState(null);
+  // const [showUpdate, setShowUpdate] = useState(false);
+  const [showUpdateFor, setShowUpdateFor] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +52,7 @@ const TitleBookmarks = () => {
       }
     };
     fetchData();
-  }, [isAuthenticated, token, username]);
+  }, [isAuthenticated, token, username, showUpdateFor]);
 
   if (loading) {
     return <Spinner />;
@@ -73,7 +78,17 @@ const TitleBookmarks = () => {
         {titleBookmarksState.items.map((item) => (
           <li key={item.titleID}>
             <Link to={`/title/${item.titleID}`}>{item.title.primaryTitle}</Link>
+            <Button onClick={() => setShowUpdateFor(item.titleID)}>
+              Update
+            </Button>
             <p>{item.notes}</p>
+            <UpdateBookmark
+              id={item.titleID}
+              bookmarkType={"title"}
+              show={showUpdateFor === item.titleID}
+              onHide={() => setShowUpdateFor(null)}
+              storedNote={item.notes}
+            ></UpdateBookmark>
           </li>
         ))}
       </ul>
