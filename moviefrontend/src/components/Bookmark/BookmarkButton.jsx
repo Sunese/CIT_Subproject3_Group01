@@ -149,6 +149,7 @@ const BookmarkButton = ({ bookmarkType, id }) => {
           onHide={() => {
             setShowUpdateBookmark(false);
             setIsBookmarked(false);
+            setIsHovered(false);
           }}
         />
       </>
@@ -170,6 +171,7 @@ const BookmarkButton = ({ bookmarkType, id }) => {
         onHide={() => {
           setShowAddBookmark(false);
           setIsBookmarked(true);
+          setIsHovered(false);
         }}
       />
     </>

@@ -74,6 +74,7 @@ const YourRating = ({ titleid }) => {
           show={showUpdateRating}
           onHide={() => {
             setShowUpdateRating(false);
+            setIsHovered(false);
           }}
         />
       </>
@@ -93,6 +94,7 @@ const YourRating = ({ titleid }) => {
         show={showRate}
         onHide={() => {
           setShowRate(false);
+          setIsHovered(false);
         }}
       ></Rate>
     </>
