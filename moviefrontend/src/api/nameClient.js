@@ -29,5 +29,27 @@ class NameClient {
     );
     return response;
   }
+
+  static async getNameRating(nameID) {
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URI + "/api/v1/name/" + nameID + "/rating",
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  }
+  static async getPrimaryProfessions(nameID) {
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URI +
+        "/api/v1/name/" +
+        nameID +
+        "/primaryProfessions",
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  }
 }
 export default NameClient;
