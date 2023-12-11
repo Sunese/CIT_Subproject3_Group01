@@ -7,9 +7,10 @@ import TitleBookmarkPageItemData from "../../../data/user/titleBookmarkPageItemD
 import PagedData from "../../../data/pagedData";
 import { useNotification } from "../../../utils/NotificationContext";
 import Spinner from "react-bootstrap/Spinner";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import AddBookmark from "../../Bookmark/AddBookmark";
 import UpdateBookmark from "../../Bookmark/UpdateBookmark";
+import Paginator from "../../Paginator";
 
 const TitleBookmarks = () => {
   const { isAuthenticated, token, username } = useAuth();
@@ -20,6 +21,8 @@ const TitleBookmarks = () => {
   // const [showUpdate, setShowUpdate] = useState(false);
   const [showUpdateFor, setShowUpdateFor] = useState(null);
   const navigate = useNavigate();
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +33,9 @@ const TitleBookmarks = () => {
       try {
         const response = await BookmarkClient.getTitleBookmarks(
           token,
-          username
+          username,
+          page,
+          pageSize
         );
         if (!response.ok) {
           throw new Error();
@@ -72,26 +77,49 @@ const TitleBookmarks = () => {
     return <div>No title bookmarks</div>;
   }
 
+  const MapTitleBookmarks = () => {
+    return titleBookmarksState?.items.map((item) => (
+      <tr key={item.titleID}>
+        <td>
+          <Link to={`/title/${item.titleID}`}>{item.title.primaryTitle}</Link>
+        </td>
+        <td>
+          <p>{item.notes}</p>
+        </td>
+        <td>
+          <Button onClick={() => setShowUpdateFor(item.titleID)}>Update</Button>
+        </td>
+        <UpdateBookmark
+          id={item.titleID}
+          bookmarkType={"title"}
+          show={showUpdateFor === item.titleID}
+          onHide={() => setShowUpdateFor(null)}
+          storedNote={item.notes}
+        ></UpdateBookmark>
+      </tr>
+    ));
+  };
+
   return (
     <>
-      <ul>
-        {titleBookmarksState.items.map((item) => (
-          <li key={item.titleID}>
-            <Link to={`/title/${item.titleID}`}>{item.title.primaryTitle}</Link>
-            <Button onClick={() => setShowUpdateFor(item.titleID)}>
-              Update
-            </Button>
-            <p>{item.notes}</p>
-            <UpdateBookmark
-              id={item.titleID}
-              bookmarkType={"title"}
-              show={showUpdateFor === item.titleID}
-              onHide={() => setShowUpdateFor(null)}
-              storedNote={item.notes}
-            ></UpdateBookmark>
-          </li>
-        ))}
-      </ul>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Notes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <MapTitleBookmarks />
+        </tbody>
+      </Table>
+      <Paginator
+        pageCount={page}
+        setPageCount={setPage}
+        itemCount={pageSize}
+        setItemCount={setPageSize}
+      />
     </>
   );
 };

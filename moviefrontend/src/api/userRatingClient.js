@@ -15,11 +15,12 @@ class UserRatingClient {
     return response;
   }
 
-  static async getUserRatings(username, token) {
+  static async getUserRatings(username, token, page = 0, pageSize = 10) {
     // Get all ratings for user
     try {
       const response = await fetch(
-        process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlerating`,
+        process.env.REACT_APP_API_BASE_URI +
+          `/api/v1/${username}/titlerating?page=${page}&pageSize=${pageSize}`,
         {
           method: "GET",
           headers: {

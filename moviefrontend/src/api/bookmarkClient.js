@@ -1,9 +1,10 @@
 import { useAuth } from "../utils/AuthContext";
 
 class BookmarkClient {
-  static async getTitleBookmarks(token, username) {
+  static async getTitleBookmarks(token, username, page = 0, pageSize = 10) {
     const uri =
-      process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlebookmark/`;
+      process.env.REACT_APP_API_BASE_URI +
+      `/api/v1/${username}/titlebookmark/?page=${page}&pageSize=${pageSize}`;
     const response = await fetch(uri, {
       method: "GET",
       headers: {
