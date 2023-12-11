@@ -7,6 +7,7 @@ import BookmarkClient from "../../api/bookmarkClient";
 
 const UpdateBookmark = ({ id, bookmarkType, show, storedNote, onHide }) => {
   const [inputNote, setInputNote] = useState(null);
+  const [isValid, setIsValid] = useState(true);
   const { isAuthenticated, token, username } = useAuth();
   const { showNotification } = useNotification();
   const [error, setError] = useState(null);
@@ -46,6 +47,14 @@ const UpdateBookmark = ({ id, bookmarkType, show, storedNote, onHide }) => {
     } catch (error) {
       showNotification("Could not update note", "danger");
     }
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputNote(value);
+    var regex = new RegExp("^[a-zA-Z0-9,. ']*$");
+    const isValidInput = regex.test(value);
+    setIsValid(isValidInput);
   };
 
   const handleUpdateNote = async () => {
@@ -126,7 +135,11 @@ const UpdateBookmark = ({ id, bookmarkType, show, storedNote, onHide }) => {
         <Button variant="danger" onClick={() => handleDeleteBookmark()}>
           Remove Bookmark
         </Button>
-        <Button variant="primary" onClick={() => handleUpdateNote()}>
+        <Button
+          variant="primary"
+          disabled={!isValid}
+          onClick={() => handleUpdateNote()}
+        >
           Update Note
         </Button>
       </>
@@ -144,10 +157,15 @@ const UpdateBookmark = ({ id, bookmarkType, show, storedNote, onHide }) => {
             <Form.Label>Notes</Form.Label>
             <Form.Control
               type="text"
+              value={inputNote}
               placeholder="Enter notes"
               defaultValue={storedNote}
-              onChange={(e) => setInputNote(e.target.value)}
+              onChange={(e) => handleInputChange(e)}
+              isInvalid={!isValid}
             />
+            <Form.Control.Feedback type="invalid">
+              Encountered invalid characters.
+            </Form.Control.Feedback>
           </Form.Group>
         </Form>
       </Modal.Body>
