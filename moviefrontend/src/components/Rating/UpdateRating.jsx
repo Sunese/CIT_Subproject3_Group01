@@ -83,7 +83,7 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
           <Button className="mb-1" variant="secondary" onClick={onHide}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDeleteRating}>
+          <Button variant="danger" onClick={() => handleDeleteRating()}>
             Remove rating
           </Button>
           <Button disabled>Update rating</Button>
@@ -102,13 +102,13 @@ function UpdateRating({ titleid, show, storedRating, onHide }) {
           >
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDeleteRating}>
+          <Button variant="danger" onClick={() => handleDeleteRating()}>
             Remove rating
           </Button>
           <Button
             className="mb-1"
             variant="primary"
-            onClick={handleUpdateRating}
+            onClick={() => handleUpdateRating()}
           >
             Update Rating
           </Button>
