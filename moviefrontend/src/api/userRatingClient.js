@@ -39,7 +39,7 @@ class UserRatingClient {
   static async createUserRating(username, token, titleid, rating) {
     // Create rating for specific title from user
     const body = {
-      titleId: titleid,
+      titleID: titleid,
       rating: rating,
     };
     const response = await fetch(
@@ -58,7 +58,7 @@ class UserRatingClient {
 
   static async updateUserRating(username, token, titleid, rating) {
     const body = {
-      titleId: titleid,
+      titleID: titleid,
       rating: rating,
     };
     const response = await fetch(

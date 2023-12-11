@@ -20,9 +20,9 @@ class NameClient {
     }
   }
 
-  static async getName(nameId) {
+  static async getName(nameID) {
     const response = await fetch(
-      process.env.REACT_APP_API_BASE_URI + "/api/v1/name/" + nameId,
+      process.env.REACT_APP_API_BASE_URI + "/api/v1/name/" + nameID,
       {
         method: "GET",
       }

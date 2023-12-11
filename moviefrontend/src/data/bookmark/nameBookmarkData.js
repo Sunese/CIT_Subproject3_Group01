@@ -1,15 +1,15 @@
 import NameData from "../name/nameData.js";
 
 class NameBookmarkData {
-  constructor(nameId, name, notes) {
-    this.nameId = nameId;
+  constructor(nameID, name, notes) {
+    this.nameID = nameID;
     this.name = name;
     this.notes = notes;
   }
 
   static fromJson(json) {
     return new NameBookmarkData(
-      json.nameId,
+      json.nameID,
       NameData.fromJson(json.name),
       json.notes
     );

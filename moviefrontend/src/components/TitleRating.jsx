@@ -11,7 +11,7 @@ import TitleRatingData from "../data/title/titleRatingData";
 import GlobalRatingStar from "./Rating/GlobalRatingStar";
 import { useNotification } from "../utils/NotificationContext";
 
-const TitleRating = ({ titleId }) => {
+const TitleRating = ({ titleID }) => {
   const [rating, setRating] = useState(null);
   const [loading, setLoading] = useState(false);
   const { showNotification } = useNotification();
@@ -19,7 +19,7 @@ const TitleRating = ({ titleId }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await TitleClient.getTitleRatings(titleId);
+        const response = await TitleClient.getTitleRatings(titleID);
         if (response.status === 200) {
           const titleRating = TitleRatingData.fromJson(await response.json());
           setRating(titleRating);
@@ -34,7 +34,7 @@ const TitleRating = ({ titleId }) => {
     setLoading(true);
     fetchData();
     setLoading(false);
-  }, [titleId]);
+  }, [titleID]);
 
   if (loading) return <Spinner />;
 

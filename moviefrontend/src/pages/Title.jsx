@@ -58,7 +58,7 @@ const Title = () => {
         </Col>
         <Col>
           <div className="star-top-text">Global rating</div>
-          <TitleRating titleId={titleData.titleID}></TitleRating>
+          <TitleRating titleID={titleData.titleID}></TitleRating>
         </Col>
         <Col>
           <div className="star-top-text">Your rating</div>

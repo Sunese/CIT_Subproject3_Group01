@@ -1,9 +1,9 @@
 import TitleData from "../title/titleData";
 
 class Rating {
-  constructor(username, titleId, rating, timeStamp, title) {
+  constructor(username, titleID, rating, timeStamp, title) {
     this.username = username;
-    this.titleId = titleId;
+    this.titleID = titleID;
     this.rating = rating;
     this.timeStamp = timeStamp;
     this.title = title;
@@ -12,7 +12,7 @@ class Rating {
   static fromJson(json) {
     return new Rating(
       json.username,
-      json.titleId,
+      json.titleID,
       json.rating,
       json.timeStamp,
       new TitleData(json.title)

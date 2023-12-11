@@ -29,7 +29,9 @@ const Name = () => {
           throw new Error("Error getting Name");
         }
         const json = await nameResponse.json();
+        console.log("name data json:", json);
         const nameResult = NameData.fromJson(json);
+        console.log("name data:", nameResult);
         setNameData(nameResult);
         const response = await KnownForTitleClient.getKnownForTitles(id);
         if (!response.ok) {

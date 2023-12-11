@@ -9,7 +9,7 @@ class NameData {
   static fromJson(json) {
     console.log("name data json: ", json);
     return new NameData(
-      json.nameId,
+      json.nameID,
       json.primaryName,
       json.birthYear,
       json.deathYear
