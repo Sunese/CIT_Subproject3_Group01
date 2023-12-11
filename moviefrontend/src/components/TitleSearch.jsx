@@ -58,8 +58,8 @@ const TitleSearch = () => {
   }, [searchParams, token, pageCount, itemCount]);
 
   function MapCards() {
-    if (!Array.isArray(resultsData.items)) {
-      return;
+    if (!Array.isArray(resultsData.items) || resultsData.total === 0) {
+      return <div>No results found</div>;
     }
     return (
       <div>

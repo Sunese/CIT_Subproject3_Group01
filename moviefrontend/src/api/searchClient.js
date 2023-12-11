@@ -3,7 +3,9 @@ class SearchClient {
     try {
       const authHeader = { Authorization: `${token}` };
       const response = await fetch(
-        process.env.REACT_APP_API_BASE_URI + "/api/v1/search/title?" + searchTerm,
+        process.env.REACT_APP_API_BASE_URI +
+          "/api/v1/search/title?" +
+          searchTerm,
         {
           method: "GET",
           headers: authHeader,
@@ -20,7 +22,66 @@ class SearchClient {
     try {
       const authHeader = { Authorization: `${token}` };
       const response = await fetch(
-        process.env.REACT_APP_API_BASE_URI + "/api/v1/search/name?" + searchTerm,
+        process.env.REACT_APP_API_BASE_URI +
+          "/api/v1/search/name?" +
+          searchTerm,
+        {
+          method: "GET",
+          headers: authHeader,
+        }
+      );
+      return response;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  }
+
+  static async actorSearch(token, searchTerm) {
+    try {
+      const authHeader = { Authorization: `${token}` };
+      const response = await fetch(
+        process.env.REACT_APP_API_BASE_URI +
+          "/api/v1/search/actor?" +
+          searchTerm,
+        {
+          method: "GET",
+          headers: authHeader,
+        }
+      );
+      return response;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  }
+
+  static async writerSearch(token, searchTerm) {
+    try {
+      const authHeader = { Authorization: `${token}` };
+      const response = await fetch(
+        process.env.REACT_APP_API_BASE_URI +
+          "/api/v1/search/writer?" +
+          searchTerm,
+        {
+          method: "GET",
+          headers: authHeader,
+        }
+      );
+      return response;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  }
+
+  static async coPlayerSearch(token, searchTerm) {
+    try {
+      const authHeader = { Authorization: `${token}` };
+      const response = await fetch(
+        process.env.REACT_APP_API_BASE_URI +
+          "/api/v1/search/coplayer?" +
+          searchTerm,
         {
           method: "GET",
           headers: authHeader,
@@ -37,9 +98,9 @@ class SearchClient {
     try {
       const authHeader = { Authorization: `${token}` };
       const response = await fetch(
-        process.env.REACT_APP_API_BASE_URI 
-        + "/api/v1/search/history"
-        + pagenation,
+        process.env.REACT_APP_API_BASE_URI +
+          "/api/v1/search/history" +
+          pagenation,
         {
           method: "GET",
           headers: authHeader,

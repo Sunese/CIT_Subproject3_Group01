@@ -27,7 +27,7 @@ const SearchBar = () => {
         var regex = new RegExp("^[a-zA-Z0-9 ']*$");
         if (!regex.test(Query)) {
           showNotification(
-            "Please enter a valid search query, make sure your input does not contain symbols",
+            "Please enter a valid search query, ensure your input does not contain symbols",
             "danger"
           );
           return;
@@ -71,8 +71,7 @@ const SearchBar = () => {
         align="end"
       >
         <Dropdown.Item onClick={(e) => handleSectionChange(e, "All")} id="all">
-          {" "}
-          All{" "}
+          All
         </Dropdown.Item>
         <Dropdown.Item
           onClick={(e) => handleSectionChange(e, "Titles")}
@@ -93,6 +92,24 @@ const SearchBar = () => {
           id="input-group-dropdown-2"
           align="end"
         >
+          <Dropdown.Item
+            onClick={(e) => handleSectionChange(e, "Actors")}
+            id="actor"
+          >
+            Actors
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => handleSectionChange(e, "Writers")}
+            id="writer"
+          >
+            Writers
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => handleSectionChange(e, "Co-players")}
+            id="coplayer"
+          >
+            Co-players
+          </Dropdown.Item>
           <Dropdown.Item
             onClick={(e) => handleTypeChange(e, "Movie")}
             id="movie"

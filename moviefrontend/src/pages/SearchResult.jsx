@@ -10,7 +10,12 @@ const SearchResult = () => {
   function ConditionalSearch() {
     if (searchParams.get("section") === "title") {
       return <TitleSearch />;
-    } else if (searchParams.get("section") === "name") {
+    } else if (
+      searchParams.get("section") === "name" ||
+      searchParams.get("section") === "actor" ||
+      searchParams.get("section") === "writer" ||
+      searchParams.get("section") === "coplayer"
+    ) {
       return <NameSearch />;
     } else if (searchParams.get("section") === "all") {
       return (
