@@ -39,10 +39,14 @@ const Similarmovies = ({ titleID }) => {
     }
     return resultsData.items.slice(0, 3).map((item) => {
       return (
-        <Link key={item.titleID} to={`/title/${item.titleID}`}>
+        <Link
+          key={item.titleID}
+          to={`/title/${item.titleID}`}
+          style={{ color: "#0000EE" }}
+        >
           <Card>
             <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
+              <Card.Title style={{ color: "#0000EE" }}>{item.title}</Card.Title>
             </Card.Body>
           </Card>
         </Link>
