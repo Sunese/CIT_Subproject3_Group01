@@ -92,7 +92,7 @@ const Title = () => {
           <Similarmovies titleID={titleData.titleID} />
         </Col>
         <Col>
-          <h2>Popular Actors</h2>
+          <PopularActors titleID={titleData.titleID} />
         </Col>
       </Row>
       <Row>

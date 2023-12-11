@@ -114,6 +114,19 @@ class TitleClient {
     );
     return response;
   }
+
+  static async getPopularActors(id) {
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URI +
+        "/api/v1/title/" +
+        id +
+        "/popularActors",
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  }
 }
 
 export default TitleClient;
