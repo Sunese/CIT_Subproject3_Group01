@@ -9,30 +9,46 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/esm/Col";
 
-const Paginator = ({pageCount, setPageCount, itemCount, setItemCount }) => {
-
+const Paginator = ({
+  pageCount,
+  setPageCount,
+  maxPageCount,
+  itemCount,
+  setItemCount,
+}) => {
   const handleNumberOfItems = (event) => {
     setItemCount(parseInt(event.target.getAttribute("id")));
+    setPageCount(0);
   };
 
   return (
     <div>
       <Container>
-        <Row md='auto' className="d-flex justify-content-center">
-          <Col md='auto' className="d-flex justify-content-center">
+        <Row md="auto" className="d-flex justify-content-center">
+          <Col md="auto" className="d-flex justify-content-center">
             <Pagination>
               {pageCount === 0 ? (
                 <Pagination.Prev disabled></Pagination.Prev>
-                ) : (
-                <Pagination.Prev onClick={() => {setPageCount(pageCount - 1);}}></Pagination.Prev>
-                )}
+              ) : (
+                <Pagination.Prev
+                  onClick={() => {
+                    setPageCount(pageCount - 1);
+                  }}
+                ></Pagination.Prev>
+              )}
               <Pagination.Item active>{pageCount}</Pagination.Item>
-              <Pagination.Next
-                onClick={() => {setPageCount(pageCount + 1);}}
-              ></Pagination.Next>
+              {pageCount < maxPageCount - 1 ? (
+                <Pagination.Next
+                  onClick={() => {
+                    setPageCount(pageCount + 1);
+                  }}
+                ></Pagination.Next>
+              ) : (
+                <Pagination.Next disabled></Pagination.Next>
+              )}
             </Pagination>
           </Col>
-          <Col md='auto' className="d-flex justify-content-center">
+          <Col md="auto" className="d-flex justify-content-center">
             <Dropdown>
               <Dropdown.Toggle id="dropdown-basic">
                 Items: {itemCount}
@@ -83,7 +99,7 @@ const Paginator = ({pageCount, setPageCount, itemCount, setItemCount }) => {
 };
 
 Paginator.propTypes = {
-  page: PropTypes.instanceOf(PagedData).isRequired
+  page: PropTypes.instanceOf(PagedData).isRequired,
 };
 
 export default Paginator;

@@ -81,6 +81,7 @@ const SearchHistory = () => {
         <Paginator
           pageCount={pageCount}
           setPageCount={setPageCount}
+          maxPageCount={searchHistory.numberOfPages}
           itemCount={itemCount}
           setItemCount={setItemCount}
         />

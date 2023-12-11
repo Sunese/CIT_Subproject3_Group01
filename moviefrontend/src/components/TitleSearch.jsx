@@ -85,6 +85,7 @@ const TitleSearch = () => {
       <Paginator
         pageCount={pageCount}
         setPageCount={setPageCount}
+        maxPageCount={resultsData.numberOfPages}
         itemCount={itemCount}
         setItemCount={setItemCount}
       />

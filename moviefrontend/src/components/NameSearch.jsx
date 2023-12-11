@@ -9,7 +9,7 @@ import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import Paginator from "./Paginator";
 import SearchNameCard from "./SearchNameCard";
 import NameData from "../data/name/nameData";
- 
+
 const NameSearch = () => {
   const { token } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -77,7 +77,13 @@ const NameSearch = () => {
     <>
       <h1>Names:</h1>
       <MapCards />
-      <Paginator pageCount={pageCount} setPageCount={setPageCount} itemCount={itemCount} setItemCount={setItemCount}/>
+      <Paginator
+        pageCount={pageCount}
+        setPageCount={setPageCount}
+        maxPageCount={resultsData.numberOfPages}
+        itemCount={itemCount}
+        setItemCount={setItemCount}
+      />
     </>
   );
 };
