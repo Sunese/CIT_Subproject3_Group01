@@ -104,6 +104,16 @@ class TitleClient {
     );
     return response;
   }
+
+  static async getWriters(id) {
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URI + "/api/v1/title/" + id + "/writers",
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  }
 }
 
 export default TitleClient;
