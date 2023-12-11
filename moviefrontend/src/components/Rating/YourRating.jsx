@@ -33,8 +33,10 @@ const YourRating = ({ titleid }) => {
           token,
           titleid
         );
+        console.log("response: ", response);
         if (response.status === 200) {
           const rating = Rating.fromJson(await response.json());
+          console.log("rating: ", rating);
           setStoredRating(rating);
         }
         if (response.status === 404) {

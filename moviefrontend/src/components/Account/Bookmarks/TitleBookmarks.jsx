@@ -57,7 +57,7 @@ const TitleBookmarks = () => {
       }
     };
     fetchData();
-  }, [isAuthenticated, token, username, showUpdateFor]);
+  }, [isAuthenticated, token, username, showUpdateFor, page, pageSize]);
 
   if (loading) {
     return <Spinner />;
@@ -119,6 +119,7 @@ const TitleBookmarks = () => {
         setPageCount={setPage}
         itemCount={pageSize}
         setItemCount={setPageSize}
+        maxPageCount={titleBookmarksState?.numberOfPages}
       />
     </>
   );

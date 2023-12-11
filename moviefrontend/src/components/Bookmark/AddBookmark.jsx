@@ -12,8 +12,9 @@ const AddBookmark = ({ id, bookmarkType, show, onHide }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const addNameBookmark = async (notes) => {
+  const addNameBookmark = async () => {
     try {
+      console.log("addNameBookmark: ", token, username, id, inputNote);
       const response = await BookmarkClient.addNameBookmark(
         token,
         username,

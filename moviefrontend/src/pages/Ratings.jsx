@@ -122,6 +122,7 @@ const Ratings = () => {
         setPageCount={setPage}
         itemCount={pageSize}
         setItemCount={setPageSize}
+        maxPageCount={ratings?.numberOfPages}
       />
     </>
   );

@@ -16,10 +16,10 @@ class BookmarkClient {
     return response;
   }
 
-  static async getTitleBookmark(token, username, titleId) {
+  static async getTitleBookmark(token, username, titleID) {
     const uri =
       process.env.REACT_APP_API_BASE_URI +
-      `/api/v1/${username}/titlebookmark/${titleId}`;
+      `/api/v1/${username}/titlebookmark/${titleID}`;
     const authHeader = { Authorization: `${token}` };
     const response = await fetch(uri, {
       method: "GET",
@@ -45,11 +45,11 @@ class BookmarkClient {
     return response;
   }
 
-  static async addTitleBookmark(token, username, titleId, notes = "") {
+  static async addTitleBookmark(token, username, titleID, notes = "") {
     if (notes === null) notes = "";
     const model = JSON.stringify({
       notes: notes,
-      titleId: titleId,
+      titleID: titleID,
     });
     console.log("add title bookmark POST request model: ", model);
     const uri =
@@ -65,10 +65,10 @@ class BookmarkClient {
     return response;
   }
 
-  static async removeTitleBookmark(token, username, titleId) {
+  static async removeTitleBookmark(token, username, titleID) {
     const uri =
       process.env.REACT_APP_API_BASE_URI +
-      `/api/v1/${username}/titlebookmark/${titleId}`;
+      `/api/v1/${username}/titlebookmark/${titleID}`;
     const response = await fetch(uri, {
       method: "DELETE",
       headers: {
@@ -79,13 +79,15 @@ class BookmarkClient {
     return response;
   }
 
-  static async updateTitleBookmarkNote(token, username, titleId, newNote) {
+  static async updateTitleBookmarkNote(token, username, titleID, newNote) {
+    if (newNote === null) newNote = "";
+    console.log("new note: ", newNote);
     const model = JSON.stringify({
       notes: newNote,
     });
     const uri =
       process.env.REACT_APP_API_BASE_URI +
-      `/api/v1/${username}/titlebookmark/${titleId}`;
+      `/api/v1/${username}/titlebookmark/${titleID}`;
     const response = await fetch(uri, {
       method: "PATCH",
       headers: {
@@ -97,9 +99,10 @@ class BookmarkClient {
     return response;
   }
 
-  static async getNameBookmarks(token, username) {
+  static async getNameBookmarks(token, username, page = 0, pageSize = 10) {
     const uri =
-      process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/namebookmark/`;
+      process.env.REACT_APP_API_BASE_URI +
+      `/api/v1/${username}/namebookmark/?page=${page}&pageSize=${pageSize}`;
     const response = await fetch(uri, {
       method: "GET",
       headers: {
@@ -110,10 +113,10 @@ class BookmarkClient {
     return response;
   }
 
-  static async getNameBookmark(token, username, nameId) {
+  static async getNameBookmark(token, username, nameID) {
     const uri =
       process.env.REACT_APP_API_BASE_URI +
-      `/api/v1/${username}/namebookmark/${nameId}`;
+      `/api/v1/${username}/namebookmark/${nameID}`;
     const authHeader = { Authorization: `${token}` };
     const response = await fetch(uri, {
       method: "GET",
@@ -125,11 +128,13 @@ class BookmarkClient {
     return response;
   }
 
-  static async addNameBookmark(token, username, nameId, notes = "") {
+  static async addNameBookmark(token, username, nameID, notes = "") {
+    if (notes === null) notes = "";
     const model = JSON.stringify({
       notes: notes,
-      nameId: nameId,
+      nameID: nameID,
     });
+    console.log("add name bookmark POST request model: ", model);
     const uri =
       process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/namebookmark`;
     const response = await fetch(uri, {
@@ -143,10 +148,10 @@ class BookmarkClient {
     return response;
   }
 
-  static async removeNameBookmark(token, username, nameId) {
+  static async removeNameBookmark(token, username, nameID) {
     const uri =
       process.env.REACT_APP_API_BASE_URI +
-      `/api/v1/${username}/namebookmark/${nameId}`;
+      `/api/v1/${username}/namebookmark/${nameID}`;
     const response = await fetch(uri, {
       method: "DELETE",
       headers: {
@@ -157,13 +162,14 @@ class BookmarkClient {
     return response;
   }
 
-  static async updateNameBookmarkNote(token, username, nameId, newNote) {
+  static async updateNameBookmarkNote(token, username, nameID, newNote) {
+    if (newNote === null) newNote = "";
     const model = JSON.stringify({
       notes: newNote,
     });
     const uri =
       process.env.REACT_APP_API_BASE_URI +
-      `/api/v1/${username}/namebookmark/${nameId}`;
+      `/api/v1/${username}/namebookmark/${nameID}`;
     const response = await fetch(uri, {
       method: "PATCH",
       headers: {

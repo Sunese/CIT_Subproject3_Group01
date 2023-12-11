@@ -1,8 +1,8 @@
 import TitleData from "../title/titleData";
 
 class TitleBookmarkData {
-  constructor(titleId, timestamp, notes, title) {
-    this.titleId = titleId;
+  constructor(titleID, timestamp, notes, title) {
+    this.titleID = titleID;
     this.timestamp = timestamp;
     this.notes = notes;
     this.title = title;

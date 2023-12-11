@@ -75,7 +75,7 @@ function Rate({ titleid, show, onHide }) {
           <Button
             className="mb-1"
             variant="primary"
-            onClick={handleCreateRating}
+            onClick={() => handleCreateRating()}
           >
             Submit
           </Button>
