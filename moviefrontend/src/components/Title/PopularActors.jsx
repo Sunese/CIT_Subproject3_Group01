@@ -27,7 +27,6 @@ const PopularActors = ({ titleID }) => {
   }, [titleID]);
 
   let renderResults = () => {
-    console.log("Popular Actors: ", resultsData);
     if (resultsData.total === 0 || !Array.isArray(resultsData.items)) {
       return <p>No Popular Actors found</p>;
     }

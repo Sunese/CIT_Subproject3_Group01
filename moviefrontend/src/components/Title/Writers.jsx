@@ -27,7 +27,6 @@ const Writers = ({ titleID }) => {
   }, [titleID]);
 
   let renderResults = () => {
-    console.log("Writers: ", resultsData);
     if (Object.keys(resultsData).length === 0 || resultsData[0] === undefined) {
       return <p>No Writers found</p>;
     }

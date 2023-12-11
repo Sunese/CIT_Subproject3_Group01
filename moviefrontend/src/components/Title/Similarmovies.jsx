@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import TitleClient from "../../api/titleClient";
 import PagedData from "../../data/pagedData";
 import { Card } from "react-bootstrap";
-import TitleSearchData from "../../data/search/titleSearchData";
 import { Link } from "react-router-dom";
 import { array } from "prop-types";
+import SimiliarMoviesData from "../../data/title/similiarMoviesData";
 
 const Similarmovies = ({ titleID }) => {
   const [resultsData, setResultsData] = useState(new PagedData());
@@ -21,8 +21,9 @@ const Similarmovies = ({ titleID }) => {
         const response = await TitleClient.getSimiliarMovies(titleID);
         handleResponse(response);
         const responseData = await response.json();
+        console.log(responseData);
         setResultsData(
-          PagedData.fromJson(responseData, TitleSearchData.fromJson)
+          PagedData.fromJson(responseData, SimiliarMoviesData.fromJson)
         );
       } catch (error) {
         console.error(error);
@@ -32,6 +33,7 @@ const Similarmovies = ({ titleID }) => {
   }, [titleID]);
 
   let renderResults = () => {
+    console.log("resultsData: ", resultsData);
     if (resultsData.total === 0 || !Array.isArray(resultsData.items)) {
       return <p>No Similiar Movies</p>;
     }
@@ -40,7 +42,7 @@ const Similarmovies = ({ titleID }) => {
         <Link key={item.titleID} to={`/title/${item.titleID}`}>
           <Card>
             <Card.Body>
-              <Card.Title>{item.primaryTitle}</Card.Title>
+              <Card.Title>{item.title}</Card.Title>
             </Card.Body>
           </Card>
         </Link>
