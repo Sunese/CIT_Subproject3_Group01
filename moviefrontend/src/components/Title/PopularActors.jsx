@@ -32,10 +32,14 @@ const PopularActors = ({ titleID }) => {
     }
     return resultsData.items.slice(0, 3).map((item) => {
       return (
-        <Link key={item.url} to={`/name/${item.nameId}`}>
+        <Link
+          style={{ color: "#0000EE" }}
+          key={item.url}
+          to={`/name/${item.nameId}`}
+        >
           <Card>
             <Card.Body>
-              <Card.Title>{item.name}</Card.Title>
+              <Card.Title style={{ color: "#0000EE" }}>{item.name}</Card.Title>
             </Card.Body>
           </Card>
         </Link>

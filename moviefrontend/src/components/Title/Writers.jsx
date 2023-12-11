@@ -32,10 +32,16 @@ const Writers = ({ titleID }) => {
     }
     return resultsData.map((item) => {
       return (
-        <Link key={item.url} to={`/name/${item.nameID}`}>
+        <Link
+          style={{ color: "#0000EE" }}
+          key={item.url}
+          to={`/name/${item.nameID}`}
+        >
           <Card>
             <Card.Body>
-              <Card.Title>{item.primaryName}</Card.Title>
+              <Card.Title style={{ color: "#0000EE" }}>
+                {item.primaryName}
+              </Card.Title>
             </Card.Body>
           </Card>
         </Link>
