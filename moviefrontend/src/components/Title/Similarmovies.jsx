@@ -4,6 +4,7 @@ import PagedData from "../../data/pagedData";
 import { Card } from "react-bootstrap";
 import TitleSearchData from "../../data/search/titleSearchData";
 import { Link } from "react-router-dom";
+import { array } from "prop-types";
 
 const Similarmovies = ({ titleID }) => {
   const [resultsData, setResultsData] = useState(new PagedData());
@@ -31,10 +32,9 @@ const Similarmovies = ({ titleID }) => {
   }, [titleID]);
 
   let renderResults = () => {
-    if (resultsData.total === 0) {
+    if (resultsData.total === 0 || !Array.isArray(resultsData.items)) {
       return <p>No Similiar Movies</p>;
     }
-    console.log(resultsData);
     return resultsData.items.slice(0, 3).map((item) => {
       return (
         <Link key={item.titleID} to={`/title/${item.titleID}`}>

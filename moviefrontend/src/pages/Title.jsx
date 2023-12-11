@@ -13,6 +13,9 @@ import { Button } from "react-bootstrap";
 import Bookmark from "../components/Bookmark";
 import YourRating from "../components/Rating/YourRating";
 import Similarmovies from "../components/Title/Similarmovies";
+import Directors from "../components/Title/Directors";
+import Writers from "../components/Title/Writers";
+import PopularActors from "../components/Title/PopularActors";
 
 const Title = () => {
   let { id } = useParams();
@@ -94,10 +97,10 @@ const Title = () => {
       </Row>
       <Row>
         <Col>
-          <h2>Directors</h2>
+          <Directors titleID={titleData.titleID} />
         </Col>
         <Col>
-          <h2>Writers</h2>
+          <Writers titleID={titleData.titleID} />
         </Col>
       </Row>
     </>

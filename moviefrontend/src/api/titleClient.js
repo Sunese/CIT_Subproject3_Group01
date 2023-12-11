@@ -94,5 +94,16 @@ class TitleClient {
     );
     return response;
   }
+
+  static async getDirectors(id) {
+    const response = await fetch(
+      process.env.REACT_APP_API_BASE_URI + "/api/v1/title/" + id + "/directors",
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  }
 }
+
 export default TitleClient;
