@@ -7,8 +7,9 @@ import { useNotification } from "../utils/NotificationContext";
 import PagedData from "../data/pagedData";
 import TitleBookmarkPageItemData from "../data/user/titleBookmarkPageItemData";
 import TitleRatingPageItemData from "../data/title/titleRatingPageItemData";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import UserTitleRatingData from "../data/user/userTitleRatingData";
+import UpdateRating from "../components/Rating/UpdateRating";
 
 const Ratings = () => {
   const { isAuthenticated, username, token } = useAuth();
@@ -17,6 +18,7 @@ const Ratings = () => {
   const [ratings, setRatings] = useState(null);
   const { showNotification } = useNotification();
   const navigate = useNavigate();
+  const [showUpdateFor, setShowUpdateFor] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -48,7 +50,7 @@ const Ratings = () => {
     }
 
     fetchData();
-  }, [isAuthenticated, username, token]);
+  }, [isAuthenticated, username, token, showUpdateFor]);
 
   if (!isAuthenticated) {
     showNotification("Sign in to see your ratings", "warning");
@@ -76,6 +78,17 @@ const Ratings = () => {
             {rating.rating}
             <br />
             {rating.timeStamp}
+            <Button onClick={() => setShowUpdateFor(rating.titleID)}>
+              Update
+            </Button>
+            <UpdateRating
+              titleid={rating.titleID}
+              storedRating={rating}
+              show={showUpdateFor === rating.titleID}
+              onHide={() => {
+                setShowUpdateFor(null);
+              }}
+            />
           </li>
         ))}
       </ul>
