@@ -10,6 +10,7 @@ import NameData from "../data/name/nameData";
 import KnownForTitleClient from "../api/knownForTitlesClient";
 import KnownForTitlesData from "../data/knownForTitle/knownForTitleData";
 import PagedData from "../data/pagedData";
+import BookmarkButton from "../components/Bookmark/BookmarkButton";
 
 const Name = () => {
   const { id } = useParams();
@@ -23,8 +24,12 @@ const Name = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const jsonNameResult = await NameClient.getName(id);
-        const nameResult = NameData.fromJson(jsonNameResult);
+        const nameResponse = await NameClient.getName(id);
+        if (!nameResponse.ok) {
+          throw new Error("Error getting Name");
+        }
+        const json = await nameResponse.json();
+        const nameResult = NameData.fromJson(json);
         setNameData(nameResult);
         const response = await KnownForTitleClient.getKnownForTitles(id);
         if (!response.ok) {
@@ -69,6 +74,9 @@ const Name = () => {
               <Card.Text>{nameData.deathYear}</Card.Text>
             </Card.Body>
           </Card>
+        </Col>
+        <Col>
+          <BookmarkButton bookmarkType={"name"} id={nameData.nameID} />
         </Col>
       </Row>
       <Row>

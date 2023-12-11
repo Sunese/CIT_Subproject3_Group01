@@ -10,7 +10,7 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import TitleRating from "../components/TitleRating";
 import { Button } from "react-bootstrap";
-import Bookmark from "../components/Bookmark";
+import BookmarkButton from "../components/Bookmark/BookmarkButton";
 import YourRating from "../components/Rating/YourRating";
 import Similarmovies from "../components/Title/Similarmovies";
 import Directors from "../components/Title/Directors";
@@ -66,7 +66,7 @@ const Title = () => {
         </Col>
         <Col>
           <div className="star-top-text">Bookmark</div>
-          <Bookmark titleid={titleData.titleID} />
+          <BookmarkButton bookmarkType={"title"} id={titleData.titleID} />
         </Col>
         <h1>{titleData.primaryTitle}</h1>
         {titleData.isAdult ? (

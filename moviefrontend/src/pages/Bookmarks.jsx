@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import TitleBookmarkPageItemData from "../data/user/titleBookmarkPageItemData";
 import PagedData from "../data/pagedData";
-import TitleBookmarks from "../components/Bookmarks/TitleBookmarks";
-import NameBookmarks from "../components/Bookmarks/NameBookmarks";
+import TitleBookmarks from "../components/Account/Bookmarks/TitleBookmarks";
+import NameBookmarks from "../components/Account/Bookmarks/NameBookmarks";
 
 const Bookmarks = () => {
   return (
