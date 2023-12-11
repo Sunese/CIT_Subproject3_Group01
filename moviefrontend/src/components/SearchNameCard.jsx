@@ -12,9 +12,7 @@ const SearchNameCard = ({ item }) => {
       <Card.Body>
         <Card.Title>
           <Link to={"/name/" + item.nameID}>
-            <Row>
-              <h2>{item.primaryName}</h2>
-            </Row>
+            <h2 style={{ fontSize: "1rem" }}>{item.primaryName}</h2>
           </Link>
         </Card.Title>
         {/* <Button variant="primary">Go somewhere</Button> */}
