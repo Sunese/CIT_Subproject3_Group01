@@ -17,7 +17,7 @@ const NameSearch = () => {
   const [loading, setLoading] = useState(false);
   const [resultsData, setResultsData] = useState(new PagedData());
   const [pageCount, setPageCount] = useState(0);
-  const [itemCount, setItemCount] = useState(10);
+  const [itemCount, setItemCount] = useState(5);
 
   let handleResponse = (searchResponse) => {
     if (!searchResponse.ok) {
@@ -80,20 +80,16 @@ const NameSearch = () => {
         let searchResponse = "";
         if (searchParams.get("section") === "actor") {
           searchResponse = await actorSearch();
-          console.log("actorSearch: ", searchResponse);
         } else if (searchParams.get("section") === "coplayer") {
           searchResponse = await coplayerSearch();
-          console.log("coplayerSearch: ", searchResponse);
         } else if (searchParams.get("section") === "writer") {
           searchResponse = await writerSearch();
-          console.log("writerSearch: ", searchResponse);
         } else {
           searchResponse = await nameSearch(token);
         }
         handleResponse(searchResponse);
         const responseData = await searchResponse.json();
         setResultsData(PagedData.fromJson(responseData, NameData.fromJson));
-        console.log("NameresponseData: ", responseData);
         setLoading(false);
       } catch (error) {
         setError(error);

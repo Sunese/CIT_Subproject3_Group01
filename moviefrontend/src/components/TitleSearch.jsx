@@ -18,7 +18,7 @@ const TitleSearch = () => {
   const [loading, setLoading] = useState(false);
   const [resultsData, setResultsData] = useState(new PagedData());
   const [pageCount, setPageCount] = useState(0);
-  const [itemCount, setItemCount] = useState(10);
+  const [itemCount, setItemCount] = useState(5);
 
   let handleResponse = (searchResponse) => {
     if (!searchResponse.ok) {

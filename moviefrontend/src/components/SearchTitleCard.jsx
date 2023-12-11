@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const SearchTitleCard = ({ item }) => {
   return (
-    <Card>
+    <Card className="searchTitleCard">
       <Card.Body>
         <Card.Title>
           <Link
@@ -18,17 +18,19 @@ const SearchTitleCard = ({ item }) => {
             <Row>
               <Col md="auto">
                 <img
-                  style={{ width: "10rem", minWidth: "10rem" }}
+                  style={{ width: "5rem", minWidth: "5rem", maxWidth: "5rem" }}
                   src={item.poster}
                   alt={item.titleID}
                 />
               </Col>
               <Col>
-                <h2>{item.primaryTitle}</h2>
+                <h2 style={{ fontSize: "1rem" }}>{item.primaryTitle}</h2>
                 {item.plot != null ? (
-                  <p>{item.plot.substring(0, 200)}...</p>
+                  <p style={{ fontSize: "1rem", fontWeight: "normal" }}>
+                    {item.plot.substring(0, 200)}...
+                  </p>
                 ) : (
-                  <p>No plot available</p>
+                  <p style={{ fontSize: "1rem" }}>No plot available</p>
                 )}
                 <Button className="flex-end" variant="primary">
                   Read more...
