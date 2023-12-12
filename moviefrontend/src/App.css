@@ -237,3 +237,7 @@
 .title-actions {
   margin-right: 30px;
 }
+
+.account-settings-row {
+  justify-content: center;
+}
