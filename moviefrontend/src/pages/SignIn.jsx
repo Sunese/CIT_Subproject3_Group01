@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const { login } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -47,10 +48,17 @@ const SignIn = () => {
 
   const validateAndSetUsername = (username) => {
     if (!/^[a-zA-Z0-9_]*$/.test(username)) {
-      showNotification("Username can only contain letters, numbers and underscores");
+      showNotification(
+        "Username can only contain letters, numbers and underscores"
+      );
     }
-    setUsername(username)
+    setUsername(username);
   };
+
+  if (isAuthenticated) {
+    showNotification("You are already signed in", "warning");
+    navigate("/");
+  }
 
   return (
     <>
