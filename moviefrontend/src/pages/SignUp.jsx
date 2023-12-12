@@ -11,8 +11,7 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { showNotification } = useNotification();
 
@@ -25,10 +24,16 @@ function SignUp() {
       showNotification("Username must be at least 3 characters long", "danger");
       return true;
     } else if (username.length > 20) {
-      showNotification("Username must be less than 20 characters long", "danger");
+      showNotification(
+        "Username must be less than 20 characters long",
+        "danger"
+      );
       return true;
     } else if (!/^[a-zA-Z0-9_]*$/.test(username)) {
-      showNotification("Username can only contain letters, numbers and underscores", "danger");
+      showNotification(
+        "Username can only contain letters, numbers and underscores",
+        "danger"
+      );
       return true;
     }
     return false;
@@ -62,7 +67,11 @@ function SignUp() {
   };
 
   const handleSignUp = async () => {
-    if (isInvalidEmail(email) || isInvalidUsername(username) || isInvalidPassword(password)) {
+    if (
+      isInvalidEmail(email) ||
+      isInvalidUsername(username) ||
+      isInvalidPassword(password)
+    ) {
       return;
     }
     try {
@@ -70,7 +79,7 @@ function SignUp() {
         username,
         email,
         password,
-        role
+        ""
       );
 
       if (!signUpResponse.ok) {
@@ -90,11 +99,16 @@ function SignUp() {
       // Use the login function from useAuth to update the authentication state
       login(jwttoken, jwtusername);
       navigate("/");
-      showNotification("Welcome " + username + " you have signed up and signed in successfully", "success");
+      showNotification("Welcome " + username, "success");
     } catch (error) {
       console.error("Error signing up:", error.message);
     }
   };
+
+  if (isAuthenticated) {
+    showNotification("You are already signed in", "warning");
+    navigate("/");
+  }
 
   return (
     <>
@@ -140,16 +154,6 @@ function SignUp() {
           striped
           variant={getPasswordStrengthVariant()}
         />
-
-        <Form.Group className="mb-3" controlId="formRole">
-          <Form.Label>Role</Form.Label>
-          <Form.Control
-            type="role"
-            placeholder="role"
-            value={role}
-            onChange={(event) => setRole(event.target.value)}
-          />
-        </Form.Group>
 
         <Button onClick={handleSignUp} variant="primary">
           Sign Up
