@@ -6,6 +6,7 @@ import { useAuth } from "../utils/AuthContext";
 import AccountClient from "../api/accountClient";
 import { useNavigate } from "react-router";
 import { useNotification } from "../utils/NotificationContext";
+import Spinner from "react-bootstrap/Spinner";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -14,6 +15,7 @@ function SignUp() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { showNotification } = useNotification();
+  const [loading, setLoading] = useState(false);
 
   const calculatePasswordStrength = () => {
     return password.length * 4;
@@ -67,11 +69,13 @@ function SignUp() {
   };
 
   const handleSignUp = async () => {
+    setLoading(true);
     if (
       isInvalidEmail(email) ||
       isInvalidUsername(username) ||
       isInvalidPassword(password)
     ) {
+      setLoading(false);
       return;
     }
     try {
@@ -102,6 +106,8 @@ function SignUp() {
       showNotification("Welcome " + username, "success");
     } catch (error) {
       console.error("Error signing up:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -154,10 +160,13 @@ function SignUp() {
           striped
           variant={getPasswordStrengthVariant()}
         />
-
-        <Button onClick={handleSignUp} variant="primary">
-          Sign Up
-        </Button>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Button onClick={handleSignUp} variant="primary">
+            Sign Up
+          </Button>
+        )}
       </Form>
     </>
   );
