@@ -52,7 +52,7 @@ const Account = () => {
 
   return (
     <>
-      <Row>
+      <Row className="account-settings-row">
         <Card className="account-card">
           <Card.Body>
             {loading ? (
@@ -67,7 +67,7 @@ const Account = () => {
           </Card.Body>
         </Card>
       </Row>
-      <Row>
+      <Row className="account-settings-row">
         <Button
           className="account-button"
           variant="primary"
@@ -76,7 +76,7 @@ const Account = () => {
           Update Email
         </Button>
       </Row>
-      <Row>
+      <Row className="account-settings-row">
         <Button
           className="account-button"
           variant="primary"
@@ -85,7 +85,7 @@ const Account = () => {
           Update Password
         </Button>
       </Row>
-      <Row>
+      <Row className="account-settings-row">
         <Button
           className="account-button"
           variant="danger"
