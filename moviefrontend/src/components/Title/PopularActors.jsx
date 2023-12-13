@@ -35,7 +35,7 @@ const PopularActors = ({ titleID }) => {
         <Link
           style={{ color: "#0000EE" }}
           key={item.url}
-          to={`/name/${item.nameId}`}
+          to={`/name/${item.nameID}`}
         >
           <Card>
             <Card.Body>
