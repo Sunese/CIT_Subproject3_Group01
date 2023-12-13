@@ -241,3 +241,43 @@
 .account-settings-row {
   justify-content: center;
 }
+
+.carousel-card {
+  min-width: 10rem;
+  max-width: 10rem;
+  min-height: 10rem;
+  max-height: 15rem;
+}
+
+.carousel-card-image {
+  max-width: 10rem;
+  max-height: 10rem;
+}
+
+.carousel-styling {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-height: 15rem;
+  max-width: 42rem;
+}
+
+.carousel-indicators {
+  margin-bottom: -2rem;
+}
+
+.carousel-title-text {
+  font-size: 1rem;
+}
+
+.carousel-subtitle-text {
+  font-size: 0.6rem;
+}
+
+.profession-bubble {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 5px; /* spacing between bubbles */
+  border-radius: 20px; /* border-radius makes bubbles */
+}
