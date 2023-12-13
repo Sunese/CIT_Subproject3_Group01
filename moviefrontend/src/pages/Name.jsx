@@ -80,6 +80,43 @@ const Name = () => {
     );
   }
 
+  const renderBirthYear = () => {
+    if (nameData.birthYear === "    ") {
+      return <></>;
+    }
+    return <Card.Text>Birth Year: {nameData.birthYear}</Card.Text>;
+  };
+
+  const renderDeathYear = () => {
+    if (nameData.deathYear === "    ") {
+      return <></>;
+    }
+    return <Card.Text>Death Year: {nameData.deathYear}</Card.Text>;
+  };
+
+  const renderProfessions = () => {
+    if (!Array.isArray(nameProfessions)) {
+      return <></>;
+    }
+    return (
+      <Card.Text>
+        Professions:{" "}
+        {nameProfessions.map((p) => (
+          <span key={p.professionName} className="profession-bubble">
+            {p.professionName}
+          </span>
+        ))}
+      </Card.Text>
+    );
+  };
+
+  const renderRating = () => {
+    if (nameRating.rating === undefined) {
+      return <></>;
+    }
+    return <Card.Text>Rating: {nameRating.rating}</Card.Text>;
+  };
+
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
@@ -90,29 +127,10 @@ const Name = () => {
           <Card>
             <Card.Body>
               <Card.Title>{nameData.primaryName}</Card.Title>
-              {nameData.birthYear === "    " ? (
-                <></>
-              ) : (
-                <Card.Text>Birth Year: {nameData.birthYear}</Card.Text>
-              )}
-              {nameData.deathYear === "    " ? (
-                <></>
-              ) : (
-                <Card.Text>Death Year: {nameData.deathYear}</Card.Text>
-              )}
-              {Array.isArray(nameProfessions) ? (
-                <Card.Text>
-                  Professions:{" "}
-                  {nameProfessions.map((p) => p.professionName + ", ")}
-                </Card.Text>
-              ) : (
-                <></>
-              )}
-              {nameRating.rating === undefined ? (
-                <></>
-              ) : (
-                <Card.Text>Rating: {nameRating.rating}</Card.Text>
-              )}
+              {renderBirthYear()}
+              {renderDeathYear()}
+              {renderProfessions()}
+              {renderRating()}
             </Card.Body>
           </Card>
         </Col>
@@ -120,10 +138,8 @@ const Name = () => {
           <BookmarkButton bookmarkType={"name"} id={nameData.nameID} />
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <KnownForTitles knownForTitlesData={knownForTitlesData} />
-        </Col>
+      <Row className="justify-content-md-center">
+        <KnownForTitles knownForTitlesData={knownForTitlesData} />
       </Row>
     </>
   );
