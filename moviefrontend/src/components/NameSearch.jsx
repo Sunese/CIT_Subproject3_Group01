@@ -118,7 +118,7 @@ const NameSearch = () => {
     return (
       <div>
         {resultsData.items.map((item) => (
-          <SearchNameCard key={item.titleid} item={item} />
+          <SearchNameCard key={item.nameID} item={item} />
         ))}
       </div>
     );

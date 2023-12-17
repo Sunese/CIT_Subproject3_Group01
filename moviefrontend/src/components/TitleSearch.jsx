@@ -64,7 +64,7 @@ const TitleSearch = () => {
     return (
       <div>
         {resultsData.items.map((item) => (
-          <SearchTitleCard key={item.titleid} item={item} />
+          <SearchTitleCard key={item.titleID} item={item} />
         ))}
       </div>
     );
