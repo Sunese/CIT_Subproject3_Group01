@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../../../utils/AuthContext";
-import BookmarkClient from "../../../api/bookmarkClient";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
-import PagedData from "../../../data/pagedData";
-import { useNotification } from "../../../utils/NotificationContext";
-import Spinner from "react-bootstrap/Spinner";
-import NameBookmarkPageItemData from "../../../data/user/nameBookmarkPageItemData";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import AddBookmark from "../../Bookmark/AddBookmark";
+import Spinner from "react-bootstrap/Spinner";
+import { Link, useNavigate } from "react-router-dom";
+import BookmarkClient from "../../../api/bookmarkClient";
+import PagedData from "../../../data/pagedData";
+import NameBookmarkPageItemData from "../../../data/user/nameBookmarkPageItemData";
+import { useAuth } from "../../../utils/AuthContext";
+import { useNotification } from "../../../utils/NotificationContext";
 import UpdateBookmark from "../../Bookmark/UpdateBookmark";
 import Paginator from "../../Paginator";
 

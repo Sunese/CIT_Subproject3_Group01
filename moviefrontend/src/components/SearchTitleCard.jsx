@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import Row from "react-bootstrap/Row";
@@ -43,10 +42,6 @@ const SearchTitleCard = ({ item }) => {
       </Card.Body>
     </Card>
   );
-};
-
-SearchTitleCard.propTypes = {
-  item: PropTypes.object.isRequired,
 };
 
 export default SearchTitleCard;

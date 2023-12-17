@@ -1,9 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/esm/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/esm/Col";
 import { Link } from "react-router-dom";
 
 const SearchNameCard = ({ item }) => {
@@ -20,9 +16,4 @@ const SearchNameCard = ({ item }) => {
     </Card>
   );
 };
-
-SearchNameCard.propTypes = {
-  item: PropTypes.object.isRequired,
-};
-
 export default SearchNameCard;

@@ -3,7 +3,7 @@ import { useAuth } from "../utils/AuthContext";
 import AccountClient from "../api/accountClient";
 import { useNavigate } from "react-router";
 import Form from "react-bootstrap/Form";
-import { Alert, Button, Col, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useNotification } from "../utils/NotificationContext";
 import { Link } from "react-router-dom";
 
@@ -15,6 +15,13 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { showNotification } = useNotification();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      showNotification("You are already signed in", "warning");
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   const handleSignIn = async () => {
     setLoading(true);
@@ -54,11 +61,6 @@ const SignIn = () => {
     }
     setUsername(username);
   };
-
-  if (isAuthenticated) {
-    showNotification("You are already signed in", "warning");
-    navigate("/");
-  }
 
   return (
     <>

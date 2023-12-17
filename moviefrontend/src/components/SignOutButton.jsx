@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../utils/AuthContext";
-import AccountClient from "../api/accountClient";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 import { useNotification } from "../utils/NotificationContext";

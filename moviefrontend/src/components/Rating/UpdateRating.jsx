@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
 import { Rating } from "react-simple-star-rating";
 import { Modal, Spinner } from "react-bootstrap";
 import { useAuth } from "../../utils/AuthContext";
-import AccountClient from "../../api/accountClient";
 import UserRatingClient from "../../api/userRatingClient";
-import RatingData from "../../data/rating/ratingData";
 import { useNotification } from "../../utils/NotificationContext";
 
 function UpdateRating({ titleid, show, storedRating, onHide }) {

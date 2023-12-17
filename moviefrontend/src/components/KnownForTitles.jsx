@@ -1,7 +1,5 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import PropTypes from "prop-types";
-import PagedData from "../data/pagedData";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
@@ -57,9 +55,5 @@ const KnownForTitles = ({ knownForTitlesData }) =>
   ) : (
     <h1>Not Known For any Titles... veery sad</h1>
   );
-
-KnownForTitles.propTypes = {
-  knownForTitlesData: PropTypes.instanceOf(PagedData).isRequired,
-};
 
 export default KnownForTitles;

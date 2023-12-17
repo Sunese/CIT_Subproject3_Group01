@@ -2,7 +2,6 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 
 const addBookmark = (
@@ -47,9 +46,5 @@ const OldBookmark = ({ isAddBookmark }) => (
     )}
   </>
 );
-
-Bookmark.propTypes = {
-  isAddBookmark: PropTypes.bool.isRequired,
-};
 
 export default OldBookmark;

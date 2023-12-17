@@ -1,14 +1,11 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
-import { FaRegStar } from "react-icons/fa";
-import { Button, Col, Modal, Row, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../utils/AuthContext";
 import Rate from "./Rate";
 import UserRatingClient from "../../api/userRatingClient";
 import Rating from "../../data/rating/ratingData";
 import UpdateRating from "./UpdateRating";
-import DeleteRating from "./DeleteRating";
 import { Link } from "react-router-dom";
 import { useNotification } from "../../utils/NotificationContext";
 import YourRatingStar from "./YourRatingStar";

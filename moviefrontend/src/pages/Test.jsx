@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import TitleData from "../data/title/titleData";
-import UserBookmarks from "../components/UserBookmarks";
-import UserRatings from "../components/UserRatings";
 import Paginator from "../components/Paginator";
 import TitleClient from "../api/titleClient";
 

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";

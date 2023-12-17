@@ -1,8 +1,8 @@
 import { useAuth } from "../../utils/AuthContext";
 import { useNotification } from "../../utils/NotificationContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 import AccountClient from "../../api/accountClient";
 
 const DeleteAccount = ({ show, onHide }) => {

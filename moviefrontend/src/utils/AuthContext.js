@@ -1,6 +1,5 @@
 import React from "react";
 import { createContext, useContext, useReducer } from "react";
-import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
@@ -47,9 +46,6 @@ const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-AuthProvider.propTypes = {
-  children: PropTypes.any,
 };
 
 const useAuth = () => {

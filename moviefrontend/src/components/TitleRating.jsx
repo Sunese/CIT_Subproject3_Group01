@@ -1,11 +1,6 @@
-import { FaStar } from "react-icons/fa";
-import { FaRegStar } from "react-icons/fa";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { useAuth } from "../utils/AuthContext";
 import React from "react";
-import Rate from "./Rating/Rate";
-import YourRating from "./Rating/YourRating";
 import TitleClient from "../api/titleClient";
 import TitleRatingData from "../data/title/titleRatingData";
 import GlobalRatingStar from "./Rating/GlobalRatingStar";

@@ -1,9 +1,6 @@
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import TitleRatingPageItemData from "../data/title/titleRatingPageItemData";
 
 const TitleRatingPageItem = ({ data, className }) => (
   <Card className={className}>
@@ -18,9 +15,5 @@ const TitleRatingPageItem = ({ data, className }) => (
     </Card.Body>
   </Card>
 );
-TitleRatingPageItem.propTypes = {
-  data: PropTypes.instanceOf(TitleRatingPageItemData).isRequired,
-  className: PropTypes.string,
-};
 
 export default TitleRatingPageItem;

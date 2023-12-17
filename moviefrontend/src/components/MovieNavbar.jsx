@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SignIn from "../pages/SignIn";
 import Button from "react-bootstrap/esm/Button";
 import { useAuth } from "../utils/AuthContext";
 import SignOutButton from "./SignOutButton";

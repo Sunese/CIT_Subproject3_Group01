@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { GetUrlParamRegex } from "../utils/urlBuilder";
-
-import PropTypes from "prop-types";
-import PagedData from "../data/pagedData";
+import React from "react";
 import Pagination from "react-bootstrap/Pagination";
 import Dropdown from "react-bootstrap/Dropdown";
 import Container from "react-bootstrap/esm/Container";
@@ -96,10 +92,6 @@ const Paginator = ({
       </Container>
     </div>
   );
-};
-
-Paginator.propTypes = {
-  page: PropTypes.instanceOf(PagedData).isRequired,
 };
 
 export default Paginator;

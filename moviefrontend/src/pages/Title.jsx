@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import PropTypes from "prop-types";
 import TitleData from "../data/title/titleData";
 import { useParams } from "react-router-dom";
 import TitleClient from "../api/titleClient";
@@ -9,7 +8,6 @@ import Spinner from "react-bootstrap/esm/Spinner";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import TitleRating from "../components/TitleRating";
-import { Button } from "react-bootstrap";
 import BookmarkButton from "../components/Bookmark/BookmarkButton";
 import YourRating from "../components/Rating/YourRating";
 import Similarmovies from "../components/Title/Similarmovies";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
-import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Button, Card, Row, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useNotification } from "../utils/NotificationContext";
 import UpdateEmail from "../components/Account/UpdateEmail";
 import AccountClient from "../api/accountClient";
