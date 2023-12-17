@@ -4,11 +4,13 @@ import Spinner from "react-bootstrap/esm/Spinner";
 import PagedData from "../data/pagedData";
 import TitleRatingPageItemData from "../data/title/titleRatingPageItemData";
 import TitleRatingPageItem from "./TitleRatingPageItem";
+import { useNotification } from "../utils/NotificationContext";
 
 const HighestRated = ({ days }) => {
   const [titles, setTitles] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +23,7 @@ const HighestRated = ({ days }) => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
+        showNotification("Error loading highest rated titles", "danger");
         setError("Error loading highest rated titles");
       }
     };

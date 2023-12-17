@@ -3,13 +3,15 @@ import TitleClient from "../../api/titleClient";
 import PagedData from "../../data/pagedData";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useNotification } from "../../utils/NotificationContext";
 
 const Writers = ({ titleID }) => {
   const [resultsData, setResultsData] = useState(new PagedData());
+  const { showNotification } = useNotification();
 
   let handleResponse = (response) => {
     if (!response.ok) {
-      throw new Error("Error getting Directors");
+      throw new Error("Error getting Writers");
     }
   };
 
@@ -20,7 +22,7 @@ const Writers = ({ titleID }) => {
         handleResponse(response);
         setResultsData(await response.json());
       } catch (error) {
-        throw error;
+        showNotification("Error getting Writers", "danger");
       }
     };
     fetchData();

@@ -2,18 +2,18 @@ import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
-
+import { useNotification } from "../utils/NotificationContext";
 import SearchClient from "../api/searchClient";
 import PagedData from "../data/pagedData";
 import { PaginationUrlBuilder } from "../utils/urlBuilder";
 import Paginator from "./Paginator";
-import TitleData from "../data/title/titleData";
 import SearchTitleCard from "./SearchTitleCard";
 import TitleSearchData from "../data/search/titleSearchData";
 
 const TitleSearch = () => {
   const { token } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { showNotification } = useNotification();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [resultsData, setResultsData] = useState(new PagedData());
@@ -50,6 +50,7 @@ const TitleSearch = () => {
         setLoading(false);
       } catch (error) {
         setError(error);
+        showNotification("Failed to search", "danger");
         setLoading(false);
       }
     };

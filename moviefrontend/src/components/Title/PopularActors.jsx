@@ -3,9 +3,11 @@ import TitleClient from "../../api/titleClient";
 import PagedData from "../../data/pagedData";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useNotification } from "../../utils/NotificationContext";
 
 const PopularActors = ({ titleID }) => {
   const [resultsData, setResultsData] = useState(new PagedData());
+  const { showNotification } = useNotification();
 
   let handleResponse = (response) => {
     if (!response.ok) {
@@ -20,7 +22,7 @@ const PopularActors = ({ titleID }) => {
         handleResponse(response);
         setResultsData(await response.json());
       } catch (error) {
-        throw error;
+        showNotification("Error getting Popular Actors", "danger");
       }
     };
     fetchData();

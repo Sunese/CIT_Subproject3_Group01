@@ -12,11 +12,13 @@ import KnownForTitleClient from "../api/knownForTitlesClient";
 import KnownForTitlesData from "../data/knownForTitle/knownForTitleData";
 import PagedData from "../data/pagedData";
 import BookmarkButton from "../components/Bookmark/BookmarkButton";
+import { useNotification } from "../utils/NotificationContext";
 
 const Name = () => {
   const { id } = useParams();
   const [error, setError] = useState(null);
   const [loadingName, setLoadingName] = useState(true);
+  const { showNotification } = useNotification();
   const [nameData, setNameData] = useState(new NameData());
   const [nameRating, setNameRating] = useState(new NameRatingData());
   const [nameProfessions, setNameProfessions] = useState([]);
@@ -65,7 +67,7 @@ const Name = () => {
         setLoadingName(false);
       } catch (error) {
         setLoadingName(false);
-        setError(error.message);
+        showNotification("Error getting name", "danger");
       }
     };
     fetchData();

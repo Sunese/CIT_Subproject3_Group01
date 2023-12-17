@@ -3,11 +3,12 @@ import TitleClient from "../../api/titleClient";
 import PagedData from "../../data/pagedData";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { array } from "prop-types";
+import { useNotification } from "../../utils/NotificationContext";
 import SimiliarMoviesData from "../../data/title/similiarMoviesData";
 
 const Similarmovies = ({ titleID }) => {
   const [resultsData, setResultsData] = useState(new PagedData());
+  const { showNotification } = useNotification();
 
   let handleResponse = (response) => {
     if (!response.ok) {
@@ -25,7 +26,7 @@ const Similarmovies = ({ titleID }) => {
           PagedData.fromJson(responseData, SimiliarMoviesData.fromJson)
         );
       } catch (error) {
-        throw error;
+        showNotification("Error getting Similiar Movies", "danger");
       }
     };
     fetchData();

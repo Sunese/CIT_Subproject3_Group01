@@ -3,10 +3,11 @@ import TitleClient from "../../api/titleClient";
 import PagedData from "../../data/pagedData";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import NameResultsItemData from "../../data/name/nameResultsItemData";
+import { useNotification } from "../../utils/NotificationContext";
 
 const Directors = ({ titleID }) => {
   const [resultsData, setResultsData] = useState(new PagedData());
+  const { showNotification } = useNotification();
 
   let handleResponse = (response) => {
     if (!response.ok) {
@@ -21,7 +22,7 @@ const Directors = ({ titleID }) => {
         handleResponse(response);
         setResultsData(await response.json());
       } catch (error) {
-        throw error;
+        showNotification("Error getting Directors", "danger");
       }
     };
     fetchData();

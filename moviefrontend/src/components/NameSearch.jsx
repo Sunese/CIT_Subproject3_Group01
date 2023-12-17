@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../utils/AuthContext";
 
+import { useNotification } from "../utils/NotificationContext";
 import SearchClient from "../api/searchClient";
 import PagedData from "../data/pagedData";
 import { PaginationUrlBuilder } from "../utils/urlBuilder";
@@ -13,6 +14,7 @@ import NameData from "../data/name/nameData";
 const NameSearch = () => {
   const { token } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { showNotification } = useNotification();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [resultsData, setResultsData] = useState(new PagedData());
@@ -93,6 +95,7 @@ const NameSearch = () => {
         setLoading(false);
       } catch (error) {
         setError(error);
+        showNotification("Failed to search", "danger");
         setLoading(false);
       }
     };

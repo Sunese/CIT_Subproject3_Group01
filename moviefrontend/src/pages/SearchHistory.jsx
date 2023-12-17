@@ -5,6 +5,7 @@ import PagedData from "../data/pagedData";
 import SearchHistoryData from "../data/search/searchHistoryData";
 import Table from "react-bootstrap/Table";
 import Paginator from "../components/Paginator";
+import { useNotification } from "../utils/NotificationContext";
 
 const SearchHistory = () => {
   const { token, isAuthenticated } = useAuth();
@@ -13,6 +14,7 @@ const SearchHistory = () => {
   const [searchHistory, setSearchHistory] = useState(new PagedData());
   const [pageCount, setPageCount] = useState(0);
   const [itemCount, setItemCount] = useState(10);
+  const { showNotification } = useNotification();
 
   let handleResponse = (response) => {
     if (!response.ok) {
@@ -34,6 +36,7 @@ const SearchHistory = () => {
         setLoading(false);
         return data;
       } catch (error) {
+        showNotification("Failed to get search history", "danger");
         setLoading(false);
       }
     };

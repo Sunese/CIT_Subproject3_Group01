@@ -5,10 +5,12 @@ import TitleClient from "../api/titleClient";
 import PagedData from "../data/pagedData";
 import TitleResultsItemData from "../data/title/titleResultsItemData";
 import TitleResultItem from "./TitleResultItem";
+import { useNotification } from "../utils/NotificationContext";
 
 const FeaturedTitles = () => {
   const [error, setError] = useState(null);
   const [loadingFeatured, setLoadingFeatured] = useState(true);
+  const { showNotification } = useNotification();
   const [featuredTitles, setFeaturedTitles] = useState(null);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const FeaturedTitles = () => {
         setLoadingFeatured(false);
       } catch (error) {
         setLoadingFeatured(false);
+        showNotification("Error loading featured titles", "danger");
         setError(error.message);
       }
     };
