@@ -11,7 +11,7 @@ import TitleRatingData from "../data/title/titleRatingData";
 import GlobalRatingStar from "./Rating/GlobalRatingStar";
 import { useNotification } from "../utils/NotificationContext";
 
-const TitleRating = ({ titleID }) => {
+const TitleRating = ({ showUpdateRating, showRate, titleID }) => {
   const [rating, setRating] = useState(null);
   const [loading, setLoading] = useState(false);
   const { showNotification } = useNotification();
@@ -34,7 +34,7 @@ const TitleRating = ({ titleID }) => {
     setLoading(true);
     fetchData();
     setLoading(false);
-  }, [titleID]);
+  }, [titleID, showUpdateRating, showRate]);
 
   if (loading) return <Spinner />;
 

@@ -22,6 +22,8 @@ const Title = () => {
   const [error, setError] = useState(null);
   const [loadingTitle, setLoadingTitle] = useState(true);
   const [titleData, setTitleData] = useState(new TitleData());
+  const [showRate, setShowRate] = useState(false);
+  const [showUpdateRating, setShowUpdateRating] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,11 +60,21 @@ const Title = () => {
         </Col>
         <Col>
           <div className="star-top-text">Global rating</div>
-          <TitleRating titleID={titleData.titleID}></TitleRating>
+          <TitleRating
+            showRate={showRate}
+            showUpdateRating={showUpdateRating}
+            titleID={titleData.titleID}
+          ></TitleRating>
         </Col>
         <Col>
           <div className="star-top-text">Your rating</div>
-          <YourRating titleid={titleData.titleID}></YourRating>
+          <YourRating
+            showRate={showRate}
+            setShowRate={setShowRate}
+            titleid={titleData.titleID}
+            showUpdateRating={showUpdateRating}
+            setShowUpdateRating={setShowUpdateRating}
+          ></YourRating>
         </Col>
         <Col>
           <div className="star-top-text">Bookmark</div>

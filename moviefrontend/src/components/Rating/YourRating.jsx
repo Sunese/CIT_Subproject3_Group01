@@ -13,11 +13,15 @@ import { Link } from "react-router-dom";
 import { useNotification } from "../../utils/NotificationContext";
 import YourRatingStar from "./YourRatingStar";
 
-const YourRating = ({ titleid }) => {
+const YourRating = ({
+  showRate,
+  setShowRate,
+  showUpdateRating,
+  setShowUpdateRating,
+  titleid,
+}) => {
   const { isAuthenticated, token, username } = useAuth();
-  const [showRate, setShowRate] = useState(false);
   const [loadingRating, setLoadingRating] = useState(false);
-  const [showUpdateRating, setShowUpdateRating] = useState(false);
   const [storedRating, setStoredRating] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const { showNotification } = useNotification();
