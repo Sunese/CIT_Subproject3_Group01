@@ -12,7 +12,6 @@ class BookmarkClient {
         Authorization: `${token}`,
       },
     });
-    console.log("response from client: ", response);
     return response;
   }
 
@@ -51,7 +50,6 @@ class BookmarkClient {
       notes: notes,
       titleID: titleID,
     });
-    console.log("add title bookmark POST request model: ", model);
     const uri =
       process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/titlebookmark`;
     const response = await fetch(uri, {
@@ -81,7 +79,6 @@ class BookmarkClient {
 
   static async updateTitleBookmarkNote(token, username, titleID, newNote) {
     if (newNote === null) newNote = "";
-    console.log("new note: ", newNote);
     const model = JSON.stringify({
       notes: newNote,
     });
@@ -134,7 +131,6 @@ class BookmarkClient {
       notes: notes,
       nameID: nameID,
     });
-    console.log("add name bookmark POST request model: ", model);
     const uri =
       process.env.REACT_APP_API_BASE_URI + `/api/v1/${username}/namebookmark`;
     const response = await fetch(uri, {

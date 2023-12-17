@@ -41,12 +41,10 @@ const TitleBookmarks = () => {
           throw new Error();
         }
         const json = await response.json();
-        console.log("json: ", json);
         const titleBookmarks = PagedData.fromJson(
           json,
           TitleBookmarkPageItemData.fromJsonWithoutRating
         );
-        console.log("titleBookmarks: ", titleBookmarks);
         setTitleBookmarks(titleBookmarks);
       } catch (error) {
         console.error("error: ", error);

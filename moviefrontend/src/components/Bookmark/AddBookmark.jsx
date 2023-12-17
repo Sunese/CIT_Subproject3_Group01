@@ -15,7 +15,6 @@ const AddBookmark = ({ id, bookmarkType, show, onHide }) => {
 
   const addNameBookmark = async () => {
     try {
-      console.log("addNameBookmark: ", token, username, id, inputNote);
       const response = await BookmarkClient.addNameBookmark(
         token,
         username,
@@ -40,7 +39,6 @@ const AddBookmark = ({ id, bookmarkType, show, onHide }) => {
         id,
         inputNote
       );
-      console.log("add title bookmark response: ", response);
       if (response.status === 201) {
         showNotification("Bookmark added", "success");
       } else {

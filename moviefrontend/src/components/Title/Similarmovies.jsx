@@ -21,7 +21,6 @@ const Similarmovies = ({ titleID }) => {
         const response = await TitleClient.getSimiliarMovies(titleID);
         handleResponse(response);
         const responseData = await response.json();
-        console.log(responseData);
         setResultsData(
           PagedData.fromJson(responseData, SimiliarMoviesData.fromJson)
         );
@@ -33,7 +32,6 @@ const Similarmovies = ({ titleID }) => {
   }, [titleID]);
 
   let renderResults = () => {
-    console.log("resultsData: ", resultsData);
     if (resultsData.total === 0 || !Array.isArray(resultsData.items)) {
       return <p>No Similiar Movies</p>;
     }

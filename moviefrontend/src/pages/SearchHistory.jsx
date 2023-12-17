@@ -30,7 +30,6 @@ const SearchHistory = () => {
         );
         handleResponse(response);
         const data = await response.json();
-        console.log("data: ", data);
         setSearchHistory(PagedData.fromJson(data, SearchHistoryData.fromJson));
         setLoading(false);
         return data;

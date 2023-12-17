@@ -40,12 +40,10 @@ const NameBookmarks = () => {
           throw new Error();
         }
         const json = await response.json();
-        console.log("json: ", json);
         const nameBookmarks = PagedData.fromJson(
           json,
           NameBookmarkPageItemData.fromJson
         );
-        console.log("name bookmarks: ", nameBookmarks);
         setNameBookmarks(nameBookmarks);
       } catch (error) {
         console.error("error: ", error);

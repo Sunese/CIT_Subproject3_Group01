@@ -39,12 +39,10 @@ const Ratings = () => {
         );
 
         if (!response.ok) {
-          console.log("bad response: ", response);
           throw new Error();
         }
 
         const json = await response.json();
-        console.log("json: ", json);
 
         const ratings = PagedData.fromJson(json, UserTitleRatingData.fromJson);
 

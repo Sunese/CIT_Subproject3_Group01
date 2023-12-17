@@ -26,7 +26,6 @@ const TopRatedBookmarks = () => {
           throw new Error();
         }
         const json = await response.json();
-        console.log("top rated bookmarks data response: ", json);
         const bookmarks = PagedData.fromJson(json, TitleBookmarkData.fromJson);
         setBookmarks(bookmarks.items);
       } catch (error) {
