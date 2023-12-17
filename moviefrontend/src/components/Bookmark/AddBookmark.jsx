@@ -45,7 +45,6 @@ const AddBookmark = ({ id, bookmarkType, show, onHide }) => {
         showNotification("Could not add bookmark", "danger");
       }
     } catch (error) {
-      console.error("error: ", error);
       showNotification("Could not add bookmark", "danger");
     }
   };

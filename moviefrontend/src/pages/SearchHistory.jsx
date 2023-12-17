@@ -35,7 +35,6 @@ const SearchHistory = () => {
         return data;
       } catch (error) {
         setLoading(false);
-        console.error(error);
       }
     };
     fetchData();

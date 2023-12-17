@@ -48,7 +48,6 @@ const Ratings = () => {
 
         setRatings(ratings);
       } catch (error) {
-        console.error("error: ", error);
         showNotification("Error loading ratings", "danger");
       } finally {
         setLoading(false);

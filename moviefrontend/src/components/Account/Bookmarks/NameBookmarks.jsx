@@ -46,7 +46,6 @@ const NameBookmarks = () => {
         );
         setNameBookmarks(nameBookmarks);
       } catch (error) {
-        console.error("error: ", error);
         showNotification("Error loading name bookmarks", "danger");
         setError("Could not load name bookmarks");
       } finally {

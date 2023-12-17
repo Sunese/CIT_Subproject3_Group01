@@ -21,7 +21,6 @@ const FeaturedTitles = () => {
         setFeaturedTitles(result);
         setLoadingFeatured(false);
       } catch (error) {
-        console.error(error);
         setLoadingFeatured(false);
         setError(error.message);
       }

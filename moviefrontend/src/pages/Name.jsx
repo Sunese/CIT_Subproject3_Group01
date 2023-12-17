@@ -66,7 +66,6 @@ const Name = () => {
       } catch (error) {
         setLoadingName(false);
         setError(error.message);
-        console.error("error: ", error);
       }
     };
     fetchData();

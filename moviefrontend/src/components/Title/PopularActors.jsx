@@ -20,7 +20,7 @@ const PopularActors = ({ titleID }) => {
         handleResponse(response);
         setResultsData(await response.json());
       } catch (error) {
-        console.error(error);
+        throw error;
       }
     };
     fetchData();

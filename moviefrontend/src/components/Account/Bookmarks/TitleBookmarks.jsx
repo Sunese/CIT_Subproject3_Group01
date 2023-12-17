@@ -47,7 +47,6 @@ const TitleBookmarks = () => {
         );
         setTitleBookmarks(titleBookmarks);
       } catch (error) {
-        console.error("error: ", error);
         showNotification("Error loading title bookmarks", "danger");
         setError("Could not load title bookmarks");
       } finally {

@@ -105,7 +105,7 @@ function SignUp() {
       navigate("/");
       showNotification("Welcome " + username, "success");
     } catch (error) {
-      console.error("Error signing up:", error.message);
+      throw error;
     } finally {
       setLoading(false);
     }

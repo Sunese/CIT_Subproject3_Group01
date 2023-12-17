@@ -93,7 +93,6 @@ const NameSearch = () => {
         setLoading(false);
       } catch (error) {
         setError(error);
-        console.error("error: ", error);
         setLoading(false);
       }
     };

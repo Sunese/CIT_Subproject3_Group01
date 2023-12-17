@@ -21,7 +21,6 @@ const HighestRated = ({ days }) => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.error(error);
         setError("Error loading highest rated titles");
       }
     };

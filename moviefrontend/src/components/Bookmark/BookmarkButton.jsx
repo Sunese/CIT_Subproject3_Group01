@@ -72,7 +72,6 @@ const BookmarkButton = ({ bookmarkType, id }) => {
         setStoredBookmark(null);
       }
     } catch (error) {
-      console.error("error: ", error);
       showNotification("Could not retreive bookmark", "danger");
     }
   };

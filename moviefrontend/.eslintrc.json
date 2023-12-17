@@ -20,7 +20,8 @@
   "rules": {
     // turn off no-unused-vars
     "no-unused-vars": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-useless-catch": "off"
     //add customize rules here as per your project's needs
   }
 }

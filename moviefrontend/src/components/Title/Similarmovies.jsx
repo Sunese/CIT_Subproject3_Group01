@@ -25,7 +25,7 @@ const Similarmovies = ({ titleID }) => {
           PagedData.fromJson(responseData, SimiliarMoviesData.fromJson)
         );
       } catch (error) {
-        console.error(error);
+        throw error;
       }
     };
     fetchData();
